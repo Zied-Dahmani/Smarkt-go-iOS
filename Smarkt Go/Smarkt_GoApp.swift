@@ -11,7 +11,7 @@ import SwiftUI
 struct Smarkt_GoApp: App {
     var body: some Scene {
         WindowGroup {
-            MainScreen()
+            SignInScreen()
         }
     }
 }
