@@ -31,7 +31,7 @@ struct SignInScreen: View {
                 
                 Text(Strings.kappName)
                     .fontWeight(.semibold)
-                    .font(.system(size:Constants.kheadlineLarge))
+                    .font(.title)
                     .foregroundColor(.black)
                     .padding()
                 
@@ -39,7 +39,7 @@ struct SignInScreen: View {
                 if !InputError.isEmpty {
                     Text(InputError)
                         .fontWeight(.semibold)
-                        .font(.system(size:Constants.kbodySmall))
+                        .font(.footnote)
                         .foregroundColor(.red)
                         .frame(maxWidth: .infinity,alignment: .leading)
                         .padding(.horizontal,Constants.kbigSpace)
@@ -48,6 +48,10 @@ struct SignInScreen: View {
                 
                 CustomButton(text: Strings.ksignInWithPhone, icon: "phone.fill", textColor: .white, iconColor: .white, backgroundColor: .accentColor,action:{
                     InputError = signInScreenViewModel.isValid(phoneNumber)
+                    if InputError.isEmpty
+                    {
+                        navigateToSecondView = true
+                    }
                 })
                 .padding()
                 .fullScreenCover(isPresented: $navigateToSecondView) {

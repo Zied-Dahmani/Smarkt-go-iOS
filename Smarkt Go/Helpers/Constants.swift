@@ -20,12 +20,8 @@ struct Constants {
     static let ksmallSpace = 10.0
     
     
+    static let kiconSize = 20.0
     
-    //THEME
-    static let kbodySmall = 14.0
-    static let kbodyMedium = 16.0
-    static let kbodyLarde = 18.0
-    static let kheadlineMedium = 20.0
-    static let kheadlineLarge = 26.0
+
 
 }

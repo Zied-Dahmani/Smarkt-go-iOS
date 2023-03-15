@@ -11,7 +11,8 @@ import SwiftUI
 struct Smarkt_GoApp: App {
     var body: some Scene {
         WindowGroup {
-            SignInScreen(signInScreenViewModel: SignInScreenViewModel())
+            OnboardingScreen()
+            //SignInScreen(signInScreenViewModel: SignInScreenViewModel())
         }
     }
 }

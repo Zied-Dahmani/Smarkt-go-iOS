@@ -12,6 +12,8 @@
 		891BF33829C1F75C000735CE /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891BF33729C1F75C000735CE /* Strings.swift */; };
 		891BF33A29C1FAFC000735CE /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891BF33929C1FAFC000735CE /* CustomTextField.swift */; };
 		891BF33C29C2146C000735CE /* SignInScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891BF33B29C2146C000735CE /* SignInScreenViewModel.swift */; };
+		891BF33E29C24D6D000735CE /* OnboardingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891BF33D29C24D6D000735CE /* OnboardingScreen.swift */; };
+		891BF34029C255FD000735CE /* OnboardingSlide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891BF33F29C255FD000735CE /* OnboardingSlide.swift */; };
 		8928C7C02972F32900AE14C3 /* Smarkt_GoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C7BF2972F32900AE14C3 /* Smarkt_GoApp.swift */; };
 		8928C7C42972F32B00AE14C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8928C7C32972F32B00AE14C3 /* Assets.xcassets */; };
 		8928C7C72972F32B00AE14C3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8928C7C62972F32B00AE14C3 /* Preview Assets.xcassets */; };
@@ -46,6 +48,8 @@
 		891BF33729C1F75C000735CE /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		891BF33929C1FAFC000735CE /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		891BF33B29C2146C000735CE /* SignInScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInScreenViewModel.swift; sourceTree = "<group>"; };
+		891BF33D29C24D6D000735CE /* OnboardingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingScreen.swift; sourceTree = "<group>"; };
+		891BF33F29C255FD000735CE /* OnboardingSlide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSlide.swift; sourceTree = "<group>"; };
 		8928C7BC2972F32900AE14C3 /* Smarkt Go.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Smarkt Go.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8928C7BF2972F32900AE14C3 /* Smarkt_GoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Smarkt_GoApp.swift; sourceTree = "<group>"; };
 		8928C7C32972F32B00AE14C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -175,6 +179,7 @@
 				8928C7EE2972F75800AE14C3 /* MainScreen.swift */,
 				8928C7F02972FED900AE14C3 /* ProfileScreen.swift */,
 				892B002D29B76B540026E40F /* SignInScreen.swift */,
+				891BF33D29C24D6D000735CE /* OnboardingScreen.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -192,6 +197,7 @@
 			children = (
 				891BF33529C1F5D7000735CE /* CustomButton.swift */,
 				891BF33929C1FAFC000735CE /* CustomTextField.swift */,
+				891BF33F29C255FD000735CE /* OnboardingSlide.swift */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -326,6 +332,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				891BF33E29C24D6D000735CE /* OnboardingScreen.swift in Sources */,
 				891BF33C29C2146C000735CE /* SignInScreenViewModel.swift in Sources */,
 				891BF33429C1F2D8000735CE /* Constants.swift in Sources */,
 				8928C7EF2972F75800AE14C3 /* MainScreen.swift in Sources */,
@@ -335,6 +342,7 @@
 				8928C7C02972F32900AE14C3 /* Smarkt_GoApp.swift in Sources */,
 				8928C7F12972FED900AE14C3 /* ProfileScreen.swift in Sources */,
 				891BF33829C1F75C000735CE /* Strings.swift in Sources */,
+				891BF34029C255FD000735CE /* OnboardingSlide.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
