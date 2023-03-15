@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		891BF33429C1F2D8000735CE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891BF33329C1F2D8000735CE /* Constants.swift */; };
+		891BF33629C1F5D7000735CE /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891BF33529C1F5D7000735CE /* CustomButton.swift */; };
+		891BF33829C1F75C000735CE /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891BF33729C1F75C000735CE /* Strings.swift */; };
+		891BF33A29C1FAFC000735CE /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891BF33929C1FAFC000735CE /* CustomTextField.swift */; };
+		891BF33C29C2146C000735CE /* SignInScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891BF33B29C2146C000735CE /* SignInScreenViewModel.swift */; };
 		8928C7C02972F32900AE14C3 /* Smarkt_GoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C7BF2972F32900AE14C3 /* Smarkt_GoApp.swift */; };
 		8928C7C42972F32B00AE14C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8928C7C32972F32B00AE14C3 /* Assets.xcassets */; };
 		8928C7C72972F32B00AE14C3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8928C7C62972F32B00AE14C3 /* Preview Assets.xcassets */; };
@@ -36,6 +41,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		891BF33329C1F2D8000735CE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		891BF33529C1F5D7000735CE /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		891BF33729C1F75C000735CE /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		891BF33929C1FAFC000735CE /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		891BF33B29C2146C000735CE /* SignInScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInScreenViewModel.swift; sourceTree = "<group>"; };
 		8928C7BC2972F32900AE14C3 /* Smarkt Go.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Smarkt Go.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8928C7BF2972F32900AE14C3 /* Smarkt_GoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Smarkt_GoApp.swift; sourceTree = "<group>"; };
 		8928C7C32972F32B00AE14C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -139,6 +149,8 @@
 		8928C7E92972F3D800AE14C3 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				891BF33329C1F2D8000735CE /* Constants.swift */,
+				891BF33729C1F75C000735CE /* Strings.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -170,6 +182,7 @@
 		8928C7ED2972F44300AE14C3 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				891BF33B29C2146C000735CE /* SignInScreenViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -177,6 +190,8 @@
 		892B002F29B76FD90026E40F /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
+				891BF33529C1F5D7000735CE /* CustomButton.swift */,
+				891BF33929C1FAFC000735CE /* CustomTextField.swift */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -311,10 +326,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				891BF33C29C2146C000735CE /* SignInScreenViewModel.swift in Sources */,
+				891BF33429C1F2D8000735CE /* Constants.swift in Sources */,
 				8928C7EF2972F75800AE14C3 /* MainScreen.swift in Sources */,
+				891BF33629C1F5D7000735CE /* CustomButton.swift in Sources */,
 				892B002E29B76B540026E40F /* SignInScreen.swift in Sources */,
+				891BF33A29C1FAFC000735CE /* CustomTextField.swift in Sources */,
 				8928C7C02972F32900AE14C3 /* Smarkt_GoApp.swift in Sources */,
 				8928C7F12972FED900AE14C3 /* ProfileScreen.swift in Sources */,
+				891BF33829C1F75C000735CE /* Strings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

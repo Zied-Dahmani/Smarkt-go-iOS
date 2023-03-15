@@ -11,103 +11,77 @@ import Foundation
 import SwiftUI
 
 struct SignInScreen: View {
-    
+    @ObservedObject var signInScreenViewModel: SignInScreenViewModel
     @State private var phoneNumber = ""
-
+    @State private var navigateToSecondView = false
+    @State private var InputError = ""
+    
     
     var body: some View {
         
-        VStack(alignment: .center) {
+        NavigationView {
             
-            Image("shopping_app")
-                        .resizable()
-                        .frame(width: UIScreen.main.bounds.width / 1.5  , height: UIScreen.main.bounds.height / 4)
-                       .aspectRatio(contentMode: .fit)
-                       .padding()
-            
-            
-            TextField("Phone number", text: $phoneNumber)
-                .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
-                .frame(width: UIScreen.main.bounds.width - 40  , height: 50)
-                      .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .strokeBorder(Color.accentColor, lineWidth: 1)
-                                  )
-                      .padding()
-            
-            Button(action: {
-                print("ca marche")
-            }) {
-                HStack {
-                    Image(systemName: "phone")
-                        .foregroundColor(.white)
-                    Text("Sign in with phone")
-                        .fontWeight(.semibold)
-                        .foregroundColor(.white)
-                }
-                .padding()
-                .frame(width: UIScreen.main.bounds.width - 40  , height: 50)
-                .background(Color.accentColor)
-                .cornerRadius(10)
-                .shadow(radius: 5)
+            VStack(alignment: .center) {
                 
-            }.padding()
-
-            
-            Divider()
-                .frame(height: 2)
-                .background(Color.gray)
-                .padding(.horizontal,40)
-
-            Button(action: {
-                        // Action when button is pressed
-                    }) {
-                        HStack {
-                            Image("google")
-                                       .resizable()
-                                       .aspectRatio(contentMode: .fit)
-                            Text("Sign in with Google")
-                                .fontWeight(.semibold)
-                                .foregroundColor(.black)
-                        }
-                        .padding()
-                        .frame(width: UIScreen.main.bounds.width - 40  , height: 50)
-                        .background(Color.white)
-                        .cornerRadius(10)
-                        .shadow(radius: 5)
-
-                    }
+                Image("shopping_app")
+                    .resizable()
+                    .frame(width: UIScreen.main.bounds.width / 1.5  , height: UIScreen.main.bounds.height / 4)
+                    .aspectRatio(contentMode: .fit)
+                    .padding(.vertical,Constants.khugeSpace)
+                
+                Text(Strings.kappName)
+                    .fontWeight(.semibold)
+                    .font(.system(size:Constants.kheadlineLarge))
+                    .foregroundColor(.black)
                     .padding()
+                
+                CustomTextField(text:Strings.kphoneNumber, keyboardType: .numberPad,textValue: $phoneNumber )
+                if !InputError.isEmpty {
+                    Text(InputError)
+                        .fontWeight(.semibold)
+                        .font(.system(size:Constants.kbodySmall))
+                        .foregroundColor(.red)
+                        .frame(maxWidth: .infinity,alignment: .leading)
+                        .padding(.horizontal,Constants.kbigSpace)
+                    
+                }
+                
+                CustomButton(text: Strings.ksignInWithPhone, icon: "phone.fill", textColor: .white, iconColor: .white, backgroundColor: .accentColor,action:{
+                    InputError = signInScreenViewModel.isValid(phoneNumber)
+                })
+                .padding()
+                .fullScreenCover(isPresented: $navigateToSecondView) {
+                    MainScreen()
+                }
+                
+                Divider()
+                    .frame(height: Constants.kdividerHeight)
+                    .background(.gray)
+                    .padding(.horizontal,Constants.kbigSpace * 2)
+                
+                
+                CustomButton(text: Strings.ksignInWithGoogle, icon: "google", textColor: .black, iconColor: nil, backgroundColor: .white, action: {
+                })
+                .padding()
+                
+                
+                CustomButton(text: Strings.ksignInWithApple, icon: "applelogo", textColor: .white, iconColor: .white, backgroundColor: .black, action: {
+                })
+                
+                Spacer()
+                
+            }
             
-            
-            Button(action: {
-                        // Action when button is pressed
-                    }) {
-                        HStack {
-                            Image(systemName: "applelogo")
-                                .foregroundColor(.white)
-                            Text("Sign in with Apple")
-                                .fontWeight(.semibold)
-                                .foregroundColor(.white)
-                        }
-                        .padding()
-                        .frame(width: UIScreen.main.bounds.width - 40  , height: 50)
-                        .background(Color.black)
-                        .cornerRadius(10)
-                        .shadow(radius: 5)
-
-                    }
-
-            Spacer()
-
-            
-        }.padding()
-
+        }
+        
     }
+    
+    
 }
 
 struct SignInScreen_Preview: PreviewProvider {
+    
     static var previews: some View {
-        SignInScreen()
+        SignInScreen(signInScreenViewModel: SignInScreenViewModel())
     }
 }

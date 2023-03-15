@@ -57,10 +57,10 @@ struct ProfileScreen: View {
                 
                 
                 List {
-                    NavigationLink(destination: SignInScreen()){
+                    NavigationLink(destination: MainScreen()){
                         Text("Wallet")
                     }
-                    NavigationLink(destination: SignInScreen()) {
+                    NavigationLink(destination: MainScreen()) {
                         Text("Settings")
                     }
                 }
