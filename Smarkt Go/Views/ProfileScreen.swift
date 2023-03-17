@@ -13,7 +13,6 @@ struct ProfileScreen: View {
     var body: some View {
         
         NavigationView{
-            // TODO: Display user data
             VStack{
                 
                 AsyncImage(url: URL(string:"https://hws.dev/paul.jpg"),content: { image in
@@ -36,7 +35,7 @@ struct ProfileScreen: View {
                 
                 HStack{
  
-                    //Text((signInScreenViewModel.currentUser?.email)!)
+//                   Text((signInScreenViewModel.currentUser?.id)!)
                     Text("Zied Dahmani")
                         .font(.title2)
                     Image(systemName: "pencil")

@@ -9,6 +9,7 @@ import Foundation
 
 
 import SwiftUI
+import _AuthenticationServices_SwiftUI
 
 struct SignInScreen: View {
     @EnvironmentObject var signInScreenViewModel:SignInScreenViewModel
@@ -28,7 +29,7 @@ struct SignInScreen: View {
                     .resizable()
                     .frame(width: UIScreen.main.bounds.width / 1.5  , height: UIScreen.main.bounds.height / 4)
                     .aspectRatio(contentMode: .fit)
-                    .padding(.vertical,Constants.khugeSpace)
+                    .padding(.bottom,Constants.khugeSpace)
                 
                 Text(Strings.kappName)
                     .fontWeight(.semibold)
@@ -79,21 +80,32 @@ struct SignInScreen: View {
                 
                 
                 CustomButton(text: Strings.ksignInWithGoogle, icon: "google", textColor: .black, iconColor: nil, backgroundColor: .white, action: {
-                    if signInScreenViewModel.signInWithGoogle()
-                    {
-                        //navigateToSecondView = true
-                    }
+                    signInScreenViewModel.signInWithGoogle()
                 })
                 .padding()
                 
                 
-                CustomButton(text: Strings.ksignInWithApple, icon: "applelogo", textColor: .white, iconColor: .white, backgroundColor: .black, action: {
-                })
+                SignInWithAppleButton{ (request) in
+                    signInScreenViewModel.nonce = randomNonceString()
+                    request.requestedScopes = [.email,.fullName]
+                    signInScreenViewModel.nonce = sha256(signInScreenViewModel.nonce)
+                }onCompletion: { (result) in
+                    signInScreenViewModel.onCompletionSignInWithApple(result: result)
+                }
+                .signInWithAppleButtonStyle(.black)
+                .frame(width: UIScreen.main.bounds.width - Constants.kbigSpace * 2  , height: Constants.kbuttonHeight)
+                .cornerRadius(Constants.kcornerRadius)
+                .shadow(radius: Constants.kshadowRadius)
+                
                 
                 Spacer()
                 
             }
-            
+            .onReceive(signInScreenViewModel.$currentUser) { newValue in
+                if newValue != nil {
+                    navigateToSecondView = true
+                }
+            }
         }
         
     }

@@ -11,10 +11,13 @@ import Foundation
 import Combine
 import GoogleSignIn
 import Firebase
+import AuthenticationServices
 
 class SignInScreenViewModel: ObservableObject {
-    @Published var currentUser  : FirebaseAuth.User?
-    
+    @Published var currentUser  : User?
+    @Published var nonce  = ""
+    @Published var supermarkets = [Supermarket]()
+
     
     func isValid(_ text: String) -> String {
         if text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
@@ -31,12 +34,15 @@ class SignInScreenViewModel: ObservableObject {
         }
     }
     
-    func signInWithGoogle() -> Bool
+    
+    func signInWithGoogle()
     {
-        guard let clientID = FirebaseApp.app()?.options.clientID else { return false }
+        guard let clientID = FirebaseApp.app()?.options.clientID else {
+            return  }
         
         let config = GIDConfiguration(clientID: clientID)
         GIDSignIn.sharedInstance.configuration = config
+        
         
         GIDSignIn.sharedInstance.signIn(withPresenting: (UIApplication.shared.windows.first?.rootViewController)! ) {result, error in
             guard error == nil else {
@@ -56,13 +62,11 @@ class SignInScreenViewModel: ObservableObject {
                     return
                 }
                 
-                self.currentUser = result?.user
+                self.currentUser = User(id: (result?.user.email)!, name: (result?.user.displayName)!)
                 UserDefaults.standard.set(true, forKey: "isUserLoggedIn")
             }
         }
-        // TODO: Return true when this user is signed in 
-        return true
-
+        
     }
     
     func signOut()
@@ -77,8 +81,62 @@ class SignInScreenViewModel: ObservableObject {
         }
     }
     
+    
+    func onCompletionSignInWithApple(result : Result<ASAuthorization, Error>){
+        switch result {
+        case .success(let user):
+            guard let credential = user.credential as?  ASAuthorizationAppleIDCredential else {
+                return
+            }
+            signInWithApple(credential: credential)
+        case .failure(let error):
+            print(error.localizedDescription)
+        }
+    }
+    
+    func signInWithApple(credential: ASAuthorizationAppleIDCredential){
+        
+        guard let token = credential.identityToken else {
+            return
+        }
+        
+        guard let tokenString = String(data:token,encoding: .utf8) else {
+            return
+        }
+        let firebaseCredential = OAuthProvider.credential(withProviderID:"apple.com",idToken: tokenString,rawNonce: nonce )
+        
+        Auth.auth().signIn(with: firebaseCredential) {(result,err) in
+            if let error = err {
+                return
+            }
+            
+        }
+        
+    }
+    
+    
+    
+    /*func getSupermarkets() {
+            guard let url = URL(string: "http://localhost:9090/supermarket/") else {
+                return
+            }
+
+            URLSession.shared.dataTask(with: url) { data, _, error in
+                guard let data = data else {
+                    return
+                }
+
+                do {
+                    let decodedUsers = try JSONDecoder().decode([Supermarket].self, from: data)
+                    DispatchQueue.main.async {
+                        self.supermarkets = decodedUsers
+                    }
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }.resume()
+        }*/
+    
 }
-
-
 
 

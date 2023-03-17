@@ -23,10 +23,13 @@
 		8928C7EF2972F75800AE14C3 /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C7EE2972F75800AE14C3 /* MainScreen.swift */; };
 		8928C7F12972FED900AE14C3 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C7F02972FED900AE14C3 /* ProfileScreen.swift */; };
 		892B002E29B76B540026E40F /* SignInScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892B002D29B76B540026E40F /* SignInScreen.swift */; };
+		8944CC6229C480EB00A43B8C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8944CC6129C480EB00A43B8C /* User.swift */; };
 		897B279329C3080600FE6BD2 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897B279229C3080500FE6BD2 /* HomeScreen.swift */; };
 		897B279529C30CC200FE6BD2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 897B279429C30CC100FE6BD2 /* GoogleService-Info.plist */; };
 		897B279929C30FD700FE6BD2 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 897B279829C30FD700FE6BD2 /* GoogleSignIn */; };
 		897B279B29C30FD700FE6BD2 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 897B279A29C30FD700FE6BD2 /* GoogleSignInSwift */; };
+		898DD75F29C50023000E5E04 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898DD75E29C50023000E5E04 /* Utils.swift */; };
+		898DD76129C50418000E5E04 /* Supermarket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898DD76029C50418000E5E04 /* Supermarket.swift */; };
 		89DB91C029C3B3CC004A75A3 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 89DB91BF29C3B3CC004A75A3 /* FirebaseAuth */; };
 		89DB91C229C3B438004A75A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89DB91C129C3B438004A75A3 /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
@@ -68,9 +71,13 @@
 		8928C7EE2972F75800AE14C3 /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
 		8928C7F02972FED900AE14C3 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
 		892B002D29B76B540026E40F /* SignInScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInScreen.swift; sourceTree = "<group>"; };
+		8944CC6129C480EB00A43B8C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		897B279229C3080500FE6BD2 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 		897B279429C30CC100FE6BD2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		897B279629C30D4500FE6BD2 /* Smarkt-Go-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Smarkt-Go-Info.plist"; sourceTree = SOURCE_ROOT; };
+		898DD75D29C4EFF7000E5E04 /* Smarkt Go.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Smarkt Go.entitlements"; sourceTree = "<group>"; };
+		898DD75E29C50023000E5E04 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		898DD76029C50418000E5E04 /* Supermarket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Supermarket.swift; sourceTree = "<group>"; };
 		89DB91C129C3B438004A75A3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -125,6 +132,7 @@
 		8928C7BE2972F32900AE14C3 /* Smarkt Go */ = {
 			isa = PBXGroup;
 			children = (
+				898DD75D29C4EFF7000E5E04 /* Smarkt Go.entitlements */,
 				897B279629C30D4500FE6BD2 /* Smarkt-Go-Info.plist */,
 				897B279429C30CC100FE6BD2 /* GoogleService-Info.plist */,
 				892B002F29B76FD90026E40F /* Widgets */,
@@ -171,6 +179,7 @@
 				891BF33329C1F2D8000735CE /* Constants.swift */,
 				891BF33729C1F75C000735CE /* Strings.swift */,
 				89DB91C129C3B438004A75A3 /* AppDelegate.swift */,
+				898DD75E29C50023000E5E04 /* Utils.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -185,6 +194,8 @@
 		8928C7EB2972F3EF00AE14C3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				8944CC6129C480EB00A43B8C /* User.swift */,
+				898DD76029C50418000E5E04 /* Supermarket.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -385,7 +396,9 @@
 				891BF33429C1F2D8000735CE /* Constants.swift in Sources */,
 				8928C7EF2972F75800AE14C3 /* MainScreen.swift in Sources */,
 				891BF33629C1F5D7000735CE /* CustomButton.swift in Sources */,
+				898DD75F29C50023000E5E04 /* Utils.swift in Sources */,
 				892B002E29B76B540026E40F /* SignInScreen.swift in Sources */,
+				8944CC6229C480EB00A43B8C /* User.swift in Sources */,
 				891BF33A29C1FAFC000735CE /* CustomTextField.swift in Sources */,
 				8928C7C02972F32900AE14C3 /* Smarkt_GoApp.swift in Sources */,
 				89DB91C229C3B438004A75A3 /* AppDelegate.swift in Sources */,
@@ -393,6 +406,7 @@
 				8928C7F12972FED900AE14C3 /* ProfileScreen.swift in Sources */,
 				891BF33829C1F75C000735CE /* Strings.swift in Sources */,
 				891BF34029C255FD000735CE /* OnboardingSlide.swift in Sources */,
+				898DD76129C50418000E5E04 /* Supermarket.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -548,10 +562,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Smarkt Go/Smarkt Go.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Smarkt Go/Preview Content\"";
-				DEVELOPMENT_TEAM = L6XTSCA775;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Smarkt-Go-Info.plist";
@@ -560,6 +576,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -567,6 +584,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.esprit.Smarkt-Go";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -578,10 +596,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Smarkt Go/Smarkt Go.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Smarkt Go/Preview Content\"";
-				DEVELOPMENT_TEAM = L6XTSCA775;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Smarkt-Go-Info.plist";
@@ -590,6 +610,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -597,6 +618,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.esprit.Smarkt-Go";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
