@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct ProfileScreen: View {
-    
-    
+    @EnvironmentObject var signInScreenViewModel: SignInScreenViewModel
+
     var body: some View {
         
         NavigationView{
-            
+            // TODO: Display user data
             VStack{
                 
                 AsyncImage(url: URL(string:"https://hws.dev/paul.jpg"),content: { image in
@@ -35,6 +35,8 @@ struct ProfileScreen: View {
                 
                 
                 HStack{
+ 
+                    //Text((signInScreenViewModel.currentUser?.email)!)
                     Text("Zied Dahmani")
                         .font(.title2)
                     Image(systemName: "pencil")
@@ -42,7 +44,7 @@ struct ProfileScreen: View {
                         .frame(width: 16, height: 16)
                         .foregroundColor(.accentColor)
                         .onTapGesture{
-                            print("Edit")
+                            signInScreenViewModel.signOut()
                         }
                 }
                 

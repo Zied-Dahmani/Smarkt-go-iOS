@@ -11,7 +11,8 @@ import Foundation
 import SwiftUI
 
 struct SignInScreen: View {
-    @ObservedObject var signInScreenViewModel: SignInScreenViewModel
+    @EnvironmentObject var signInScreenViewModel:SignInScreenViewModel
+    
     @State private var phoneNumber = ""
     @State private var navigateToSecondView = false
     @State private var InputError = ""
@@ -58,13 +59,30 @@ struct SignInScreen: View {
                     MainScreen()
                 }
                 
-                Divider()
-                    .frame(height: Constants.kdividerHeight)
-                    .background(.gray)
-                    .padding(.horizontal,Constants.kbigSpace * 2)
+                HStack{
+                    Divider()
+                        .frame(width: UIScreen.main.bounds.width / 2.5, height: Constants.kdividerHeight)
+                        .background(.gray)
+                    //.padding(.horizontal,Constants.kbigSpace * 2)
+                    
+                    Text(Strings.kor)
+                        .fontWeight(.semibold)
+                        .font(.footnote)
+                        .foregroundColor(.black)
+                    
+                    Divider()
+                        .frame(width: UIScreen.main.bounds.width / 2.5, height: Constants.kdividerHeight)
+                        .background(.gray)
+                }
+                
+                
                 
                 
                 CustomButton(text: Strings.ksignInWithGoogle, icon: "google", textColor: .black, iconColor: nil, backgroundColor: .white, action: {
+                    if signInScreenViewModel.signInWithGoogle()
+                    {
+                        //navigateToSecondView = true
+                    }
                 })
                 .padding()
                 
@@ -86,6 +104,6 @@ struct SignInScreen: View {
 struct SignInScreen_Preview: PreviewProvider {
     
     static var previews: some View {
-        SignInScreen(signInScreenViewModel: SignInScreenViewModel())
+        SignInScreen()
     }
 }

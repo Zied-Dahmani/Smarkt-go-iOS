@@ -19,6 +19,7 @@ struct Strings {
     
     static let kphoneNumber = "Phone number"
     static let ksignInWithPhone = "Sign in with phone"
+    static let kor = "Or"
     static let ksignInWithGoogle = "Sign in with Google"
     static let ksignInWithApple = "Sign in with Apple"
 }

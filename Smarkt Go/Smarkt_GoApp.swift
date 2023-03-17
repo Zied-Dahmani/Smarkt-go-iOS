@@ -9,10 +9,19 @@ import SwiftUI
 
 @main
 struct Smarkt_GoApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    let isUserLoggedIn = UserDefaults.standard.bool(forKey: "isUserLoggedIn")
+
     var body: some Scene {
         WindowGroup {
-            OnboardingScreen()
-            //SignInScreen(signInScreenViewModel: SignInScreenViewModel())
+            if !isUserLoggedIn {
+                OnboardingScreen()
+            }
+            else {
+                // TODO: Init user ( signed in )
+                MainScreen()
+                    .environmentObject(SignInScreenViewModel())
+            }
         }
     }
 }

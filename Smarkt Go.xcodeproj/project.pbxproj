@@ -23,6 +23,12 @@
 		8928C7EF2972F75800AE14C3 /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C7EE2972F75800AE14C3 /* MainScreen.swift */; };
 		8928C7F12972FED900AE14C3 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C7F02972FED900AE14C3 /* ProfileScreen.swift */; };
 		892B002E29B76B540026E40F /* SignInScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892B002D29B76B540026E40F /* SignInScreen.swift */; };
+		897B279329C3080600FE6BD2 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897B279229C3080500FE6BD2 /* HomeScreen.swift */; };
+		897B279529C30CC200FE6BD2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 897B279429C30CC100FE6BD2 /* GoogleService-Info.plist */; };
+		897B279929C30FD700FE6BD2 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 897B279829C30FD700FE6BD2 /* GoogleSignIn */; };
+		897B279B29C30FD700FE6BD2 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 897B279A29C30FD700FE6BD2 /* GoogleSignInSwift */; };
+		89DB91C029C3B3CC004A75A3 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 89DB91BF29C3B3CC004A75A3 /* FirebaseAuth */; };
+		89DB91C229C3B438004A75A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89DB91C129C3B438004A75A3 /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +68,10 @@
 		8928C7EE2972F75800AE14C3 /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
 		8928C7F02972FED900AE14C3 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
 		892B002D29B76B540026E40F /* SignInScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInScreen.swift; sourceTree = "<group>"; };
+		897B279229C3080500FE6BD2 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
+		897B279429C30CC100FE6BD2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		897B279629C30D4500FE6BD2 /* Smarkt-Go-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Smarkt-Go-Info.plist"; sourceTree = SOURCE_ROOT; };
+		89DB91C129C3B438004A75A3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +79,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				897B279929C30FD700FE6BD2 /* GoogleSignIn in Frameworks */,
+				89DB91C029C3B3CC004A75A3 /* FirebaseAuth in Frameworks */,
+				897B279B29C30FD700FE6BD2 /* GoogleSignInSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +125,8 @@
 		8928C7BE2972F32900AE14C3 /* Smarkt Go */ = {
 			isa = PBXGroup;
 			children = (
+				897B279629C30D4500FE6BD2 /* Smarkt-Go-Info.plist */,
+				897B279429C30CC100FE6BD2 /* GoogleService-Info.plist */,
 				892B002F29B76FD90026E40F /* Widgets */,
 				8928C7ED2972F44300AE14C3 /* ViewModels */,
 				8928C7EC2972F43A00AE14C3 /* Views */,
@@ -155,6 +170,7 @@
 			children = (
 				891BF33329C1F2D8000735CE /* Constants.swift */,
 				891BF33729C1F75C000735CE /* Strings.swift */,
+				89DB91C129C3B438004A75A3 /* AppDelegate.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -180,6 +196,7 @@
 				8928C7F02972FED900AE14C3 /* ProfileScreen.swift */,
 				892B002D29B76B540026E40F /* SignInScreen.swift */,
 				891BF33D29C24D6D000735CE /* OnboardingScreen.swift */,
+				897B279229C3080500FE6BD2 /* HomeScreen.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -212,12 +229,18 @@
 				8928C7B82972F32900AE14C3 /* Sources */,
 				8928C7B92972F32900AE14C3 /* Frameworks */,
 				8928C7BA2972F32900AE14C3 /* Resources */,
+				89DB91C529C3D09C004A75A3 /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "Smarkt Go";
+			packageProductDependencies = (
+				897B279829C30FD700FE6BD2 /* GoogleSignIn */,
+				897B279A29C30FD700FE6BD2 /* GoogleSignInSwift */,
+				89DB91BF29C3B3CC004A75A3 /* FirebaseAuth */,
+			);
 			productName = "Smarkt Go";
 			productReference = 8928C7BC2972F32900AE14C3 /* Smarkt Go.app */;
 			productType = "com.apple.product-type.application";
@@ -290,6 +313,10 @@
 				Base,
 			);
 			mainGroup = 8928C7B32972F32900AE14C3;
+			packageReferences = (
+				897B279729C30FD700FE6BD2 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				89DB91BE29C3B3CC004A75A3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 8928C7BD2972F32900AE14C3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -308,6 +335,7 @@
 			files = (
 				8928C7C72972F32B00AE14C3 /* Preview Assets.xcassets in Resources */,
 				8928C7C42972F32B00AE14C3 /* Assets.xcassets in Resources */,
+				897B279529C30CC200FE6BD2 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,6 +355,26 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		89DB91C529C3D09C004A75A3 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "TAGS=\"TODO:|FIXME:\"\nERRORTAG=\"ERROR:\"\nfind \"${SRCROOT}\" \\( -name \"*.h\" -or -name \"*.m\" -or -name \"*.swift\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($TAGS).*\\$|($ERRORTAG).*\\$\" | perl -p -e \"s/($TAGS)/ warning: \\$1/\" | perl -p -e \"s/($ERRORTAG)/ error: \\$1/\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8928C7B82972F32900AE14C3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -340,6 +388,8 @@
 				892B002E29B76B540026E40F /* SignInScreen.swift in Sources */,
 				891BF33A29C1FAFC000735CE /* CustomTextField.swift in Sources */,
 				8928C7C02972F32900AE14C3 /* Smarkt_GoApp.swift in Sources */,
+				89DB91C229C3B438004A75A3 /* AppDelegate.swift in Sources */,
+				897B279329C3080600FE6BD2 /* HomeScreen.swift in Sources */,
 				8928C7F12972FED900AE14C3 /* ProfileScreen.swift in Sources */,
 				891BF33829C1F75C000735CE /* Strings.swift in Sources */,
 				891BF34029C255FD000735CE /* OnboardingSlide.swift in Sources */,
@@ -504,6 +554,7 @@
 				DEVELOPMENT_TEAM = L6XTSCA775;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Smarkt-Go-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -533,6 +584,7 @@
 				DEVELOPMENT_TEAM = L6XTSCA775;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Smarkt-Go-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -667,6 +719,43 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		897B279729C30FD700FE6BD2 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+		89DB91BE29C3B3CC004A75A3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		897B279829C30FD700FE6BD2 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 897B279729C30FD700FE6BD2 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		897B279A29C30FD700FE6BD2 /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 897B279729C30FD700FE6BD2 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
+		89DB91BF29C3B3CC004A75A3 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 89DB91BE29C3B3CC004A75A3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8928C7B42972F32900AE14C3 /* Project object */;
 }

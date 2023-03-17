@@ -11,6 +11,7 @@ struct OnboardingScreen: View {
     
     @State var currentPage = 1
     @State private var navigateToSecondView = false
+
     
     var body: some View {
         ZStack{
@@ -65,8 +66,9 @@ struct OnboardingScreen: View {
             })
             .padding(.bottom,Constants.khugeSpace * 2)
             .fullScreenCover(isPresented: $navigateToSecondView) {
-                SignInScreen(signInScreenViewModel: SignInScreenViewModel()
-                )
+                SignInScreen()
+                .environmentObject(SignInScreenViewModel())
+
             }
             
             ,alignment: .bottom
