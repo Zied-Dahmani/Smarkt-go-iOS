@@ -22,6 +22,12 @@ struct Constants {
     
     static let kiconSize = 20.0
     
+    
+    static let kbaseUrl = "http://localhost:9090/"
+    static let ksignUp = "user/signUp"
+    static let ksignIn = "user/signIn"
+    static let ksignOut = "user/signOut"
+    
 
 
 }

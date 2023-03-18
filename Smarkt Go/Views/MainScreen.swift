@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct MainScreen: View {
+
     
     var body: some View {
         TabView {
@@ -34,6 +35,7 @@ struct MainScreen: View {
                     Text("Profile")
                 }
         }
+    
     }
 }
 extension UIApplication {

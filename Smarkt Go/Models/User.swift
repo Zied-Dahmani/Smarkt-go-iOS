@@ -7,8 +7,19 @@
 
 import Foundation
 
-struct User {
+struct User : Codable {
+    var token: String
     var id: String
-    var name: String
+    var fullName: String
+    var image: String
+    var wallet: Float
     
+    
+    func getImage() -> String {
+        return id.contains("+") ? Constants.kbaseUrl+self.image : self.image
+    }
+    
+    func isSignedWithPhone() -> Bool {
+        return id.contains("+")
+    }
 }

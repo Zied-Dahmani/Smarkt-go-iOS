@@ -22,4 +22,8 @@ struct Strings {
     static let kor = "Or"
     static let ksignInWithGoogle = "Sign in with Google"
     static let ksignInWithApple = "Sign in with Apple"
+    static let ksignOut = "Sign out"
+    
+    
+    static let ksettings = "Settings"
 }

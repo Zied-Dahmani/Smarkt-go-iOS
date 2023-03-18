@@ -10,22 +10,26 @@ import SwiftUI
 @main
 struct Smarkt_GoApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    let isUserLoggedIn = UserDefaults.standard.bool(forKey: "isUserLoggedIn")
-    let signInScreenViewModel = SignInScreenViewModel()
+    @ObservedObject var signInScreenViewModel =  SignInScreenViewModel()
+    @Environment(\.presentationMode) var presentationMode
     
     init() {
-       // signInScreenViewModel.signInWithGoogle()
+        if !signInScreenViewModel.userLoggedIn!.isEmpty
+        {
+            signInScreenViewModel.signInUp(url: Constants.ksignIn, id: signInScreenViewModel.userLoggedIn!)
+        }
     }
     
     var body: some Scene {
         WindowGroup {
-            if !isUserLoggedIn {
+            if signInScreenViewModel.userLoggedIn!.isEmpty && !signInScreenViewModel.isNotFirstTime {
                 OnboardingScreen()
-                    .onAppear(perform: signInScreenViewModel.getSupermarkets)
-
+            }
+            else if  signInScreenViewModel.userLoggedIn!.isEmpty && signInScreenViewModel.isNotFirstTime {
+                SignInScreen()
+                    .environmentObject(signInScreenViewModel)
             }
             else {
-                // TODO: Init user ( signed in )
                 MainScreen()
                     .environmentObject(signInScreenViewModel)
             }

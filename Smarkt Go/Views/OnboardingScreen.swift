@@ -12,6 +12,10 @@ struct OnboardingScreen: View {
     @State var currentPage = 1
     @State private var navigateToSecondView = false
 
+    init()
+    {
+        UserDefaults.standard.set(true, forKey: "isNotFirstTime")
+    }
     
     var body: some View {
         ZStack{

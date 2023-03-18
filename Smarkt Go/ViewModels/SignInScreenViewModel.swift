@@ -14,10 +14,18 @@ import Firebase
 import AuthenticationServices
 
 class SignInScreenViewModel: ObservableObject {
-    @Published var currentUser  : User?
+    @Published var user  : User?
+    @Published var navigateToSecondView = false
     @Published var nonce  = ""
-    @Published var supermarkets = [Supermarket]()
-
+    @Published var isLoading  = false
+    @Published var userLoggedIn : String?
+    @Published var isNotFirstTime : Bool
+    
+    init(){
+        userLoggedIn = UserDefaults.standard.string(forKey: "userLoggedIn") ?? ""
+        isNotFirstTime = UserDefaults.standard.bool(forKey: "isNotFirstTime")
+    }
+    
     
     func isValid(_ text: String) -> String {
         if text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
@@ -34,15 +42,69 @@ class SignInScreenViewModel: ObservableObject {
         }
     }
     
+    func signInUp(url: String,id: String,fullName:String? = nil,image: String? = nil){
+        let url = URL(string: Constants.kbaseUrl + url)!
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        var data: [String: Any]
+        if fullName == nil {
+            data = ["id": id]
+        }
+        else {
+            data = ["id": id,"fullName":fullName,"image":image]
+        }
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: data)
+        
+        request.httpBody = jsonData
+        
+        let session = URLSession.shared
+        
+        let task = session.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse,
+                  (200...299).contains(httpResponse.statusCode)
+            else {
+                print("Invalid response")
+                return
+            }
+            
+            
+            if let data = data {
+                DispatchQueue.main.async {
+                    do {
+                        let decoder = JSONDecoder()
+                        self.user = try decoder.decode(User.self, from: data)
+                        UserDefaults.standard.set(self.user?.id, forKey: "userLoggedIn")
+                        self.isLoading = false
+                        self.navigateToSecondView = true
+                    } catch {
+                        print("Error decoding JSON: \(error.localizedDescription)")
+                    }
+                }
+                
+            }
+        }
+        
+        task.resume()
+        
+        
+    }
+    
+    func signIn(){
+        
+    }
     
     func signInWithGoogle()
     {
-        guard let clientID = FirebaseApp.app()?.options.clientID else {
-            return  }
-        
-        let config = GIDConfiguration(clientID: clientID)
-        GIDSignIn.sharedInstance.configuration = config
-        
+        self.isLoading = true
         
         GIDSignIn.sharedInstance.signIn(withPresenting: (UIApplication.shared.windows.first?.rootViewController)! ) {result, error in
             guard error == nil else {
@@ -62,8 +124,18 @@ class SignInScreenViewModel: ObservableObject {
                     return
                 }
                 
-                self.currentUser = User(id: (result?.user.email)!, name: (result?.user.displayName)!)
-                UserDefaults.standard.set(true, forKey: "isUserLoggedIn")
+                let url: String
+                if let isNewUser = result?.additionalUserInfo?.isNewUser, isNewUser {
+                    url = Constants.ksignUp
+                } else {
+                    url = Constants.ksignIn
+                }
+                
+                if let photoURL = result?.user.photoURL {
+                    self.userLoggedIn = result?.user.email
+                    self.signInUp(url: url, id: (result?.user.email)!, fullName: result?.user.displayName, image: photoURL.absoluteString)
+                }
+                
             }
         }
         
@@ -73,8 +145,33 @@ class SignInScreenViewModel: ObservableObject {
     {
         let firebaseAuth = Auth.auth()
         do {
-            try firebaseAuth.signOut()
-            UserDefaults.standard.set(false, forKey: "isUserLoggedIn")
+            guard let url = URL(string: Constants.kbaseUrl+Constants.ksignOut) else {
+                return
+            }
+            
+            URLSession.shared.dataTask(with: url) { data, _, error in
+                guard let data = data else {
+                    return
+                }
+                do {
+                    if let jsonDict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                        if let message = jsonDict["msg"] as? String {
+                            if message == "signed out"
+                            {
+                                try firebaseAuth.signOut()
+                                DispatchQueue.main.async {
+                                    self.userLoggedIn = ""
+                                    self.navigateToSecondView = false
+                                    UserDefaults.standard.set("", forKey: "userLoggedIn")
+                                }
+                            }
+                        }
+                    }
+                    
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }.resume()
             
         } catch let signOutError as NSError {
             print("Error signing out: %@", signOutError)
@@ -117,25 +214,25 @@ class SignInScreenViewModel: ObservableObject {
     
     
     /*func getSupermarkets() {
-            guard let url = URL(string: "http://localhost:9090/supermarket/") else {
-                return
-            }
-
-            URLSession.shared.dataTask(with: url) { data, _, error in
-                guard let data = data else {
-                    return
-                }
-
-                do {
-                    let decodedUsers = try JSONDecoder().decode([Supermarket].self, from: data)
-                    DispatchQueue.main.async {
-                        self.supermarkets = decodedUsers
-                    }
-                } catch {
-                    print(error.localizedDescription)
-                }
-            }.resume()
-        }*/
+     guard let url = URL(string: "http://localhost:9090/supermarket/") else {
+     return
+     }
+     
+     URLSession.shared.dataTask(with: url) { data, _, error in
+     guard let data = data else {
+     return
+     }
+     
+     do {
+     let decodedUsers = try JSONDecoder().decode([Supermarket].self, from: data)
+     DispatchQueue.main.async {
+     self.supermarkets = decodedUsers
+     }
+     } catch {
+     print(error.localizedDescription)
+     }
+     }.resume()
+     }*/
     
 }
 
