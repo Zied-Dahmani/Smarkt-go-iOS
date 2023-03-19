@@ -9,6 +9,7 @@ import Foundation
 
 struct User : Codable {
     var token: String
+    var provider: String
     var id: String
     var fullName: String
     var image: String
@@ -16,10 +17,10 @@ struct User : Codable {
     
     
     func getImage() -> String {
-        return id.contains("+") ? Constants.kbaseUrl+self.image : self.image
+        return provider == "google" ?  self.image: Constants.kbaseUrl+self.image
     }
     
-    func isSignedWithPhone() -> Bool {
-        return id.contains("+")
+    func isSignedInWithGoogle() -> Bool {
+        return provider == "google"
     }
 }

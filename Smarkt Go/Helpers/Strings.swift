@@ -22,8 +22,25 @@ struct Strings {
     static let kor = "Or"
     static let ksignInWithGoogle = "Sign in with Google"
     static let ksignInWithApple = "Sign in with Apple"
-    static let ksignOut = "Sign out"
+    static let kalreadySignedInWithGoogle = "You have already signed in using this email address with Google!"
+    static let kalreadySignedInWithApple = "You have already signed in using this email address with Apple!"
     
     
+    static let khome = "Home"
+    static let kcart = "Cart"
+    static let kchat = "Chat"
+    static let kfavourites = "Favourites"
+    static let kprofile = "Profile"
+    
+    
+    static let kwallet = "Wallet"
     static let ksettings = "Settings"
+    static let ksignOut = "Sign out"
+    static let ksignOutTitle = "Sign out?"
+    static let ksignOutSubTitle = "Are you sure you want to sign out?"
+    static let kyes = "Yes"
+    static let kno = "No"
+    static let kok = "Ok"
+    static let kerror = "Error"
+    static let kcheckInternetConnection = "Check your internet connection!"
 }

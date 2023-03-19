@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct SettingsScreen: View {
-    @Environment(\.presentationMode) var presentationMode
-
     @EnvironmentObject var signInScreenViewModel: SignInScreenViewModel
     @State private var showAlert = false
     
@@ -22,11 +20,10 @@ struct SettingsScreen: View {
                         showAlert = true
                     }
                     .alert(isPresented: $showAlert) {
-                        Alert(title: Text("Sign out?"), message: Text("Are you sure you want to sign out?"), primaryButton: .destructive(Text("Yes"),action: {
+                        Alert(title: Text(Strings.ksignOutTitle), message: Text(Strings.ksignOutSubTitle), primaryButton: .destructive(Text(Strings.kyes),action: {
                             signInScreenViewModel.signOut()
-                            presentationMode.wrappedValue.dismiss()
-                        }), secondaryButton: .default(Text("No")))
-
+                        }), secondaryButton: .default(Text(Strings.kno)))
+                        
                     }
                 
             }

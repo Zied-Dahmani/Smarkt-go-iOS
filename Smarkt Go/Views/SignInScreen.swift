@@ -13,9 +13,7 @@ import _AuthenticationServices_SwiftUI
 
 struct SignInScreen: View {
     @Environment(\.presentationMode) var presentationMode
-
     @EnvironmentObject var signInScreenViewModel:SignInScreenViewModel
-    
     @State private var phoneNumber = ""
     @State private var InputError = ""
     
@@ -25,7 +23,6 @@ struct SignInScreen: View {
         NavigationView {
             
             ZStack {
-                // Your content here
                 if signInScreenViewModel.isLoading {
                     ProgressView()
                         .progressViewStyle(CircularProgressViewStyle())
@@ -61,19 +58,15 @@ struct SignInScreen: View {
                         InputError = signInScreenViewModel.isValid(phoneNumber)
                         if InputError.isEmpty
                         {
-                            signInScreenViewModel.navigateToSecondView = true
+                            //signInScreenViewModel.navigateToSecondView = true
                         }
                     })
                     .padding()
-                    .fullScreenCover(isPresented: $signInScreenViewModel.navigateToSecondView) {
-                        MainScreen()
-                    }
                     
                     HStack{
                         Divider()
                             .frame(width: UIScreen.main.bounds.width / 2.5, height: Constants.kdividerHeight)
                             .background(.gray)
-                        //.padding(.horizontal,Constants.kbigSpace * 2)
                         
                         Text(Strings.kor)
                             .fontWeight(.semibold)
@@ -85,14 +78,10 @@ struct SignInScreen: View {
                             .background(.gray)
                     }
                     
-                    
-                    
-                    
                     CustomButton(text: Strings.ksignInWithGoogle, icon: "google", textColor: .black, iconColor: nil, backgroundColor: .white, action: {
                         signInScreenViewModel.signInWithGoogle()
                     })
                     .padding()
-                    
                     
                     SignInWithAppleButton{ (request) in
                         signInScreenViewModel.nonce = randomNonceString()
@@ -112,6 +101,13 @@ struct SignInScreen: View {
                 }
                 
             }
+            .alert(isPresented: $signInScreenViewModel.showAlert) {
+                        Alert(
+                            title: Text(Strings.kerror),
+                            message: Text(signInScreenViewModel.alertMessage),
+                            dismissButton: .default(Text(Strings.kok))
+                        )
+                    }
         }
         
     }

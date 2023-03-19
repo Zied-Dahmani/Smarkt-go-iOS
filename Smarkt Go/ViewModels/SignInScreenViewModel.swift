@@ -15,11 +15,12 @@ import AuthenticationServices
 
 class SignInScreenViewModel: ObservableObject {
     @Published var user  : User?
-    @Published var navigateToSecondView = false
     @Published var nonce  = ""
     @Published var isLoading  = false
     @Published var userLoggedIn : String?
     @Published var isNotFirstTime : Bool
+    @Published var showAlert = false
+    @Published var alertMessage = ""
     
     init(){
         userLoggedIn = UserDefaults.standard.string(forKey: "userLoggedIn") ?? ""
@@ -42,25 +43,34 @@ class SignInScreenViewModel: ObservableObject {
         }
     }
     
-    func signInUp(url: String,id: String,fullName:String? = nil,image: String? = nil){
+    func signInUp(provider: String? = nil, url: String,id: String,fullName:String? = nil,image: String? = nil){
         let url = URL(string: Constants.kbaseUrl + url)!
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        var data: [String: Any]
-        if fullName == nil {
-            data = ["id": id]
+        let data: [String: String?]
+        if provider == nil {
+            if fullName == nil {
+                data = ["id": id]
+            }
+            else {
+                data = ["id": id,"fullName":fullName,"image":image]
+            }
         }
-        else {
-            data = ["id": id,"fullName":fullName,"image":image]
+        else{
+            if fullName == nil {
+                data = ["provider":provider,"id": id]
+            }
+            else {
+                data = ["provider":provider,"id": id,"fullName":fullName,"image":image]
+            }
         }
+        
         
         let jsonData = try? JSONSerialization.data(withJSONObject: data)
-        
         request.httpBody = jsonData
-        
         let session = URLSession.shared
         
         let task = session.dataTask(with: request) { data, response, error in
@@ -76,29 +86,22 @@ class SignInScreenViewModel: ObservableObject {
                 return
             }
             
-            
             if let data = data {
                 DispatchQueue.main.async {
                     do {
                         let decoder = JSONDecoder()
                         self.user = try decoder.decode(User.self, from: data)
                         UserDefaults.standard.set(self.user?.id, forKey: "userLoggedIn")
+                        self.userLoggedIn = self.user?.id
                         self.isLoading = false
-                        self.navigateToSecondView = true
                     } catch {
                         print("Error decoding JSON: \(error.localizedDescription)")
                     }
                 }
-                
             }
         }
         
         task.resume()
-        
-        
-    }
-    
-    func signIn(){
         
     }
     
@@ -108,12 +111,14 @@ class SignInScreenViewModel: ObservableObject {
         
         GIDSignIn.sharedInstance.signIn(withPresenting: (UIApplication.shared.windows.first?.rootViewController)! ) {result, error in
             guard error == nil else {
-                print("Error signInWithGoogle : %@", error)
+                print("Error signInWithGoogle : %@", error as Any)
+                self.isLoading = false
                 return
             }
             
             guard let user = result?.user,let idToken = user.idToken?.tokenString
             else {
+                self.isLoading = false
                 return
             }
             
@@ -121,29 +126,106 @@ class SignInScreenViewModel: ObservableObject {
             
             Auth.auth().signIn(with: credential) { result, error in
                 guard error == nil else {
+                    self.isLoading = false
                     return
                 }
                 
-                let url: String
                 if let isNewUser = result?.additionalUserInfo?.isNewUser, isNewUser {
-                    url = Constants.ksignUp
+                    
+                    Auth.auth().fetchSignInMethods(forEmail: (result?.user.email)!) { [self] (providers, error) in
+                        if let error = error {
+                            print("Error fetching sign-in methods for email \(String(describing: result?.user.email)): \(error.localizedDescription)")
+                            return
+                        }
+                        
+                        // TODO: alreadySignedInWithApple & swap
+                        if providers!.contains("apple.com") {
+                            self.alertMessage = Strings.kalreadySignedInWithApple
+                            self.showAlert = true
+                            return
+                        }
+                        else{
+                            if let photoURL = result?.user.photoURL {
+                                self.signInUp(provider:"google",url: Constants.ksignUp, id: (result?.user.email)!, fullName: result?.user.displayName, image: photoURL.absoluteString)
+                            }
+                        }
+                       
+                        
+                    }
+                    
                 } else {
-                    url = Constants.ksignIn
+                        self.signInUp(url: Constants.ksignIn, id: (result?.user.email)!)
                 }
                 
-                if let photoURL = result?.user.photoURL {
-                    self.userLoggedIn = result?.user.email
-                    self.signInUp(url: url, id: (result?.user.email)!, fullName: result?.user.displayName, image: photoURL.absoluteString)
-                }
+                
                 
             }
+        }
+        
+    }
+        
+    func onCompletionSignInWithApple(result : Result<ASAuthorization, Error>){
+        switch result {
+        case .success(let user):
+            guard let credential = user.credential as?  ASAuthorizationAppleIDCredential else {
+                return
+            }
+            signInWithApple(credential: credential)
+        case .failure(let error):
+            print(error.localizedDescription)
+        }
+    }
+    
+    func signInWithApple(credential: ASAuthorizationAppleIDCredential){
+        self.isLoading = true
+
+        guard let token = credential.identityToken else {
+            self.isLoading = false
+            return
+        }
+        
+        guard let tokenString = String(data:token,encoding: .utf8) else {
+            self.isLoading = false
+            return
+        }
+        let firebaseCredential = OAuthProvider.credential(withProviderID:"apple.com",idToken: tokenString,rawNonce: nonce )
+        
+        Auth.auth().signIn(with: firebaseCredential) {(result,err) in
+            if err != nil {
+                self.isLoading = false
+                return
+            }
+            
+            if let isNewUser = result?.additionalUserInfo?.isNewUser, isNewUser {
+                
+                Auth.auth().fetchSignInMethods(forEmail: (result?.user.email)!) { [self] (providers, error) in
+                    if let error = error {
+                        print("Error fetching sign-in methods for email \(String(describing: result?.user.email)): \(error.localizedDescription)")
+                        return
+                    }
+                    
+                    // TODO: alreadySignedInWithGoogle & swap
+                    if providers!.contains("google.com") {
+                        self.alertMessage = Strings.kalreadySignedInWithGoogle
+                        self.showAlert = true
+                        return
+                    }
+                    else {
+                        self.signInUp(provider:"apple", url:Constants.ksignUp,id: (result?.user.email)!)
+                    }
+                }
+                
+            } else {
+                self.signInUp(url: Constants.ksignIn, id: (result?.user.email)!)
+            }
+            
+            
         }
         
     }
     
     func signOut()
     {
-        let firebaseAuth = Auth.auth()
         do {
             guard let url = URL(string: Constants.kbaseUrl+Constants.ksignOut) else {
                 return
@@ -158,10 +240,9 @@ class SignInScreenViewModel: ObservableObject {
                         if let message = jsonDict["msg"] as? String {
                             if message == "signed out"
                             {
-                                try firebaseAuth.signOut()
+                                try Auth.auth().signOut()
                                 DispatchQueue.main.async {
                                     self.userLoggedIn = ""
-                                    self.navigateToSecondView = false
                                     UserDefaults.standard.set("", forKey: "userLoggedIn")
                                 }
                             }
@@ -173,45 +254,9 @@ class SignInScreenViewModel: ObservableObject {
                 }
             }.resume()
             
-        } catch let signOutError as NSError {
-            print("Error signing out: %@", signOutError)
         }
     }
-    
-    
-    func onCompletionSignInWithApple(result : Result<ASAuthorization, Error>){
-        switch result {
-        case .success(let user):
-            guard let credential = user.credential as?  ASAuthorizationAppleIDCredential else {
-                return
-            }
-            signInWithApple(credential: credential)
-        case .failure(let error):
-            print(error.localizedDescription)
-        }
-    }
-    
-    func signInWithApple(credential: ASAuthorizationAppleIDCredential){
-        
-        guard let token = credential.identityToken else {
-            return
-        }
-        
-        guard let tokenString = String(data:token,encoding: .utf8) else {
-            return
-        }
-        let firebaseCredential = OAuthProvider.credential(withProviderID:"apple.com",idToken: tokenString,rawNonce: nonce )
-        
-        Auth.auth().signIn(with: firebaseCredential) {(result,err) in
-            if let error = err {
-                return
-            }
-            
-        }
-        
-    }
-    
-    
+
     
     /*func getSupermarkets() {
      guard let url = URL(string: "http://localhost:9090/supermarket/") else {

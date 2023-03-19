@@ -24,6 +24,7 @@
 		8928C7F12972FED900AE14C3 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C7F02972FED900AE14C3 /* ProfileScreen.swift */; };
 		892936E629C5ED83007D4419 /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892936E529C5ED83007D4419 /* SettingsScreen.swift */; };
 		892B002E29B76B540026E40F /* SignInScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892B002D29B76B540026E40F /* SignInScreen.swift */; };
+		893E2EF329C74ABD0090906B /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893E2EF229C74ABD0090906B /* NetworkMonitor.swift */; };
 		8944CC6229C480EB00A43B8C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8944CC6129C480EB00A43B8C /* User.swift */; };
 		897B279329C3080600FE6BD2 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897B279229C3080500FE6BD2 /* HomeScreen.swift */; };
 		897B279529C30CC200FE6BD2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 897B279429C30CC100FE6BD2 /* GoogleService-Info.plist */; };
@@ -73,6 +74,7 @@
 		8928C7F02972FED900AE14C3 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
 		892936E529C5ED83007D4419 /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
 		892B002D29B76B540026E40F /* SignInScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInScreen.swift; sourceTree = "<group>"; };
+		893E2EF229C74ABD0090906B /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		8944CC6129C480EB00A43B8C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		897B279229C3080500FE6BD2 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 		897B279429C30CC100FE6BD2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 				891BF33729C1F75C000735CE /* Strings.swift */,
 				89DB91C129C3B438004A75A3 /* AppDelegate.swift */,
 				898DD75E29C50023000E5E04 /* Utils.swift */,
+				893E2EF229C74ABD0090906B /* NetworkMonitor.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -401,6 +404,7 @@
 				891BF33629C1F5D7000735CE /* CustomButton.swift in Sources */,
 				898DD75F29C50023000E5E04 /* Utils.swift in Sources */,
 				892B002E29B76B540026E40F /* SignInScreen.swift in Sources */,
+				893E2EF329C74ABD0090906B /* NetworkMonitor.swift in Sources */,
 				8944CC6229C480EB00A43B8C /* User.swift in Sources */,
 				891BF33A29C1FAFC000735CE /* CustomTextField.swift in Sources */,
 				8928C7C02972F32900AE14C3 /* Smarkt_GoApp.swift in Sources */,
@@ -571,7 +575,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Smarkt Go/Preview Content\"";
-				DEVELOPMENT_TEAM = L6XTSCA775;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Smarkt-Go-Info.plist";
@@ -605,7 +609,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Smarkt Go/Preview Content\"";
-				DEVELOPMENT_TEAM = L6XTSCA775;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Smarkt-Go-Info.plist";

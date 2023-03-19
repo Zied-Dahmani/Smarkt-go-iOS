@@ -99,6 +99,12 @@ struct HomeScreen: View {
     }
 }
 
+extension UIApplication {
+    func dismissKeyboard() {
+        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+
 struct HomeScreen_Previews: PreviewProvider {
     static var previews: some View {
         HomeScreen()
