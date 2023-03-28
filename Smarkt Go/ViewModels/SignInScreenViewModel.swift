@@ -28,6 +28,57 @@ class SignInScreenViewModel: ObservableObject {
     }
     
     
+    
+    func signInWithPhone(_ phoneNumber: String, callback: @escaping (Bool) -> Void) {
+        let phoneNumber = "+216\(phoneNumber)"
+        PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil) { verificationID, error in
+            if let error = error {
+                print("Error verifying phone number: \(error.localizedDescription)")
+                callback(false)
+                return
+            }
+            
+            UserDefaults.standard.set(verificationID, forKey: "authVerificationID")
+            
+            callback(true)
+        }
+    }
+    
+
+    func verifyCode(_ code: String) {
+        guard let verificationID = UserDefaults.standard.string(forKey: "authVerificationID") else {
+            return
+        }
+        
+        let credential = PhoneAuthProvider.provider().credential(withVerificationID: verificationID, verificationCode: code)
+        
+        Auth.auth().signIn(with: credential) { result, error in
+            if let error = error {
+                print("Error signing in with phone: \(error.localizedDescription)")
+                return
+            }
+            else{
+              //Handle the signInUp scenario
+            }
+         
+        }
+    }
+
+    func isOTPValid(_ text: String) -> String {
+        if text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        {
+            return "Please type your code"
+        }
+        else if text.count != 6
+        {
+            return "Please type a valid OTP"
+        }
+        else
+        {
+            return ""
+        }
+    }
+    
     func isValid(_ text: String) -> String {
         if text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
         {
@@ -81,7 +132,9 @@ class SignInScreenViewModel: ObservableObject {
             
             guard let httpResponse = response as? HTTPURLResponse,
                   (200...299).contains(httpResponse.statusCode)
+                  
             else {
+            
                 print("Invalid response")
                 return
             }

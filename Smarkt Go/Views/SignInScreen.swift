@@ -18,6 +18,11 @@ struct SignInScreen: View {
     @State private var InputError = ""
     
     
+    @State private var showVerificationCode = false
+    @State private var verificationCode = ""
+    @State private var showOTP = false
+
+    
     var body: some View {
         
         NavigationView {
@@ -54,14 +59,28 @@ struct SignInScreen: View {
                         
                     }
                     
-                    CustomButton(text: Strings.ksignInWithPhone, icon: "phone.fill", textColor: .white, iconColor: .white, backgroundColor: .accentColor,action:{
+            
+                    CustomButton(text: Strings.ksignInWithPhone, icon: "phone.fill", textColor: .white, iconColor: .white, backgroundColor: .accentColor, action: {
                         InputError = signInScreenViewModel.isValid(phoneNumber)
-                        if InputError.isEmpty
-                        {
-                            //signInScreenViewModel.navigateToSecondView = true
+                        if InputError.isEmpty {
+                            signInScreenViewModel.signInWithPhone(phoneNumber) { success in
+                                if success {
+                                    showOTP = true
+                                }
+                            }
                         }
-                    })
-                    .padding()
+                    }).padding()
+                    
+            
+    
+                    
+                    NavigationLink(
+                        destination: OTPScreen(),
+                        isActive: $showOTP,
+                        label: { EmptyView() }
+                    )
+              
+                    
                     
                     HStack{
                         Divider()

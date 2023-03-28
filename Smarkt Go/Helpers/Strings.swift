@@ -19,12 +19,15 @@ struct Strings {
     
     static let kphoneNumber = "Phone number"
     static let ksignInWithPhone = "Sign in with phone"
+    static let kverifyCode = "Verify your code"
+    static let kenterOTP = "Enter OTP"
+    static let ksentOTP = "A 6 digit code has been sent to your phone number"
     static let kor = "Or"
     static let ksignInWithGoogle = "Sign in with Google"
     static let ksignInWithApple = "Sign in with Apple"
     static let kalreadySignedInWithGoogle = "You have already signed in using this email address with Google!"
     static let kalreadySignedInWithApple = "You have already signed in using this email address with Apple!"
-    
+    static let kverificationCode="Enter the code here "
     
     static let khome = "Home"
     static let kcart = "Cart"
