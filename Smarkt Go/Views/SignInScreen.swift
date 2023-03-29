@@ -21,6 +21,7 @@ struct SignInScreen: View {
     @State private var showVerificationCode = false
     @State private var verificationCode = ""
     @State private var showOTP = false
+    @State private var activee = true
 
     
     var body: some View {
@@ -58,9 +59,14 @@ struct SignInScreen: View {
                             .padding(.horizontal,Constants.kbigSpace)
                         
                     }
-                    
+                
             
                     CustomButton(text: Strings.ksignInWithPhone, icon: "phone.fill", textColor: .white, iconColor: .white, backgroundColor: .accentColor, action: {
+                       
+                            showOTP = true
+
+                        
+                        
                         InputError = signInScreenViewModel.isValid(phoneNumber)
                         if InputError.isEmpty {
                             signInScreenViewModel.signInWithPhone(phoneNumber) { success in

@@ -21,6 +21,7 @@ class SignInScreenViewModel: ObservableObject {
     @Published var isNotFirstTime : Bool
     @Published var showAlert = false
     @Published var alertMessage = ""
+    @Published var phone = ""
     
     init(){
         userLoggedIn = UserDefaults.standard.string(forKey: "userLoggedIn") ?? ""
@@ -58,7 +59,12 @@ class SignInScreenViewModel: ObservableObject {
                 return
             }
             else{
-              //Handle the signInUp scenario
+                if let isNewUser=result?.additionalUserInfo?.isNewUser,isNewUser{
+                    self.signInUp(provider:"phone",url: Constants.ksignUp, id: (result?.user.phoneNumber)!)
+                }
+                else{
+                    self.signInUp(url: Constants.ksignIn, id: (result?.user.phoneNumber)!)
+                }
             }
          
         }
