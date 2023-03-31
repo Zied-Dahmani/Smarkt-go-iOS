@@ -23,7 +23,7 @@ struct MainScreen: View {
                     Text(Strings.kchat)
                 }
             
-            Text("")
+           FavoritesScreen()
                 .tabItem {
                     Image(systemName: "heart.fill")
                     Text(Strings.kfavourites)

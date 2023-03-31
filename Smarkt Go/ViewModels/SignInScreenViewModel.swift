@@ -29,6 +29,50 @@ class SignInScreenViewModel: ObservableObject {
     }
     
     
+    func updateProfile(id: String, fullName: String, wallet: String, completion: @escaping (Error?) -> Void) {
+        let url = URL(string: Constants.kbaseUrl + Constants.kupdate)!
+        if let userLoggedIn = UserDefaults.standard.value(forKey: "userLoggedIn") as? String {
+            
+            print("The logged in User "+userLoggedIn)
+            
+        } else {
+            print("not found")
+            
+        }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        let parameters: [String: Any] = [
+            "id": id,
+            "fullName": fullName,
+            "wallet": wallet
+        ]
+        request.httpBody = try! JSONSerialization.data(withJSONObject: parameters, options: [])
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {
+                completion(error)
+                return
+            }
+            do {
+                let json = try JSONSerialization.jsonObject(with: data, options: [])
+                if let userDict = json as? [String: Any], let fullName = userDict["fullname"] as? String {
+                    self.user!.fullName = fullName
+                }
+                print(json)
+                completion(nil)
+            } catch {
+                completion(error)
+            }
+        }
+        task.resume()
+    }
+    
+    
+    
+    
+    
+    
+    
     
     func signInWithPhone(_ phoneNumber: String, callback: @escaping (Bool) -> Void) {
         let phoneNumber = "+216\(phoneNumber)"
@@ -45,7 +89,7 @@ class SignInScreenViewModel: ObservableObject {
         }
     }
     
-
+    
     func verifyCode(_ code: String) {
         guard let verificationID = UserDefaults.standard.string(forKey: "authVerificationID") else {
             return
@@ -59,6 +103,8 @@ class SignInScreenViewModel: ObservableObject {
                 return
             }
             else{
+                UserDefaults.standard.set(self.user?.id, forKey: "userLoggedIn")
+                
                 if let isNewUser=result?.additionalUserInfo?.isNewUser,isNewUser{
                     self.signInUp(provider:"phone",url: Constants.ksignUp, id: (result?.user.phoneNumber)!)
                 }
@@ -66,10 +112,10 @@ class SignInScreenViewModel: ObservableObject {
                     self.signInUp(url: Constants.ksignIn, id: (result?.user.phoneNumber)!)
                 }
             }
-         
+            
         }
     }
-
+    
     func isOTPValid(_ text: String) -> String {
         if text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
         {
@@ -138,9 +184,9 @@ class SignInScreenViewModel: ObservableObject {
             
             guard let httpResponse = response as? HTTPURLResponse,
                   (200...299).contains(httpResponse.statusCode)
-                  
+                    
             else {
-            
+                
                 print("Invalid response")
                 return
             }
@@ -208,12 +254,12 @@ class SignInScreenViewModel: ObservableObject {
                                 self.signInUp(provider:"google",url: Constants.ksignUp, id: (result?.user.email)!, fullName: result?.user.displayName, image: photoURL.absoluteString)
                             }
                         }
-                       
+                        
                         
                     }
                     
                 } else {
-                        self.signInUp(url: Constants.ksignIn, id: (result?.user.email)!)
+                    self.signInUp(url: Constants.ksignIn, id: (result?.user.email)!)
                 }
                 
                 
@@ -222,7 +268,7 @@ class SignInScreenViewModel: ObservableObject {
         }
         
     }
-        
+    
     func onCompletionSignInWithApple(result : Result<ASAuthorization, Error>){
         switch result {
         case .success(let user):
@@ -237,7 +283,7 @@ class SignInScreenViewModel: ObservableObject {
     
     func signInWithApple(credential: ASAuthorizationAppleIDCredential){
         self.isLoading = true
-
+        
         guard let token = credential.identityToken else {
             self.isLoading = false
             return
@@ -315,7 +361,7 @@ class SignInScreenViewModel: ObservableObject {
             
         }
     }
-
+    
     
     /*func getSupermarkets() {
      guard let url = URL(string: "http://localhost:9090/supermarket/") else {

@@ -6,10 +6,13 @@
 //
 
 import SwiftUI
+import PhotosUI
 
 struct ProfileScreen: View {
     @EnvironmentObject var signInScreenViewModel: SignInScreenViewModel
     @State var user : User?
+    @State var isEditModeOn = false
+    @State var editedName = ""
     
     var body: some View {
         
@@ -33,20 +36,46 @@ struct ProfileScreen: View {
                     )
                     .shadow(radius: Constants.kshadowRadius * 2)
                     .padding(.bottom,Constants.ksmallSpace)
+                    .onTapGesture {
+                        
+                    }
+                    
                     
                     HStack{
-                        Text(self.user!.fullName)
-                            .font(.title2)
-                        if !self.user!.isSignedInWithGoogle() {
+                        if isEditModeOn {
+                            TextField("Enter your name", text: $editedName)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .padding(.leading, Constants.kbigSpace)
+                        } else {
+                            Text(self.user!.fullName)
+                                .font(.title2)
+                            
+                        }
+                        if isEditModeOn {
+                            Button("Save") {
+                                user?.fullName = editedName
+                                isEditModeOn = false
+                                signInScreenViewModel.updateProfile(id: user!.id, fullName: editedName, wallet: user!.wallet.formatted()) { error in
+                                    if let error = error {
+                                        print("Error updating profile: \(error)")
+                                    } else {
+                                        print("updated")
+                                    }
+                                }
+                            }.foregroundColor(.accentColor)
+                        } else if !self.user!.isSignedInWithGoogle() {
                             Image(systemName: "pencil")
                                 .resizable()
                                 .frame(width: Constants.kiconSize / 1.3, height: Constants.kiconSize / 1.3)
                                 .foregroundColor(.accentColor)
                                 .onTapGesture{
-                                    signInScreenViewModel.signOut()
+                                    isEditModeOn = true
+                                    editedName = user?.fullName ?? ""
                                 }
                         }
                     }
+                    
+                    
                     
                     HStack{
                         Image(systemName: "dollarsign.circle.fill")
@@ -57,7 +86,7 @@ struct ProfileScreen: View {
                     .padding(.bottom,Constants.kbigSpace)
                     
                     List {
-                        NavigationLink(destination: SettingsScreen()){
+                        NavigationLink(destination: WalletScreen()){
                             Text(Strings.kwallet)
                         }
                         NavigationLink(destination: SettingsScreen()) {

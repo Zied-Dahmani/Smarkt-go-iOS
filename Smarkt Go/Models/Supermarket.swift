@@ -7,8 +7,14 @@
 
 import Foundation
 
-struct Supermarket: Codable {
+struct Supermarket: Codable , Identifiable {
+    let id = UUID()
     let name: String
     let image: String
     let description: String
+    
+    func getImage() -> String {
+        return Constants.kbaseUrl + self.image
+    }
+    
 }

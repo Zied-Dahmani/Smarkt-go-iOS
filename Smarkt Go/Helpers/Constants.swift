@@ -24,9 +24,11 @@ struct Constants {
     
     
     static let kbaseUrl = "http://localhost:9090/"
+    static let kfavorites = "supermarket/getFavorites"
     static let ksignUp = "user/signUp"
     static let ksignIn = "user/signIn"
     static let ksignOut = "user/signOut"
+    static let kupdate = "user/update"
     
 
 
