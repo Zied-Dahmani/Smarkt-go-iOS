@@ -29,6 +29,7 @@ struct Constants {
     static let ksignIn = "user/signIn"
     static let ksignOut = "user/signOut"
     static let kupdate = "user/update"
+    static let kupdatePic = "user/updatePic"
     
 
 

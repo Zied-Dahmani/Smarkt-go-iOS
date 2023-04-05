@@ -13,6 +13,9 @@ struct ProfileScreen: View {
     @State var user : User?
     @State var isEditModeOn = false
     @State var editedName = ""
+    @State var isPicker = false
+    @State var selectedImage : UIImage?
+    
     
     var body: some View {
         
@@ -37,9 +40,19 @@ struct ProfileScreen: View {
                     .shadow(radius: Constants.kshadowRadius * 2)
                     .padding(.bottom,Constants.ksmallSpace)
                     .onTapGesture {
-                        
+                        isPicker = true
+                        if let user = user, let image = selectedImage {
+                                        signInScreenViewModel.uploadImage(id: user.id, image: image)
+                                    }
                     }
-                    
+                    if selectedImage != nil {
+                        
+                        Image(uiImage: selectedImage!)
+                            .resizable()
+                            .frame(width:200,height: 200)
+                    } else {
+                        Text("No image selected")
+                    }
                     
                     HStack{
                         if isEditModeOn {
@@ -103,6 +116,9 @@ struct ProfileScreen: View {
             if newValue != nil {
                 user = newValue
             }
+        }.sheet(isPresented: $isPicker , onDismiss: nil)
+        {
+            ImagePicker(selectedImage: $selectedImage, isPicker: $isPicker)
         }
         
     }

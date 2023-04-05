@@ -27,7 +27,47 @@ class SignInScreenViewModel: ObservableObject {
         userLoggedIn = UserDefaults.standard.string(forKey: "userLoggedIn") ?? ""
         isNotFirstTime = UserDefaults.standard.bool(forKey: "isNotFirstTime")
     }
-    
+    func uploadImage(id: String, image: UIImage) {
+        let url = URL(string: Constants.kbaseUrl + Constants.kupdatePic)!
+        let boundary = UUID().uuidString
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+
+        let imageData = image.jpegData(compressionQuality: 0.8)!
+        let body = NSMutableData()
+        let filename = "image.jpeg"
+        let mimetype = "image/jpeg"
+        body.append("--\(boundary)\r\n".data(using: .utf8)!)
+        body.append("Content-Disposition:form-data; name=\"id\"\r\n\r\n".data(using: .utf8)!)
+        body.append("\(id)".data(using: .utf8)!)
+        body.append("\r\n".data(using: .utf8)!)
+        body.append("--\(boundary)\r\n".data(using: .utf8)!)
+        body.append("Content-Disposition:form-data; name=\"image\"; filename=\"\(filename)\"\r\n".data(using: .utf8)!)
+        body.append("Content-Type: \(mimetype)\r\n\r\n".data(using: .utf8)!)
+        body.append(imageData)
+        body.append("\r\n".data(using: .utf8)!)
+        body.append("--\(boundary)--\r\n".data(using: .utf8)!)
+        request.httpBody = body as Data
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+                return
+            }
+            guard let data = data else {
+                print("Error: No data received")
+                return
+            }
+            do {
+                let responseJSON = try JSONSerialization.jsonObject(with: data, options: [])
+                print("Response: \(responseJSON)")
+            } catch {
+                print("Error decoding response: \(error.localizedDescription)")
+            }
+        }.resume()
+    }
+
     
     func updateProfile(id: String, fullName: String, wallet: String, completion: @escaping (Error?) -> Void) {
         let url = URL(string: Constants.kbaseUrl + Constants.kupdate)!
