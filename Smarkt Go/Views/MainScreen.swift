@@ -1,7 +1,8 @@
 import SwiftUI
 
 struct MainScreen: View {
-    
+    @StateObject var viewModel = SupermarketsScreenViewModel()
+
     
     var body: some View {
         TabView {
@@ -10,6 +11,8 @@ struct MainScreen: View {
                     Image(systemName: "house.fill")
                     Text(Strings.khome)
                 }
+                .environmentObject(viewModel)
+
             
             Text("")
                 .tabItem {

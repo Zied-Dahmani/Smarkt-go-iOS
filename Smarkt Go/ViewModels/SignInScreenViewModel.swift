@@ -69,11 +69,6 @@ class SignInScreenViewModel: ObservableObject {
     
     
     
-    
-    
-    
-    
-    
     func signInWithPhone(_ phoneNumber: String, callback: @escaping (Bool) -> Void) {
         let phoneNumber = "+216\(phoneNumber)"
         PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil) { verificationID, error in
@@ -363,26 +358,7 @@ class SignInScreenViewModel: ObservableObject {
     }
     
     
-    /*func getSupermarkets() {
-     guard let url = URL(string: "http://localhost:9090/supermarket/") else {
-     return
-     }
-     
-     URLSession.shared.dataTask(with: url) { data, _, error in
-     guard let data = data else {
-     return
-     }
-     
-     do {
-     let decodedUsers = try JSONDecoder().decode([Supermarket].self, from: data)
-     DispatchQueue.main.async {
-     self.supermarkets = decodedUsers
-     }
-     } catch {
-     print(error.localizedDescription)
-     }
-     }.resume()
-     }*/
+   
     
 }
 

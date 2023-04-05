@@ -24,7 +24,8 @@ struct FavoritesScreen: View {
                     .foregroundColor(.black)
                     .padding(.top, Constants.ksmallSpace)
             }
-        } else {
+        }
+        /*else {
             ScrollView {
                 LazyVStack {
                     ForEach(favoritesViewModel.favorites) { favorite in
@@ -33,7 +34,7 @@ struct FavoritesScreen: View {
                     }
                 }
             }
-        }
+        }*/
     }
 }
 
