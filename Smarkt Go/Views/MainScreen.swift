@@ -1,48 +1,41 @@
-//
-//  MainScreen.swift
-//  Smarkt Go
-//
-//  Created by Zied Dahmani on 14/1/2023.
-//
-
 import SwiftUI
 
 struct MainScreen: View {
+    
+    
     var body: some View {
-        
         TabView {
-            
-            Text("")
+            HomeScreen()
                 .tabItem {
                     Image(systemName: "house.fill")
-                    Text("Home")
+                    Text(Strings.khome)
                 }
             
             Text("")
                 .tabItem {
                     Image(systemName: "basket.fill")
-                    Text("Cart")
+                    Text(Strings.kcart)
                 }
             
             Text("")
                 .tabItem {
                     Image(systemName: "message.fill")
-                    Text("Chat")
+                    Text(Strings.kchat)
                 }
             
-            Text("")
+           FavoritesScreen()
                 .tabItem {
                     Image(systemName: "heart.fill")
-                    Text("Favourites")
+                    Text(Strings.kfavourites)
                 }
             
             ProfileScreen()
                 .tabItem {
                     Image(systemName: "person.fill")
-                    Text("Profile")
+                    Text(Strings.kprofile)
                 }
-            
         }
+        
     }
 }
 
@@ -51,3 +44,5 @@ struct MainScreen_Previews: PreviewProvider {
         MainScreen()
     }
 }
+
+
