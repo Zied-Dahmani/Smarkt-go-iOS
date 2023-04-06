@@ -50,4 +50,10 @@ struct Strings {
     static let kok = "Ok"
     static let kerror = "Error"
     static let kcheckInternetConnection = "Check your internet connection!"
+    
+    
+    static let knearbySupermarkets = "Nearby supermarkets"
+    static let kviewAll = "View all"
+    static let kdescription = "Description"
+    static let kcategories = "Categories"
 }
