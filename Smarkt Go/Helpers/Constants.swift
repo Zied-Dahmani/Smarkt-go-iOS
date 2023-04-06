@@ -31,6 +31,6 @@ struct Constants {
     static let kupdate = "user/update"
     static let kupdatePic = "user/updatePic"
     
-
-
+    
+    
 }

@@ -69,7 +69,8 @@ struct ProfileScreen: View {
                         if isEditModeOn {
                             TextField("Enter your name", text: $editedName)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
-                                .padding(.leading, Constants.kbigSpace)
+                                .frame(width: UIScreen.main.bounds.width / 1.5)
+                                .padding(Constants.ksmallSpace)
                         } else {
                             Text(self.user!.fullName)
                                 .font(.title2)

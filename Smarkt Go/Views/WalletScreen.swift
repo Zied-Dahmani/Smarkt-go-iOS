@@ -12,35 +12,28 @@ struct WalletScreen: View {
     
     var body: some View {
         
-        VStack(alignment: .center) {
+        VStack(alignment: .leading) {
             Image("wallet")
                 .resizable()
-                .frame(width: UIScreen.main.bounds.width / 1.25  , height: UIScreen.main.bounds.height / 2.5)
+                .frame(width: UIScreen.main.bounds.width - 40, height:UIScreen.main.bounds.height / 2.5)
                 .aspectRatio(contentMode: .fit)
-                .padding(.top,Constants.ksmallSpace)
             
             Text(Strings.kenterCode)
                 .fontWeight(.semibold)
                 .font(.title)
                 .foregroundColor(.black)
-                .padding(.top,Constants.ksmallSpace)
             
             Text(Strings.kCode)
-                .fontWeight(.semibold)
                 .font(.subheadline)
                 .foregroundColor(.gray)
             
-            CustomTextField(text: Strings.kverificationCode, keyboardType: .numberPad, textValue: $Code).padding(.top,Constants.kbigSpace)
-            
-            
-            
+            CustomTextField(text: Strings.kverificationCode, keyboardType: .numberPad, textValue: $Code)
             
             
             CustomButton(text: Strings.kverifyWallet, icon: "", textColor: .white, iconColor: .white, backgroundColor: .accentColor,action:{
-                
             }
-                         
-            ).padding(.top,Constants.kbigSpace)
+            )
+            .padding(.top,Constants.ksmallSpace)
             
             Spacer()
             

@@ -16,12 +16,12 @@ struct FavoritesScreen: View {
                 Image("nofavorites")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .padding(.top, Constants.khugeSpace)
+                    .frame(width: UIScreen.main.bounds.width - 40, height:UIScreen.main.bounds.height / 3)
                 
                 Text(Strings.knoFavorites)
                     .fontWeight(.semibold)
-                    .font(.title)
-                    .foregroundColor(.black)
+                    .font(.subheadline)
+                    .foregroundColor(Color.gray)
                     .padding(.top, Constants.ksmallSpace)
             }
         } else {
