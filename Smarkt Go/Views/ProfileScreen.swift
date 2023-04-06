@@ -15,6 +15,7 @@ struct ProfileScreen: View {
     @State var editedName = ""
     @State var isPicker = false
     @State var selectedImage : UIImage?
+    @State var isShowingImagePicker = false
     
     
     var body: some View {
@@ -22,36 +23,46 @@ struct ProfileScreen: View {
         NavigationView{
             if user != nil {
                 VStack{
-                    
-                    AsyncImage(url: URL(string: self.user!.getImage()),content: { image in
-                        image.resizable()
-                            .aspectRatio(contentMode: .fill)
-                    },
-                               placeholder: {
-                        ProgressView()
-                    })
-                    .frame(width: Constants.kbuttonHeight * 2.8, height:Constants.kbuttonHeight * 2.8)
-                    .cornerRadius(Constants.kcornerRadius * 10)
-                    .overlay(
-                        Circle()
-                            .stroke(Color.white,lineWidth: Constants.kdividerHeight * 2)
-                            .frame(width: Constants.kbuttonHeight * 2.8, height: Constants.kbuttonHeight * 2.8)
-                    )
-                    .shadow(radius: Constants.kshadowRadius * 2)
-                    .padding(.bottom,Constants.ksmallSpace)
-                    .onTapGesture {
-                        isPicker = true
-                        if let user = user, let image = selectedImage {
-                                        signInScreenViewModel.uploadImage(id: user.id, image: image)
-                                    }
-                    }
-                    if selectedImage != nil {
-                        
-                        Image(uiImage: selectedImage!)
+                    if let image = selectedImage {
+                        Image(uiImage: image)
                             .resizable()
-                            .frame(width:200,height: 200)
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: Constants.kbuttonHeight * 2.8, height:Constants.kbuttonHeight * 2.8)
+                            .cornerRadius(Constants.kcornerRadius * 10)
+                            .overlay(
+                                Circle()
+                                    .stroke(Color.white,lineWidth: Constants.kdividerHeight * 2)
+                                    .frame(width: Constants.kbuttonHeight * 2.8, height: Constants.kbuttonHeight * 2.8)
+                            )
+                            .shadow(radius: Constants.kshadowRadius * 2)
+                            .padding(.bottom,Constants.ksmallSpace)
+                            .onTapGesture {
+                                if !self.user!.isSignedInWithGoogle() {
+                                    isShowingImagePicker = true
+                                }
+                            }
                     } else {
-                        Text("No image selected")
+                        AsyncImage(url: URL(string: self.user!.getImage()),content: { image in
+                            image.resizable()
+                                .aspectRatio(contentMode: .fill)
+                        },
+                                   placeholder: {
+                            ProgressView()
+                        })
+                        .frame(width: Constants.kbuttonHeight * 2.8, height:Constants.kbuttonHeight * 2.8)
+                        .cornerRadius(Constants.kcornerRadius * 10)
+                        .overlay(
+                            Circle()
+                                .stroke(Color.white,lineWidth: Constants.kdividerHeight * 2)
+                                .frame(width: Constants.kbuttonHeight * 2.8, height: Constants.kbuttonHeight * 2.8)
+                        )
+                        .shadow(radius: Constants.kshadowRadius * 2)
+                        .padding(.bottom,Constants.ksmallSpace)
+                        .onTapGesture {
+                            if !self.user!.isSignedInWithGoogle() {
+                                isShowingImagePicker = true
+                            }
+                        }
                     }
                     
                     HStack{
@@ -110,15 +121,27 @@ struct ProfileScreen: View {
                     
                 }
                 .navigationTitle(Strings.kprofile)
+                
             }
+            
         }
+        
+        .sheet(isPresented: $isShowingImagePicker) {
+            ImagePicker(selectedImage: $selectedImage, isPicker: $isShowingImagePicker)
+                .onDisappear {
+                    if let image = selectedImage {
+                        signInScreenViewModel.uploadImage(id: user!.id, image: image)
+                        
+                    }
+                    
+                }
+        }
+        
+        
         .onReceive(signInScreenViewModel.$user) { newValue in
             if newValue != nil {
                 user = newValue
             }
-        }.sheet(isPresented: $isPicker , onDismiss: nil)
-        {
-            ImagePicker(selectedImage: $selectedImage, isPicker: $isPicker)
         }
         
     }
