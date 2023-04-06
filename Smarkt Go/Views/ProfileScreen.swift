@@ -7,6 +7,8 @@
 
 import SwiftUI
 import PhotosUI
+import ImagePickerModule
+
 
 struct ProfileScreen: View {
     @EnvironmentObject var signInScreenViewModel: SignInScreenViewModel
@@ -128,14 +130,14 @@ struct ProfileScreen: View {
         }
         
         .sheet(isPresented: $isShowingImagePicker) {
-            ImagePicker(selectedImage: $selectedImage, isPicker: $isShowingImagePicker)
-                .onDisappear {
-                    if let image = selectedImage {
-                        signInScreenViewModel.uploadImage(id: user!.id, image: image)
-                        
-                    }
-                    
-                }
+//            ImagePicker(sourceType: selectedImage, onImagePicked: isShowingImagePicker)
+//                            .onDisappear {
+//                                if let image = selectedImage {
+//                                    signInScreenViewModel.uploadImage(id: user!.id, image: image)
+//
+//                                }
+//
+//                            }
         }
         
         

@@ -22,12 +22,22 @@ struct SupermarketScreen: View {
                            .aspectRatio(contentMode: .fill)
                            .frame(width: UIScreen.main.bounds.width - Constants.kbigSpace, height: UIScreen.main.bounds.height / 4)
                 
-                Image(systemName: "chevron.left")
-                    .foregroundColor(.accentColor)
-                    .imageScale(.large)
-                    .onTapGesture {
-                        presentationMode.wrappedValue.dismiss()
-                    }
+                HStack{
+                    Image(systemName: "chevron.left")
+                        .foregroundColor(.accentColor)
+                        .imageScale(.large)
+                        .onTapGesture {
+                            presentationMode.wrappedValue.dismiss()
+                        }
+                    Spacer()
+                    Image(systemName: "heart")
+                        .foregroundColor(.accentColor)
+                        .imageScale(.large)
+                        .onTapGesture {
+                        }
+                }
+                .padding(.horizontal,Constants.ksmallSpace)
+               
             }
             .padding()
             HStack{

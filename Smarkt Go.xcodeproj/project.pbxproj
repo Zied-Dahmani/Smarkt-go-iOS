@@ -31,6 +31,7 @@
 		892B002E29B76B540026E40F /* SignInScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892B002D29B76B540026E40F /* SignInScreen.swift */; };
 		893E2EF329C74ABD0090906B /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893E2EF229C74ABD0090906B /* NetworkMonitor.swift */; };
 		8944CC6229C480EB00A43B8C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8944CC6129C480EB00A43B8C /* User.swift */; };
+		894F615C29DF1A8300535CAE /* ImagePickerModule in Frameworks */ = {isa = PBXBuildFile; productRef = 894F615B29DF1A8300535CAE /* ImagePickerModule */; };
 		897B279329C3080600FE6BD2 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897B279229C3080500FE6BD2 /* HomeScreen.swift */; };
 		897B279529C30CC200FE6BD2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 897B279429C30CC100FE6BD2 /* GoogleService-Info.plist */; };
 		897B279929C30FD700FE6BD2 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 897B279829C30FD700FE6BD2 /* GoogleSignIn */; };
@@ -123,6 +124,7 @@
 				89DB91C029C3B3CC004A75A3 /* FirebaseAuth in Frameworks */,
 				89B3A23729D8A27500A5E7B3 /* URLImage in Frameworks */,
 				897B279B29C30FD700FE6BD2 /* GoogleSignInSwift in Frameworks */,
+				894F615C29DF1A8300535CAE /* ImagePickerModule in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,6 +304,7 @@
 				89B3A23629D8A27500A5E7B3 /* URLImage */,
 				89B3A23829D8A27500A5E7B3 /* URLImageStore */,
 				891A132F29DE3B2A0021D1B9 /* Kingfisher */,
+				894F615B29DF1A8300535CAE /* ImagePickerModule */,
 			);
 			productName = "Smarkt Go";
 			productReference = 8928C7BC2972F32900AE14C3 /* Smarkt Go.app */;
@@ -380,6 +383,7 @@
 				89DB91BE29C3B3CC004A75A3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				89B3A23529D8A27500A5E7B3 /* XCRemoteSwiftPackageReference "url-image" */,
 				891A132E29DE3B2A0021D1B9 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				894F615A29DF1A8200535CAE /* XCRemoteSwiftPackageReference "image-picker-module" */,
 			);
 			productRefGroup = 8928C7BD2972F32900AE14C3 /* Products */;
 			projectDirPath = "";
@@ -818,6 +822,14 @@
 				minimumVersion = 7.0.0;
 			};
 		};
+		894F615A29DF1A8200535CAE /* XCRemoteSwiftPackageReference "image-picker-module" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/swiftui-packages/image-picker-module";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		897B279729C30FD700FE6BD2 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
@@ -849,6 +861,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 891A132E29DE3B2A0021D1B9 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		894F615B29DF1A8300535CAE /* ImagePickerModule */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 894F615A29DF1A8200535CAE /* XCRemoteSwiftPackageReference "image-picker-module" */;
+			productName = ImagePickerModule;
 		};
 		897B279829C30FD700FE6BD2 /* GoogleSignIn */ = {
 			isa = XCSwiftPackageProductDependency;
