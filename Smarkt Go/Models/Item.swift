@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Item : Codable,Identifiable {
+class Item : Codable,Identifiable,Equatable {
     var id: String
     var name: String
     var image: String
@@ -21,5 +21,9 @@ struct Item : Codable,Identifiable {
     enum CodingKeys: String, CodingKey {
         case id = "_id"
         case name, image, description, price, category, supermarketId, supermarketName, quantity
+    }
+    
+    static func ==(lhs: Item, rhs: Item) -> Bool {
+           return lhs.id == rhs.id
     }
 }

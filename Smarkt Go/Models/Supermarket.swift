@@ -10,17 +10,18 @@ import Foundation
 struct Supermarket: Codable,Identifiable {
     var id: String
     let name: String
-    let image: String
+    let images: [String]
     let description: String
     let address: String
+    let location: [Double]
     
     enum CodingKeys: String, CodingKey {
         case id = "_id"
-        case name, image, description, address
+        case name, images, description, address, location
     }
     
-    func getImage() -> String {
-        return Constants.kbaseUrl + self.image
-    }
+//    func getImage() -> String {
+//        return Constants.kbaseUrl + self.image
+//    }
     
 }

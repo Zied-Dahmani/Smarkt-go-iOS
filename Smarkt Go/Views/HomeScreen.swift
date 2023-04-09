@@ -28,30 +28,45 @@ struct HomeScreen: View {
                         .font(.callout)
                         .foregroundColor(.accentColor)
                         .onTapGesture {
-                            
+                            isPresented = true
                         }
                 }.padding()
-                ScrollView(showsIndicators: false) {
-                    VStack {
-                        ForEach(supermarketsScreenViewModel.supermarkets) { supermarket in
-                            NavigationLink(destination: SupermarketScreen(supermarket: supermarket)
-                            ) {
-                                SupermarketCard(image: supermarket.image, title: supermarket.name, subtitle: supermarket.address)
-                            }
+                if let nearbySupermarkets = supermarketsScreenViewModel.nearbySupermarkets {
+                    if nearbySupermarkets.isEmpty
+                    {
+                        VStack(alignment: .center) {
+                            Image("empty_cart")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: UIScreen.main.bounds.width - 80, height:UIScreen.main.bounds.height / 6)
+                            
+                            Text(Strings.knoFavorites)
+                                .font(.subheadline)
+                                .foregroundColor(Color.gray)
                         }
                     }
-                    .padding(.vertical,Constants.ksmallSpace)
+                    else {
+                        ScrollView(showsIndicators: false) {
+                            VStack {
+                                ForEach(nearbySupermarkets) { supermarket in
+                                    NavigationLink(destination: SupermarketScreen(supermarket: supermarket)
+                                    ) {
+                                        SupermarketCard(image: supermarket.images[0], title: supermarket.name, subtitle: supermarket.address)
+                                    }
+                                }
+                            }
+                            .padding(.vertical,Constants.ksmallSpace)
+                        }
+                        
+                    }
                 }
                 
             }
             .navigationTitle(Strings.khome)
         }
-        //        .fullScreenCover(isPresented: $isPresented) {
-        //            if let selectedSupermarket = selectedSupermarket {
-        //                SupermarketScreen(supermarket: selectedSupermarket)
-        //            }
-        //
-        //        }
+        .fullScreenCover(isPresented: $isPresented) {
+            SupermarketsMapScreen()
+        }
         
     }
 }
