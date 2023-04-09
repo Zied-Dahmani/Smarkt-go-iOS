@@ -34,7 +34,7 @@ class CartScreenViewModel: ObservableObject {
                 }
             } catch {
                 DispatchQueue.main.async {
-                    self.statusCode = 400
+                        self.statusCode = 400
                 }
                 print(error.localizedDescription)
             }

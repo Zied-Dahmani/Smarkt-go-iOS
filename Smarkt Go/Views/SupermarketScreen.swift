@@ -12,6 +12,8 @@ struct SupermarketScreen: View {
     @Environment(\.presentationMode) var presentationMode
     let supermarket: Supermarket
     @EnvironmentObject var supermarketsScreenViewModel:SupermarketsScreenViewModel
+    @State private var isPresented = false
+    @State private var itemCategory = ""
     
     
     var body: some View {
@@ -60,11 +62,11 @@ struct SupermarketScreen: View {
                 }
                 .padding(.horizontal,Constants.kbigSpace)
                 .padding(.top,Constants.ksmallSpace)
-
+                
                 
             }
             .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 4)
-
+            
             HStack{
                 VStack(alignment: .leading){
                     Text(supermarket.name)
@@ -105,31 +107,36 @@ struct SupermarketScreen: View {
                 .padding(.leading,Constants.kbigSpace)
             VStack {
                 ForEach(supermarketsScreenViewModel.itemCategories) { itemCategory in
-                    NavigationLink(destination: ItemsScreen().onAppear{
-                        self.supermarketsScreenViewModel.getAllBySupermarketIdAndCategory(supermarketId: supermarket.id, category: itemCategory.name)
-                    }) {
-                        ItemCategoryCard(category: itemCategory.name)
-                    }
+                    
+                    ItemCategoryCard(category: itemCategory.name)
+                        .onTapGesture {
+                            isPresented = true
+                            self.itemCategory = itemCategory.name
+                        }
                 }
             }
             .padding(.horizontal,Constants.kbigSpace)
             Spacer()
         }
         .navigationBarHidden(true)
-
+        .fullScreenCover(isPresented: $isPresented) {
+            ItemsScreen().onAppear{
+                self.supermarketsScreenViewModel.getAllBySupermarketIdAndCategory(supermarketId: supermarket.id, category: self.itemCategory)
+            }
+            
+        }
+    }
+        
+        func setupAppearance() {
+            UIPageControl.appearance().currentPageIndicatorTintColor = UIColor(.accentColor)
+            UIPageControl.appearance().pageIndicatorTintColor = UIColor.lightGray
+            //        UIPageControl.appearance().backgroundColor = .gray.withAlphaComponent(0.2)
+        }
         
     }
     
-    func setupAppearance() {
-        UIPageControl.appearance().currentPageIndicatorTintColor = UIColor(.accentColor)
-        UIPageControl.appearance().pageIndicatorTintColor = UIColor.lightGray
-//        UIPageControl.appearance().backgroundColor = .gray.withAlphaComponent(0.2)
+    struct SupermarketScreen_Previews: PreviewProvider {
+        static var previews: some View {
+            SupermarketScreen(supermarket: Supermarket(id: "id", name: "Mock Supermarket", images: ["mockImage"], description: "Mock Description", address: "Mock Address", location: [35,10]))
+        }
     }
-    
-}
-
-struct SupermarketScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        SupermarketScreen(supermarket: Supermarket(id: "id", name: "Mock Supermarket", images: ["mockImage"], description: "Mock Description", address: "Mock Address", location: [35,10]))
-    }
-}

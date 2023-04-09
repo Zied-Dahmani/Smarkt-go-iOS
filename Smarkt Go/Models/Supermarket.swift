@@ -13,7 +13,7 @@ struct Supermarket: Codable,Identifiable {
     let images: [String]
     let description: String
     let address: String
-    let location: [Float]
+    let location: [Double]
     
     enum CodingKeys: String, CodingKey {
         case id = "_id"

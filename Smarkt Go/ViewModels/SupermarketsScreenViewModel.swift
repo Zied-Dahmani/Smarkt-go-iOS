@@ -10,19 +10,21 @@ import SwiftUI
 import CoreLocation
 
 class SupermarketsScreenViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
+    @Published var nearbySupermarkets : [Supermarket]?
     @Published var supermarkets : [Supermarket]?
     @Published var itemCategories = ["Drinks", "Fruits"].enumerated().map { (index, value) in
         return Category(id: index, name: value)
     }
     @Published var items = [Item]()
     
-    private var locationManager = CLLocationManager()
+    @Published var locationManager = CLLocationManager()
     
     override init() {
         super.init()
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
+        getAllSupermarkets()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -64,7 +66,7 @@ class SupermarketsScreenViewModel: NSObject, ObservableObject, CLLocationManager
                 DispatchQueue.main.async {
                     do {
                         let decoder = JSONDecoder()
-                        self.supermarkets = try decoder.decode([Supermarket].self, from: data)
+                        self.nearbySupermarkets = try decoder.decode([Supermarket].self, from: data)
                     } catch {
                         print("Error decoding JSON: \(error.localizedDescription)")
                     }

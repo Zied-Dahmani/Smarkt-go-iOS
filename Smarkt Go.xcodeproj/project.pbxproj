@@ -48,6 +48,8 @@
 		89B3A23929D8A27500A5E7B3 /* URLImageStore in Frameworks */ = {isa = PBXBuildFile; productRef = 89B3A23829D8A27500A5E7B3 /* URLImageStore */; };
 		89C0DAE029D9B6EC006582B4 /* SupermarketScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C0DADF29D9B6EC006582B4 /* SupermarketScreen.swift */; };
 		89C489B029E07B9300E25235 /* QuantityPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C489AF29E07B9300E25235 /* QuantityPicker.swift */; };
+		89D378A429E2DA4600001266 /* SupermarketsMapScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D378A329E2DA4600001266 /* SupermarketsMapScreen.swift */; };
+		89D378A629E2DAD400001266 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D378A529E2DAD400001266 /* MapView.swift */; };
 		89DB91C029C3B3CC004A75A3 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 89DB91BF29C3B3CC004A75A3 /* FirebaseAuth */; };
 		89DB91C229C3B438004A75A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89DB91C129C3B438004A75A3 /* AppDelegate.swift */; };
 		89E00FFE29E241BC00E428FA /* PaymentSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E00FFD29E241BC00E428FA /* PaymentSheetView.swift */; };
@@ -116,6 +118,8 @@
 		89B3A23329D899DD00A5E7B3 /* SupermarketCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupermarketCard.swift; sourceTree = "<group>"; };
 		89C0DADF29D9B6EC006582B4 /* SupermarketScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupermarketScreen.swift; sourceTree = "<group>"; };
 		89C489AF29E07B9300E25235 /* QuantityPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantityPicker.swift; sourceTree = "<group>"; };
+		89D378A329E2DA4600001266 /* SupermarketsMapScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupermarketsMapScreen.swift; sourceTree = "<group>"; };
+		89D378A529E2DAD400001266 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		89DB91C129C3B438004A75A3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		89E00FFD29E241BC00E428FA /* PaymentSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSheetView.swift; sourceTree = "<group>"; };
 		FE08F4F729D285E900AF65EB /* OTPScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPScreen.swift; sourceTree = "<group>"; };
@@ -267,6 +271,7 @@
 				89C0DADF29D9B6EC006582B4 /* SupermarketScreen.swift */,
 				891A132829DE1DD00021D1B9 /* ItemsScreen.swift */,
 				8966EBB829E1B0F700AD63C4 /* CartScreen.swift */,
+				89D378A329E2DA4600001266 /* SupermarketsMapScreen.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -294,6 +299,7 @@
 				891A132C29DE2E210021D1B9 /* ItemCard.swift */,
 				89C489AF29E07B9300E25235 /* QuantityPicker.swift */,
 				89E00FFD29E241BC00E428FA /* PaymentSheetView.swift */,
+				89D378A529E2DAD400001266 /* MapView.swift */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -481,6 +487,7 @@
 				891A132729DE14D30021D1B9 /* ItemCategoryCard.swift in Sources */,
 				8928C7EF2972F75800AE14C3 /* MainScreen.swift in Sources */,
 				891BF33629C1F5D7000735CE /* CustomButton.swift in Sources */,
+				89D378A629E2DAD400001266 /* MapView.swift in Sources */,
 				898DD75F29C50023000E5E04 /* Utils.swift in Sources */,
 				891A132929DE1DD00021D1B9 /* ItemsScreen.swift in Sources */,
 				FE9C5C6129D6912B00E231EF /* FavoriteItem.swift in Sources */,
@@ -500,6 +507,7 @@
 				891BF34029C255FD000735CE /* OnboardingSlide.swift in Sources */,
 				FE29021829D3D61800A4EF2E /* WalletScreen.swift in Sources */,
 				8966EBB929E1B0F700AD63C4 /* CartScreen.swift in Sources */,
+				89D378A429E2DA4600001266 /* SupermarketsMapScreen.swift in Sources */,
 				898DD76129C50418000E5E04 /* Supermarket.swift in Sources */,
 				891A132B29DE23090021D1B9 /* Item.swift in Sources */,
 			);

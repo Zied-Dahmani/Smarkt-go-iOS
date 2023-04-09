@@ -28,11 +28,11 @@ struct HomeScreen: View {
                         .font(.callout)
                         .foregroundColor(.accentColor)
                         .onTapGesture {
-                            
+                            isPresented = true
                         }
                 }.padding()
-                if let supermarkets = supermarketsScreenViewModel.supermarkets {
-                    if supermarkets.isEmpty
+                if let nearbySupermarkets = supermarketsScreenViewModel.nearbySupermarkets {
+                    if nearbySupermarkets.isEmpty
                     {
                         VStack(alignment: .center) {
                             Image("empty_cart")
@@ -48,7 +48,7 @@ struct HomeScreen: View {
                     else {
                         ScrollView(showsIndicators: false) {
                             VStack {
-                                ForEach(supermarkets) { supermarket in
+                                ForEach(nearbySupermarkets) { supermarket in
                                     NavigationLink(destination: SupermarketScreen(supermarket: supermarket)
                                     ) {
                                         SupermarketCard(image: supermarket.images[0], title: supermarket.name, subtitle: supermarket.address)
@@ -64,12 +64,9 @@ struct HomeScreen: View {
             }
             .navigationTitle(Strings.khome)
         }
-        //        .fullScreenCover(isPresented: $isPresented) {
-        //            if let selectedSupermarket = selectedSupermarket {
-        //                SupermarketScreen(supermarket: selectedSupermarket)
-        //            }
-        //
-        //        }
+        .fullScreenCover(isPresented: $isPresented) {
+            SupermarketsMapScreen()
+        }
         
     }
 }
