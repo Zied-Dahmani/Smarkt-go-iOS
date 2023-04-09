@@ -6,23 +6,73 @@
 //
 
 import Foundation
+import SwiftUI
+import CoreLocation
 
-struct ListItem: Identifiable {
-    let id: Int
-    let name: String
-}
-
-class SupermarketsScreenViewModel: ObservableObject {
-    @Published var supermarkets = [Supermarket]()
+class SupermarketsScreenViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
+    @Published var supermarkets : [Supermarket]?
     @Published var itemCategories = ["Drinks", "Fruits"].enumerated().map { (index, value) in
-        return ListItem(id: index, name: value)
+        return Category(id: index, name: value)
     }
     @Published var items = [Item]()
     
+    private var locationManager = CLLocationManager()
     
-    init()
+    override init() {
+        super.init()
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+            getNearbySupermarkets(coordinate: location.coordinate)
+            print("Latitude: \(location.coordinate.latitude), Longitude: \(location.coordinate.longitude)")
+        }
+    }
+    
+    
+    func getNearbySupermarkets(coordinate: CLLocationCoordinate2D)
     {
-        getAllSupermarkets()
+        let url = URL(string: Constants.kbaseUrl + "supermarket/")!
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let data = ["currentLocation":[coordinate.latitude,coordinate.longitude]]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: data)
+        request.httpBody = jsonData
+        let session = URLSession.shared
+        
+        let task = session.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse,
+                  (200...299).contains(httpResponse.statusCode)
+            else {
+                print("Invalid response")
+                return
+            }
+            
+            if let data = data {
+                DispatchQueue.main.async {
+                    do {
+                        let decoder = JSONDecoder()
+                        self.supermarkets = try decoder.decode([Supermarket].self, from: data)
+                    } catch {
+                        print("Error decoding JSON: \(error.localizedDescription)")
+                    }
+                }
+            }
+        }
+        
+        task.resume()
     }
     
     func getAllSupermarkets() {
@@ -47,7 +97,7 @@ class SupermarketsScreenViewModel: ObservableObject {
     
     
     func getAllBySupermarketIdAndCategory(supermarketId: String, category: String){
-
+        
         let url = URL(string: Constants.kbaseUrl + "item/")!
         
         var request = URLRequest(url: url)
@@ -88,6 +138,24 @@ class SupermarketsScreenViewModel: ObservableObject {
         task.resume()
         
     }
+        
+    func launchGoogleMaps(supermarket : Supermarket)
+    {
+        let latitude = "\(supermarket.location[0])"
+        let longitude = "\(supermarket.location[1])"
+        
+        let urlString = "comgooglemaps-x-callback://?center=\(latitude),\(longitude)&zoom=14&x-success=myapp://?resume=true&x-source=MyApp"
+        
+        if let url = URL(string: urlString) {
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            } else {
+                print("Google Maps not installed")
+            }
+        }
+    }
+    
+    
     
 }
 

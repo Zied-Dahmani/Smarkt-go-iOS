@@ -7,20 +7,24 @@
 
 import SwiftUI
 import URLImage
+import Kingfisher
 
 struct ItemCard: View {
+    @State private var showingQuantityPicker = false
     var item: Item
-    
+    @EnvironmentObject var signInScreenViewModel:SignInScreenViewModel
+    let fromCartScreen: Bool
+    let removeItem: () -> Void
+
+
     var body: some View {
         VStack(alignment: .leading){
             HStack(alignment: .top){
-                URLImage(URL(string: item.image )!) { image in
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: Constants.kbigSpace * 3, height: Constants.kbigSpace * 3)
-                    
-                }
+                KFImage(URL(string: item.image))
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: Constants.kbigSpace * 3, height: Constants.kbigSpace * 3)
+                
                 .background(Color.white)
                 .cornerRadius(Constants.kcornerRadius)
                 .shadow(radius: Constants.kshadowRadius)
@@ -33,23 +37,43 @@ struct ItemCard: View {
                         Image(systemName: "dollarsign")
                             .foregroundColor(.gray)
                             .font(.system(size: Constants.kiconSize / 1.5))
-                        Text(String(item.price))
+                        Text(String(format: "%.3f", item.price))
                             .font(.subheadline)
                             .foregroundColor(.gray)
-                        
-                        
                     }
                     
                 }
                 Spacer()
                 
-                Image(systemName: "plus")
-                    .foregroundColor(.white)
-                    .font(.system(size: Constants.kiconSize))
-                    .frame(width: Constants.kbigSpace*2, height: Constants.kbigSpace*2)
-                    .background(Color.green)
-                    .cornerRadius(Constants.kcornerRadius)
-                    .shadow(radius: Constants.kshadowRadius)
+                if fromCartScreen {
+                    Image(systemName: "minus")
+                        .foregroundColor(.white)
+                        .font(.system(size: Constants.kiconSize))
+                        .frame(width: Constants.kbigSpace*2, height: Constants.kbigSpace*2)
+                        .background(Color.red)
+                        .cornerRadius(Constants.kcornerRadius)
+                        .shadow(radius: Constants.kshadowRadius)
+                        .onTapGesture {
+                            removeItem()
+                        }
+                }
+                else {
+                    Image(systemName: "plus")
+                        .foregroundColor(.white)
+                        .font(.system(size: Constants.kiconSize))
+                        .frame(width: Constants.kbigSpace*2, height: Constants.kbigSpace*2)
+                        .background(Color.green)
+                        .cornerRadius(Constants.kcornerRadius)
+                        .shadow(radius: Constants.kshadowRadius)
+                        .onTapGesture {
+                            showingQuantityPicker = true
+                        }
+                        .sheet(isPresented: $showingQuantityPicker) {
+                            QuantityPicker(token:signInScreenViewModel.user!.token,item: item)
+                        }
+                }
+                
+                
             }
             Text(item.description)
                 .font(.footnote)
@@ -58,10 +82,12 @@ struct ItemCard: View {
         }
         .padding(.horizontal)
     }
+    
 }
+
 
 struct ItemCard_Previews: PreviewProvider {
     static var previews: some View {
-        ItemCard(item: Item(id: "String", name: "String", image: "https://courses.monoprix.tn/carthage/146350-large_default/concombre.jpg", description: "String", price: 10, category: "String", supermarketId: "", supermarketName: "String"))
-    }
+            HomeScreen()
+        }
 }

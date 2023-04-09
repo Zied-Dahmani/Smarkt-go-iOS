@@ -14,7 +14,7 @@ struct ItemsScreen: View {
         ScrollView(showsIndicators: false) {
             VStack{
                 ForEach(supermarketsScreenViewModel.items) { item in
-                    ItemCard(item: item)
+                    ItemCard(item: item,fromCartScreen: false,removeItem: {})
                 }
             }
             .navigationViewStyle(.stack) // This sets the scroll view at the top

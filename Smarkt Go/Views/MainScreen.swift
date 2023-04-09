@@ -2,7 +2,7 @@ import SwiftUI
 
 struct MainScreen: View {
     @StateObject var viewModel = SupermarketsScreenViewModel()
-
+    
     
     var body: some View {
         TabView {
@@ -12,9 +12,9 @@ struct MainScreen: View {
                     Text(Strings.khome)
                 }
                 .environmentObject(viewModel)
-
             
-            Text("")
+            
+            CartScreen()
                 .tabItem {
                     Image(systemName: "basket.fill")
                     Text(Strings.kcart)
@@ -26,7 +26,7 @@ struct MainScreen: View {
                     Text(Strings.kchat)
                 }
             
-           FavoritesScreen()
+            FavoritesScreen()
                 .tabItem {
                     Image(systemName: "heart.fill")
                     Text(Strings.kfavourites)

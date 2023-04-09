@@ -10,7 +10,7 @@ import Foundation
 
 struct Constants {
     static let kcornerRadius = 10.0
-    static let kbuttonHeight = 50.0
+    static let kbuttonHeight = 46.0
     static let kshadowRadius = 5.0
     static let kdividerHeight = 2.0
     

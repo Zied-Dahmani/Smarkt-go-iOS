@@ -17,29 +17,54 @@ struct SupermarketScreen: View {
     var body: some View {
         VStack(alignment: .leading){
             ZStack(alignment: .topLeading) {
-                KFImage(URL(string: Constants.kbaseUrl+"img/"+supermarket.image))
-                           .resizable()
-                           .aspectRatio(contentMode: .fill)
-                           .frame(width: UIScreen.main.bounds.width - Constants.kbigSpace, height: UIScreen.main.bounds.height / 4)
+                TabView {
+                    ForEach(supermarket.images, id: \.self) { image in
+                        KFImage(URL(string: Constants.kbaseUrl+"img/"+image))
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: UIScreen.main.bounds.width - Constants.kbigSpace, height: UIScreen.main.bounds.height / 4)
+                        
+                    }
+                }
+                .tabViewStyle(PageTabViewStyle())
+                .onAppear {
+                    setupAppearance()
+                }
                 
                 HStack{
-                    Image(systemName: "chevron.left")
-                        .foregroundColor(.accentColor)
-                        .imageScale(.large)
-                        .onTapGesture {
-                            presentationMode.wrappedValue.dismiss()
-                        }
+                    ZStack {
+                        Rectangle()
+                            .fill(Color.accentColor)
+                            .cornerRadius(Constants.kcornerRadius)
+                        Image(systemName: "chevron.left")
+                            .foregroundColor(.white)
+                            .imageScale(.large)
+                            .onTapGesture {
+                                presentationMode.wrappedValue.dismiss()
+                            }
+                    }
+                    .frame(width: Constants.kiconSize * 2.25, height: Constants.kiconSize * 2.25)
                     Spacer()
-                    Image(systemName: "heart")
-                        .foregroundColor(.accentColor)
-                        .imageScale(.large)
-                        .onTapGesture {
-                        }
+                    ZStack {
+                        Rectangle()
+                            .fill(Color.accentColor)
+                            .cornerRadius(Constants.kcornerRadius)
+                        Image(systemName: "heart")
+                            .foregroundColor(.white)
+                            .imageScale(.large)
+                            .onTapGesture {
+                            }
+                    }
+                    .frame(width: Constants.kiconSize * 2.25, height: Constants.kiconSize * 2.25)
+                    
                 }
-                .padding(.horizontal,Constants.ksmallSpace)
-               
+                .padding(.horizontal,Constants.kbigSpace)
+                .padding(.top,Constants.ksmallSpace)
+
+                
             }
-            .padding()
+            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 4)
+
             HStack{
                 VStack(alignment: .leading){
                     Text(supermarket.name)
@@ -57,6 +82,9 @@ struct SupermarketScreen: View {
                 Spacer()
                 Image(systemName: "map")
                     .foregroundColor(.accentColor)
+                    .onTapGesture {
+                        supermarketsScreenViewModel.launchGoogleMaps(supermarket: supermarket)
+                    }
             }
             .padding(Constants.kbigSpace)
             Text(Strings.kdescription)
@@ -88,13 +116,20 @@ struct SupermarketScreen: View {
             Spacer()
         }
         .navigationBarHidden(true)
-        
+
         
     }
+    
+    func setupAppearance() {
+        UIPageControl.appearance().currentPageIndicatorTintColor = UIColor(.accentColor)
+        UIPageControl.appearance().pageIndicatorTintColor = UIColor.lightGray
+//        UIPageControl.appearance().backgroundColor = .gray.withAlphaComponent(0.2)
+    }
+    
 }
 
 struct SupermarketScreen_Previews: PreviewProvider {
     static var previews: some View {
-        SupermarketScreen(supermarket: Supermarket(id: "id", name: "Mock Supermarket", image: "mockImage", description: "Mock Description", address: "Mock Address"))
+        SupermarketScreen(supermarket: Supermarket(id: "id", name: "Mock Supermarket", images: ["mockImage"], description: "Mock Description", address: "Mock Address", location: [35,10]))
     }
 }
