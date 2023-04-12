@@ -15,7 +15,6 @@ struct SupermarketScreen: View {
     @State private var isPresented = false
     @State private var itemCategory = ""
     
-    
     var body: some View {
         VStack(alignment: .leading){
             ZStack(alignment: .topLeading) {
@@ -31,6 +30,8 @@ struct SupermarketScreen: View {
                 .tabViewStyle(PageTabViewStyle())
                 .onAppear {
                     setupAppearance()
+                    supermarketsScreenViewModel.isFavorite(supermarketId: supermarket.id)
+
                 }
                 
                 HStack{
@@ -51,11 +52,23 @@ struct SupermarketScreen: View {
                         Rectangle()
                             .fill(Color.accentColor)
                             .cornerRadius(Constants.kcornerRadius)
-                        Image(systemName: "heart")
-                            .foregroundColor(.white)
-                            .imageScale(.large)
-                            .onTapGesture {
-                            }
+                        if let favorites = supermarketsScreenViewModel.ufavorites, let userLoggedIn = supermarketsScreenViewModel.userLoggedIn {
+                            Image(systemName: favorites.contains(userLoggedIn) ? "heart.fill" : "heart")
+                                .foregroundColor(.white)
+                                .imageScale(.large)
+                                .onTapGesture {
+                                    if favorites.contains(userLoggedIn) {
+                                        print("found")
+                                           supermarketsScreenViewModel.removeFromFavorites(supermarketID: supermarket.id,userId: userLoggedIn)
+                                    } else {
+                                        print("not found")
+                                            supermarketsScreenViewModel.addToFavorites(supermarketID: supermarket.id,userId: userLoggedIn)
+                                    }
+                                }
+                        } else {
+                        
+                        }
+
                     }
                     .frame(width: Constants.kiconSize * 2.25, height: Constants.kiconSize * 2.25)
                     
@@ -86,6 +99,7 @@ struct SupermarketScreen: View {
                     .foregroundColor(.accentColor)
                     .onTapGesture {
                         supermarketsScreenViewModel.launchGoogleMaps(supermarket: supermarket)
+                        
                     }
             }
             .padding(Constants.kbigSpace)
@@ -137,6 +151,6 @@ struct SupermarketScreen: View {
     
     struct SupermarketScreen_Previews: PreviewProvider {
         static var previews: some View {
-            SupermarketScreen(supermarket: Supermarket(id: "id", name: "Mock Supermarket", images: ["mockImage"], description: "Mock Description", address: "Mock Address", location: [35,10]))
+            SupermarketScreen(supermarket: Supermarket(id: "id", name: "Mock Supermarket", images: ["mockImage"], favorites: ["mockImage"],description: "Mock Description",  address: "Mock Address", location: [35,10]))
         }
     }

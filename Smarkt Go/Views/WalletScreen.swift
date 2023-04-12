@@ -9,7 +9,7 @@ import SwiftUI
 
 struct WalletScreen: View {
     @EnvironmentObject var signInScreenViewModel: SignInScreenViewModel
-    @ObservedObject var walletViewModel = WalletViewModel()
+    //@ObservedObject var walletViewModel = WalletViewModel()
     @State private var Code = ""
     @State private var message = ""
     @State var user : User?

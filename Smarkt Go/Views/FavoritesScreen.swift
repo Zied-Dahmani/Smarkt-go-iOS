@@ -25,16 +25,17 @@ struct FavoritesScreen: View {
                     .padding(.top, Constants.ksmallSpace)
             }
         }
-        /*else {
+        else {
             ScrollView {
                 LazyVStack {
                     ForEach(favoritesViewModel.favorites) { favorite in
-                        FavoriteItem(imageName: favorite.getImage(), text1: favorite.name, text2: favorite.description)
-                            .padding(.vertical, 10)
-                    }
-                }
+                        FavoriteItem(imageName: Constants.kbaseUrl+favorite.images[0], text1: favorite.name, text2: favorite.description)
+                                .padding(.vertical, 10)
+                    
+                    }}
             }
-        }*/
+        
+        }
     }
 }
 

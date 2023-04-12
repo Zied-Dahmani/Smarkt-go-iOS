@@ -30,6 +30,9 @@ struct Constants {
     static let ksignOut = "user/signOut"
     static let kupdate = "user/update"
     static let kupdatePic = "user/updatePic"
+    static let kredeemCode = "ticket/redeem"
+    static let kFavoriteList = "supermarket/isFavorite"
+    static let kaddRemove = "supermarket/addremovefavorite"
     
     
     

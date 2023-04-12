@@ -63,7 +63,6 @@ struct SignInScreen: View {
                     
                     CustomButton(text: Strings.ksignInWithPhone, icon: "phone.fill", textColor: .white, iconColor: .white, backgroundColor: .accentColor, action: {
                         
-                        showOTP = true
                         
                         
                         
