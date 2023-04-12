@@ -22,7 +22,7 @@ struct SignInScreen: View {
     @State private var verificationCode = ""
     @State private var showOTP = false
     @State private var activee = true
-
+    
     
     var body: some View {
         
@@ -59,11 +59,14 @@ struct SignInScreen: View {
                             .padding(.horizontal,Constants.kbigSpace)
                         
                     }
-                
-            
-                    CustomButton(text: Strings.ksignInWithPhone, icon: "phone.fill", textColor: .white, iconColor: .white, backgroundColor: .accentColor, action: {
-                       
                     
+                    
+                    CustomButton(text: Strings.ksignInWithPhone, icon: "phone.fill", textColor: .white, iconColor: .white, backgroundColor: .accentColor, action: {
+                        
+                        showOTP = true
+                        
+                        
+                        
                         InputError = signInScreenViewModel.isValid(phoneNumber)
                         if InputError.isEmpty {
                             signInScreenViewModel.signInWithPhone(phoneNumber) { success in
@@ -74,15 +77,15 @@ struct SignInScreen: View {
                         }
                     }).padding()
                     
-            
-    
+                    
+                    
                     
                     NavigationLink(
                         destination: OTPScreen(),
                         isActive: $showOTP,
                         label: { EmptyView() }
                     )
-              
+                    
                     
                     
                     HStack{
@@ -124,12 +127,12 @@ struct SignInScreen: View {
                 
             }
             .alert(isPresented: $signInScreenViewModel.showAlert) {
-                        Alert(
-                            title: Text(Strings.kerror),
-                            message: Text(signInScreenViewModel.alertMessage),
-                            dismissButton: .default(Text(Strings.kok))
-                        )
-                    }
+                Alert(
+                    title: Text(Strings.kerror),
+                    message: Text(signInScreenViewModel.alertMessage),
+                    dismissButton: .default(Text(Strings.kok))
+                )
+            }
         }
         
     }
