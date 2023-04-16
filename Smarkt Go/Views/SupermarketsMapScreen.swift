@@ -31,6 +31,7 @@ struct SupermarketsMapScreen: View {
             }
             .fullScreenCover(isPresented: $navigateToSecondView) {
                 SupermarketScreen(supermarket: selectedSupermarket!)
+                
             }
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: Button(action: {

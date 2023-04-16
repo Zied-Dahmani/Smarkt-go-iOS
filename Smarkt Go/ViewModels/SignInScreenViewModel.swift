@@ -27,6 +27,62 @@ class SignInScreenViewModel: ObservableObject {
         userLoggedIn = UserDefaults.standard.string(forKey: "userLoggedIn") ?? ""
         isNotFirstTime = UserDefaults.standard.bool(forKey: "isNotFirstTime")
     }
+    
+    
+    
+    func redeemTicket(id: String, code: Int,  wallet: Float, onCompletion: @escaping (Int) -> Void) {
+        
+        let url = URL(string: Constants.kbaseUrl + Constants.kredeemCode)!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        let parameters: [String: Any] = [
+            "id": id,
+            "code": code,
+            "wallet": wallet
+        ]
+        request.httpBody = try! JSONSerialization.data(withJSONObject: parameters, options: [])
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                onCompletion(-1) // server error
+                return
+            }
+            guard let httpResponse = response as? HTTPURLResponse else {
+                onCompletion(-1) // server error
+                return
+            }
+            switch httpResponse.statusCode {
+            case 200:
+                DispatchQueue.main.async {
+                    if let data = data {
+                        do {
+                            let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+                            if let newWallet = json?["newWallet"] as? Float {
+                                print("new wallet value is \(newWallet.formatted())")
+                                self.user?.wallet = newWallet
+                            }
+                            onCompletion(1) // success
+                        } catch {
+                            onCompletion(-1) // server error
+                        }
+                    }
+                }
+            case 400:
+                onCompletion(0) // ticket already used
+            case 401:
+                onCompletion(2) // invalid code
+            case 404:
+                onCompletion(3) // ticket not found
+            default:
+                onCompletion(-1) // server error
+            }
+        }
+        
+        task.resume()
+       
+    }
+    
     func uploadImage(id: String, image: UIImage) {
         let url = URL(string: Constants.kbaseUrl + Constants.kupdatePic)!
         let boundary = UUID().uuidString
@@ -67,7 +123,21 @@ class SignInScreenViewModel: ObservableObject {
             }
         }.resume()
     }
-
+    
+    func isCodeValid(_ text: String) -> String {
+        if text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        {
+            return "Please type your Code"
+        }
+        else if text.count != 6
+        {
+            return "Please type a valid Code"
+        }
+        else
+        {
+            return ""
+        }
+    }
     
     func updateProfile(id: String, fullName: String, wallet: String, completion: @escaping (Error?) -> Void) {
         let url = URL(string: Constants.kbaseUrl + Constants.kupdate)!

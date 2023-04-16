@@ -31,7 +31,7 @@ struct MainScreen: View {
                     Image(systemName: "heart.fill")
                     Text(Strings.kfavourites)
                 }
-            
+                .environmentObject(viewModel)
             ProfileScreen()
                 .tabItem {
                     Image(systemName: "person.fill")
