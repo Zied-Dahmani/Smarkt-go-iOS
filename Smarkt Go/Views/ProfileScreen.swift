@@ -116,6 +116,9 @@ struct ProfileScreen: View {
                         NavigationLink(destination: WalletScreen()){
                             Text(Strings.kwallet)
                         }
+                        NavigationLink(destination: MyOrdersScreen()) {
+                            Text(Strings.korders)
+                        }
                         NavigationLink(destination: SettingsScreen()) {
                             Text(Strings.ksettings)
                         }

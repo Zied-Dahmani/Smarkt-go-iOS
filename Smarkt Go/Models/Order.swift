@@ -8,8 +8,9 @@
 import Foundation
 
 
-struct Order : Codable {
+struct Order : Codable,Identifiable  {
+    let id = UUID()
     var group: [String]
-    var items: [Item],
+    var items: [Item]
     var isDelivered: Bool
 }

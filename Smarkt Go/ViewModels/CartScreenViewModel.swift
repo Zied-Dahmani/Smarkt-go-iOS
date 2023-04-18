@@ -10,6 +10,9 @@ import SwiftUI
 class CartScreenViewModel: ObservableObject {
     @Published var order:Order?
     @Published var statusCode = 0
+    @Published var myOrders : [Order] = []
+    
+    
     
     func getOrder(token:String) {
         
@@ -204,6 +207,34 @@ class CartScreenViewModel: ObservableObject {
             }
         }
         task.resume()
+    }
+
+    func getMyOrders(token:String) {
+        
+        guard let url = URL(string: Constants.kbaseUrl+"order/getMyOrders") else {
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue(token, forHTTPHeaderField: "jwt")
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data else {
+                return
+            }
+            
+            
+            do {
+                let decodedOrder = try JSONDecoder().decode([Order].self, from: data)
+                DispatchQueue.main.async {
+                    self.myOrders = decodedOrder
+                    print(self.myOrders)
+                }
+            } catch {
+                print(error.localizedDescription)
+            }
+        }.resume()
     }
 
     

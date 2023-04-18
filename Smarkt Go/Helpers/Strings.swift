@@ -31,7 +31,8 @@ struct Strings {
     static let kalreadySignedInWithGoogle = "You have already signed in using this email address with Google!"
     static let kalreadySignedInWithApple = "You have already signed in using this email address with Apple!"
     static let kverificationCode="Enter the code here "
-    static let knoFavorites="Your wishlist is empty "
+    static let knoFavorites="Your wishlist is empty"
+    static let knoOrders="No orders"
     
     static let khome = "Home"
     static let kcart = "Cart"
@@ -41,6 +42,7 @@ struct Strings {
     
     
     static let kwallet = "Wallet"
+    static let korders = "Orders"
     static let ksettings = "Settings"
     static let ksignOut = "Sign out"
     static let ksignOutTitle = "Sign out?"
