@@ -10,5 +10,6 @@ import Foundation
 
 struct Order : Codable {
     var group: [String]
-    var items: [Item]
+    var items: [Item],
+    var isDelivered: Bool
 }

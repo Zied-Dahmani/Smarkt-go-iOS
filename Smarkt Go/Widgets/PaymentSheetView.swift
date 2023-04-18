@@ -9,13 +9,17 @@ import SwiftUI
 
 struct PaymentSheetView: View {
     
-    let user:User
+//    let user:User
     let total:Float
     @State private var showAlert = false
     @State private var title = ""
     @State private var message = ""
     @Environment(\.presentationMode) var presentationMode
     let cartScreenViewModel:CartScreenViewModel
+    @EnvironmentObject var signInScreenViewModel: SignInScreenViewModel
+    @EnvironmentObject var supermarketViewModel: SupermarketsScreenViewModel
+
+
 
     
     var body: some View {
@@ -33,7 +37,7 @@ struct PaymentSheetView: View {
                 Text(Strings.kwallet+": ")
                     .font(.subheadline)
                     .foregroundColor(.black)
-                Text(String(format: "%.3f", user.wallet))
+                Text(String(format: "%.3f", signInScreenViewModel.user!.wallet))
                     .font(.subheadline)
                     .foregroundColor(.gray)
             }
@@ -47,12 +51,15 @@ struct PaymentSheetView: View {
             }
             
             CustomButton(text: Strings.kpay, icon: "dollarsign", textColor: .white, iconColor: .white, backgroundColor: .accentColor,action:{
-                if user.wallet >= total {
-                    cartScreenViewModel.pay(token: user.token, total: total) { success in
+                if signInScreenViewModel.user!.wallet >= total {
+                    cartScreenViewModel.pay(token: signInScreenViewModel.user!.token, total: total) { success in
                         if success {
                             title = Strings.ksuccess
                             message = Strings.kwalletUpToDate
                             showAlert = true
+                            signInScreenViewModel.user?.wallet -= total
+//                            supermarketViewModel.getBestSellers()
+                            
                         } else {
                             title = Strings.kfailure
                             message = Strings.kpaymentFailed

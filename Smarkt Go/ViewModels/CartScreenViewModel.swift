@@ -198,6 +198,7 @@ class CartScreenViewModel: ObservableObject {
             }
                 
             DispatchQueue.main.async {
+                
                 self.deleteOrder(token: token)
                 completion(true)
             }

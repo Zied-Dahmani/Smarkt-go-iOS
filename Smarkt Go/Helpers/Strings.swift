@@ -52,6 +52,7 @@ struct Strings {
     static let kcheckInternetConnection = "Check your internet connection!"
     
     
+    static let kbestSellers = "Best sellers"
     static let knearbySupermarkets = "Nearby supermarkets"
     static let kviewAll = "View all"
     static let kdescription = "Description"

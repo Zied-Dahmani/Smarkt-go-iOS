@@ -17,10 +17,11 @@ class Item : Codable,Identifiable,Equatable {
     var supermarketId: String
     var supermarketName: String
     var quantity: Int?
+    var sales: Int?
 
     enum CodingKeys: String, CodingKey {
         case id = "_id"
-        case name, image, description, price, category, supermarketId, supermarketName, quantity
+        case name, image, description, price, category, supermarketId, supermarketName, quantity,sales
     }
     
     static func ==(lhs: Item, rhs: Item) -> Bool {

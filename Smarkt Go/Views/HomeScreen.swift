@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct HomeScreen: View {
     //@State private var searchText: String = ""
@@ -17,7 +18,37 @@ struct HomeScreen: View {
         NavigationView{
             
             VStack{
-                Color.white.opacity(0) // placeholder view
+                Text(Strings.kbestSellers)
+                    .font(.headline)
+                    .fontWeight(.bold)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack { // Use HStack to horizontally layout the items
+                        ForEach(supermarketsScreenViewModel.bestSellers) { item in
+                            VStack {
+                                KFImage(URL(string: item.image))
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: Constants.kbigSpace * 5, height: Constants.kbigSpace * 5)
+                                    .background(Color.white)
+                                    .cornerRadius(Constants.kcornerRadius)
+                                    .shadow(radius: Constants.kshadowRadius)
+                                
+                                HStack{
+                                    Image(systemName: "dollarsign")
+                                        .foregroundColor(.black)
+                                        .font(.system(size: Constants.kiconSize / 1.5))
+                                    Text(String(format: "%.3f", item.price))
+                                        .font(.subheadline)
+                                        .foregroundColor(.black)
+                                }
+
+                            }
+                            .padding(.vertical)
+                        }
+                    }
+                    .padding(.horizontal,Constants.ksmallSpace)
+                }
                 Spacer()
                 HStack{
                     Text(Strings.knearbySupermarkets)
@@ -30,7 +61,7 @@ struct HomeScreen: View {
                         .onTapGesture {
                             isPresented = true
                         }
-                }.padding()
+                }
                 if let nearbySupermarkets = supermarketsScreenViewModel.nearbySupermarkets {
                     if nearbySupermarkets.isEmpty
                     {
@@ -62,6 +93,7 @@ struct HomeScreen: View {
                 }
                 
             }
+            .padding()
             .navigationTitle(Strings.khome)
         }
         .fullScreenCover(isPresented: $isPresented) {

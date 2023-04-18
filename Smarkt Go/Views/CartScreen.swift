@@ -10,6 +10,7 @@ import SwiftUI
 struct CartScreen: View {
     @ObservedObject var cartScreenViewModel = CartScreenViewModel()
     @EnvironmentObject var signInScreenViewModel: SignInScreenViewModel
+    @EnvironmentObject var supermarketViewModel: SupermarketsScreenViewModel
     @State private var showBottomSheet = false
 
     
@@ -91,8 +92,8 @@ struct CartScreen: View {
             }
         }
         .sheet(isPresented: $showBottomSheet) {
-            PaymentSheetView(user: signInScreenViewModel.user!, total: cartScreenViewModel.getTotal(),cartScreenViewModel: cartScreenViewModel)
-               }
+            PaymentSheetView(total: cartScreenViewModel.getTotal(),cartScreenViewModel: cartScreenViewModel)
+            }
     }
 }
 

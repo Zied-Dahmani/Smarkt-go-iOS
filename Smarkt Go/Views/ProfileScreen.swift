@@ -106,7 +106,7 @@ struct ProfileScreen: View {
                     
                     HStack{
                         Image(systemName: "dollarsign.circle.fill")
-                        Text(String(self.user!.wallet))
+                        Text(String(format: "%.3f", self.user!.wallet))
                             .font(.subheadline)
                             .foregroundColor(.gray)
                     }

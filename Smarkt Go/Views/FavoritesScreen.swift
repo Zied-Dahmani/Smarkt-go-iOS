@@ -32,7 +32,7 @@ struct FavoritesScreen: View {
                             NavigationLink(destination: SupermarketScreen(supermarket: favorite)
                             )
                             {
-                                FavoriteItem(imageName: Constants.kbaseUrl+favorite.images[0], text1: favorite.name, text2: favorite.description)
+                                FavoriteItem(imageName: Constants.kbaseUrl+"img/"+favorite.images[0], text1: favorite.name, text2: favorite.description)
                                     .padding(.vertical, 10)
                             }
                         }

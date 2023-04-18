@@ -19,6 +19,7 @@ struct MainScreen: View {
                     Image(systemName: "basket.fill")
                     Text(Strings.kcart)
                 }
+                .environmentObject(viewModel)
             
             Text("")
                 .tabItem {
