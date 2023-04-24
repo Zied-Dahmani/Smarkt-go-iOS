@@ -21,11 +21,11 @@ struct MainScreen: View {
                 }
                 .environmentObject(viewModel)
             
-            Text("")
-                .tabItem {
-                    Image(systemName: "message.fill")
-                    Text(Strings.kchat)
-                }
+//            Text("")
+//                .tabItem {
+//                    Image(systemName: "message.fill")
+//                    Text(Strings.kchat)
+//                }
             
             FavoritesScreen()
                 .tabItem {

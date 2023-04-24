@@ -80,7 +80,7 @@ class SignInScreenViewModel: ObservableObject {
         }
         
         task.resume()
-       
+        
     }
     
     func uploadImage(id: String, image: UIImage) {
@@ -89,7 +89,7 @@ class SignInScreenViewModel: ObservableObject {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-
+        
         let imageData = image.jpegData(compressionQuality: 0.8)!
         let body = NSMutableData()
         let filename = "image.jpeg"
@@ -105,7 +105,7 @@ class SignInScreenViewModel: ObservableObject {
         body.append("\r\n".data(using: .utf8)!)
         body.append("--\(boundary)--\r\n".data(using: .utf8)!)
         request.httpBody = body as Data
-
+        
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
                 print("Error: \(error.localizedDescription)")
@@ -467,8 +467,54 @@ class SignInScreenViewModel: ObservableObject {
         }
     }
     
+    func deleteAccount(token: String) {
+        do {
+            guard let url = URL(string: Constants.kbaseUrl+Constants.kdeleteMyAccount) else {
+                return
+            }
+            
+            var request = URLRequest(url: url)
+            request.httpMethod = "DELETE"
+            request.setValue(token, forHTTPHeaderField: "jwt")
+            
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                guard let data = data else {
+                    return
+                }
+            
+                do {
+                    if let jsonDict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                        if let message = jsonDict["msg"] as? String {
+                            if message == "success"
+                            {
+                                let user = Auth.auth().currentUser
+                                user?.delete { error in
+                                    if let error = error {
+                                        print("Error deleting user account: \(error.localizedDescription)")
+                                    } else {
+                                        print("User account deleted successfully.")
+                                        DispatchQueue.main.async {
+                                            self.userLoggedIn = ""
+                                            UserDefaults.standard.set("", forKey: "userLoggedIn")
+                                        }
+                                        
+                                    }
+                                }
+                                
+                            }
+                        }
+                    }
+                    
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }.resume()
+            
+        }
+        
+        
+    }
     
-   
     
 }
 
