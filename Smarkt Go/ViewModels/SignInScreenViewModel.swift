@@ -293,6 +293,9 @@ class SignInScreenViewModel: ObservableObject {
             else {
                 
                 print("Invalid response")
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                }
                 return
             }
             

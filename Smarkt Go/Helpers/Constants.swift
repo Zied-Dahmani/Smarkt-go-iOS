@@ -23,8 +23,8 @@ struct Constants {
     static let kiconSize = 20.0
     
     
-//    static let kbaseUrl = "https://smarkt-go-584j.onrender.com/"
-    static let kbaseUrl = "http://localhost:9090/"
+    static let kbaseUrl = "https://smarkt-go-584j.onrender.com/"
+//    static let kbaseUrl = "http://localhost:9090/"
     static let kfavorites = "supermarket/getFavorites"
     static let ksignUp = "user/signUp"
     static let ksignIn = "user/signIn"

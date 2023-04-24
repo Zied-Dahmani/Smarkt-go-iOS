@@ -16,12 +16,15 @@ struct SignInScreen: View {
     @EnvironmentObject var signInScreenViewModel:SignInScreenViewModel
     @State private var phoneNumber = ""
     @State private var InputError = ""
-    
+    @State private var navigateToSecondView = false
+
     
     @State private var showVerificationCode = false
     @State private var verificationCode = ""
     @State private var showOTP = false
     @State private var activee = true
+    
+    @State var signOut: Bool = false
     
     
     var body: some View {
@@ -104,6 +107,7 @@ struct SignInScreen: View {
                     
                     CustomButton(text: Strings.ksignInWithGoogle, icon: "google", textColor: .black, iconColor: nil, backgroundColor: .white, action: {
                         signInScreenViewModel.signInWithGoogle()
+                        self.signOut = false
                     })
                     .padding()
                     
@@ -113,6 +117,7 @@ struct SignInScreen: View {
                         signInScreenViewModel.nonce = sha256(signInScreenViewModel.nonce)
                     }onCompletion: { (result) in
                         signInScreenViewModel.onCompletionSignInWithApple(result: result)
+                        self.signOut = false
                     }
                     .signInWithAppleButtonStyle(.black)
                     .frame(width: UIScreen.main.bounds.width - Constants.kbigSpace * 2  , height: Constants.kbuttonHeight)
@@ -132,6 +137,18 @@ struct SignInScreen: View {
                     dismissButton: .default(Text(Strings.kok))
                 )
             }
+            .onReceive(signInScreenViewModel.$userLoggedIn) { newValue in
+                if !newValue!.isEmpty && !signOut {
+                    navigateToSecondView = true
+                    
+                }
+            }
+            .fullScreenCover(isPresented: $navigateToSecondView) {
+                MainScreen()
+                .environmentObject(signInScreenViewModel)
+
+            }
+
         }
         
     }

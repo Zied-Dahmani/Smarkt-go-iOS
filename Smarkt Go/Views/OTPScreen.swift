@@ -12,7 +12,8 @@ struct OTPScreen: View {
     
     @State private var verificationCode = ""
     @State private var InputError = ""
-    
+    @State private var navigateToSecondView = false
+
     var body: some View {
         
         VStack(alignment: .center) {
@@ -47,7 +48,7 @@ struct OTPScreen: View {
             
             
 
-            CustomButton(text: Strings.kverifyCode, icon: "", textColor: .white, iconColor: .white, backgroundColor: .accentColor,action:{
+            CustomButton(text: "Verify the code", icon: "", textColor: .white, iconColor: .white, backgroundColor: .accentColor,action:{
                 InputError = signInScreenViewModel.isOTPValid(verificationCode)
                 if InputError.isEmpty {
                     signInScreenViewModel.verifyCode(verificationCode)
@@ -57,6 +58,17 @@ struct OTPScreen: View {
             
             Spacer()
             
+        }
+        .onReceive(signInScreenViewModel.$userLoggedIn) { newValue in
+            if !newValue!.isEmpty {
+                navigateToSecondView = true
+                
+            }
+        }
+        .fullScreenCover(isPresented: $navigateToSecondView) {
+            MainScreen()
+            .environmentObject(signInScreenViewModel)
+
         }
     }}
 
