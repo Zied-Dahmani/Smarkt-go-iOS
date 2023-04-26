@@ -17,7 +17,7 @@ struct SignInScreen: View {
     @State private var phoneNumber = ""
     @State private var InputError = ""
     @State private var navigateToSecondView = false
-
+    
     
     @State private var showVerificationCode = false
     @State private var verificationCode = ""
@@ -124,8 +124,12 @@ struct SignInScreen: View {
                     .cornerRadius(Constants.kcornerRadius)
                     .shadow(radius: Constants.kshadowRadius)
                     
+                    Text(Strings.kGuest)
+                        .foregroundColor(.accentColor)
+                        .onTapGesture {
+                            navigateToSecondView = true
+                        }
                     
-                    Spacer()
                     
                 }
                 
@@ -145,10 +149,10 @@ struct SignInScreen: View {
             }
             .fullScreenCover(isPresented: $navigateToSecondView) {
                 MainScreen()
-                .environmentObject(signInScreenViewModel)
-
+                    .environmentObject(signInScreenViewModel)
+                
             }
-
+            
         }
         
     }

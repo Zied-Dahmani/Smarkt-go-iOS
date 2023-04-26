@@ -45,33 +45,37 @@ struct ItemCard: View {
                 }
                 Spacer()
                 
-                if fromCartScreen {
-                    Image(systemName: "minus")
-                        .foregroundColor(.white)
-                        .font(.system(size: Constants.kiconSize))
-                        .frame(width: Constants.kbigSpace*2, height: Constants.kbigSpace*2)
-                        .background(Color.red)
-                        .cornerRadius(Constants.kcornerRadius)
-                        .shadow(radius: Constants.kshadowRadius)
-                        .onTapGesture {
-                            removeItem()
-                        }
+                if signInScreenViewModel.user != nil
+                {
+                    if fromCartScreen {
+                        Image(systemName: "minus")
+                            .foregroundColor(.white)
+                            .font(.system(size: Constants.kiconSize))
+                            .frame(width: Constants.kbigSpace*2, height: Constants.kbigSpace*2)
+                            .background(Color.red)
+                            .cornerRadius(Constants.kcornerRadius)
+                            .shadow(radius: Constants.kshadowRadius)
+                            .onTapGesture {
+                                removeItem()
+                            }
+                    }
+                    else {
+                        Image(systemName: "plus")
+                            .foregroundColor(.white)
+                            .font(.system(size: Constants.kiconSize))
+                            .frame(width: Constants.kbigSpace*2, height: Constants.kbigSpace*2)
+                            .background(Color.green)
+                            .cornerRadius(Constants.kcornerRadius)
+                            .shadow(radius: Constants.kshadowRadius)
+                            .onTapGesture {
+                                showingQuantityPicker = true
+                            }
+                            .sheet(isPresented: $showingQuantityPicker) {
+                                QuantityPicker(token:signInScreenViewModel.user!.token,item: item)
+                            }
+                    }
                 }
-                else {
-                    Image(systemName: "plus")
-                        .foregroundColor(.white)
-                        .font(.system(size: Constants.kiconSize))
-                        .frame(width: Constants.kbigSpace*2, height: Constants.kbigSpace*2)
-                        .background(Color.green)
-                        .cornerRadius(Constants.kcornerRadius)
-                        .shadow(radius: Constants.kshadowRadius)
-                        .onTapGesture {
-                            showingQuantityPicker = true
-                        }
-                        .sheet(isPresented: $showingQuantityPicker) {
-                            QuantityPicker(token:signInScreenViewModel.user!.token,item: item)
-                        }
-                }
+                
                 
                 
             }

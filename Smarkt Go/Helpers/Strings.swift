@@ -19,6 +19,7 @@ struct Strings {
     
     static let kphoneNumber = "Phone number"
     static let ksignInWithPhone = "Sign in with phone"
+    static let kGuest = "Continue as Guest"
     static let kverifyCode = "Verify your ticket code"
     static let kverifyWallet = "Fill"
     static let kenterOTP = "Enter OTP"
