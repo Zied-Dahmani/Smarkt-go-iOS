@@ -12,6 +12,7 @@ import CoreLocation
 class SupermarketsScreenViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var nearbySupermarkets : [Supermarket]?
     @Published var supermarkets : [Supermarket]?
+    @Published var reviews = [Review]()
     @Published var bestSellers : [Item] = []
     @Published var ufavorites : [String]?
     
@@ -24,7 +25,7 @@ class SupermarketsScreenViewModel: NSObject, ObservableObject, CLLocationManager
     @Published var userLoggedIn: String? {
         didSet {
             if let userLoggedIn = userLoggedIn {
-                print("User logged in with ID: \(userLoggedIn)")
+              //  print("User logged in with ID: \(userLoggedIn)")
             }
         }
     }
@@ -40,6 +41,87 @@ class SupermarketsScreenViewModel: NSObject, ObservableObject, CLLocationManager
         userLoggedIn = UserDefaults.standard.string(forKey: "userLoggedIn")
         
     }
+    
+    func addReview(supermarketid: String, userid: String, title: String, description: String, rating: Int) {
+        guard let url = URL(string: Constants.kbaseUrl + Constants.kaddReview) else {
+            return
+        }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let parameters: [String: Any] = [
+            "supermarketId": supermarketid,
+            "userId": userid,
+            "title": title,
+            "description": description,
+            "rating": rating
+        ]
+        
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: [])
+        } catch let error {
+            print(error.localizedDescription)
+            return
+        }
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {
+                print(error?.localizedDescription ?? "Unknown error")
+                return
+            }
+            
+            if let response = try? JSONDecoder().decode(String.self, from: data) {
+                self.getSupermarketReviews(supermarketId: supermarketid)
+
+                print(response)
+            } else {
+                print("Invalid response")
+            }
+        }
+        .resume()
+    }
+
+    func getSupermarketReviews(supermarketId: String) {
+        let url = URL(string: Constants.kbaseUrl + Constants.kReviews)!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let data = ["supermarketId": supermarketId]
+        let jsonData = try? JSONSerialization.data(withJSONObject: data)
+        request.httpBody = jsonData
+        
+        let session = URLSession.shared
+        let task = session.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse,
+                  (200...299).contains(httpResponse.statusCode)
+            else {
+                print("Invalid response")
+                return
+            }
+            
+            if let data = data {
+                do {
+                    let decoder = JSONDecoder()
+                    let reviews = try decoder.decode([Review].self, from: data)
+                    DispatchQueue.main.async {
+                        self.reviews = reviews
+                    }
+                } catch {
+                    print("Error decoding JSON: \(error.localizedDescription)")
+                }
+            }
+        }
+        task.resume()
+    }
+
+    
     func isFavorite(supermarketId:String) {
         guard let url = URL(string: Constants.kbaseUrl+Constants.kFavoriteList) else {
             return
@@ -70,12 +152,10 @@ class SupermarketsScreenViewModel: NSObject, ObservableObject, CLLocationManager
             if let data = data {
                 DispatchQueue.main.async {
                     do {
-                        print("the data is :")
-                        
-                        print(data)
+     
                         let decoder = JSONDecoder()
                         self.ufavorites = try decoder.decode([String].self, from: data)
-                        print(self.ufavorites!)
+                    //    print(self.ufavorites!)
                     } catch {
                         print("Error decoding JSON: \(error.localizedDescription)")
                     }
@@ -133,8 +213,7 @@ class SupermarketsScreenViewModel: NSObject, ObservableObject, CLLocationManager
                     let decoder = JSONDecoder()
                     if let favorites = try? decoder.decode([String].self, from: Data(response.utf8)) {
                         self.ufavorites = favorites
-                        print("favorites after add or delete")
-                        print(self.ufavorites)
+                    //    print(self.ufavorites)
                     } else {
                         print("Invalid response")
                     }

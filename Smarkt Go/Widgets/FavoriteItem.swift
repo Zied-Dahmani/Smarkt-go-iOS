@@ -11,7 +11,6 @@ struct FavoriteItem: View {
     var imageName: String
     var text1: String
     var text2: String
-    @State private var isFavorite = true
     
     var body: some View {
         HStack {
@@ -26,7 +25,7 @@ struct FavoriteItem: View {
             }, placeholder: {
                 ProgressView()
             })
-
+            
             VStack(alignment: .leading, spacing: 15) {
                 Text(text1)
                     .font(.system(size: 20, weight: .bold))
@@ -42,16 +41,7 @@ struct FavoriteItem: View {
             
             Spacer()
             
-            Button(action: {
-                withAnimation {
-                    self.isFavorite.toggle()
-                }
-            }) {
-                Image(systemName: isFavorite ? "heart.fill" : "heart")
-                    .font(.system(size: 20))
-                    .foregroundColor(isFavorite ? .red : .white)
-            }
-            .padding(.trailing, 20)
+            
         }
         .padding(.leading, 20)
         .background(Color.accentColor)

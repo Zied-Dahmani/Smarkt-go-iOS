@@ -32,6 +32,7 @@ struct Strings {
     static let kalreadySignedInWithApple = "You have already signed in using this email address with Apple!"
     static let kverificationCode="Enter the code here "
     static let knoFavorites="Your wishlist is empty"
+    static let knoReview=" has no reviews yet"
     static let knoOrders="No orders"
     
     static let khome = "Home"

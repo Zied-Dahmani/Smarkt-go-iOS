@@ -9,7 +9,8 @@ import SwiftUI
 
 struct FavoritesScreen: View {
     @StateObject var favoritesViewModel = FavoritesViewModel()
-    
+    @EnvironmentObject var signInScreenViewModel: SignInScreenViewModel
+
     var body: some View {
         NavigationView {
             if favoritesViewModel.favorites.isEmpty {
@@ -41,6 +42,10 @@ struct FavoritesScreen: View {
                 
                 
             }
+             
+        }
+        .onAppear {
+            favoritesViewModel.getFavorites(id: signInScreenViewModel.user!._id)
         }
     }
 }

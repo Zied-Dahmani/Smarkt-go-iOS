@@ -15,6 +15,7 @@ import AuthenticationServices
 
 class SignInScreenViewModel: ObservableObject {
     @Published var user  : User?
+    @Published var Users = [User]()
     @Published var nonce  = ""
     @Published var isLoading  = false
     @Published var userLoggedIn : String?
@@ -27,7 +28,31 @@ class SignInScreenViewModel: ObservableObject {
         userLoggedIn = UserDefaults.standard.string(forKey: "userLoggedIn") ?? ""
         isNotFirstTime = UserDefaults.standard.bool(forKey: "isNotFirstTime")
     }
-    
+    func getAllUsers() {
+        let url = URL(string: Constants.kbaseUrl + Constants.kallUsers)!
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {
+                print("Error retrieving data: \(error?.localizedDescription ?? "Unknown error")")
+                return
+            }
+           do {
+                
+                let users = try JSONDecoder().decode([User].self, from: data)
+            //    print(users)
+                DispatchQueue.main.async {
+                    
+                    self.Users = users
+                }
+            } catch {
+                print("Error decoding JSON: \(error.localizedDescription)")
+            }
+        }.resume()
+    }
+
     
     
     func redeemTicket(id: String, code: Int,  wallet: Float, onCompletion: @escaping (Int) -> Void) {
@@ -143,10 +168,10 @@ class SignInScreenViewModel: ObservableObject {
         let url = URL(string: Constants.kbaseUrl + Constants.kupdate)!
         if let userLoggedIn = UserDefaults.standard.value(forKey: "userLoggedIn") as? String {
             
-            print("The logged in User "+userLoggedIn)
+           // print("The logged in User "+userLoggedIn)
             
         } else {
-            print("not found")
+         //   print("not found")
             
         }
         var request = URLRequest(url: url)

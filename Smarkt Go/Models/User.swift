@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct User : Codable {
+struct User : Codable,Identifiable {
+    var _id: String
     var token: String
     var provider: String
     var id: String
@@ -24,3 +25,4 @@ struct User : Codable {
         return provider == "google"
     }
 }
+

@@ -10,22 +10,15 @@ class FavoritesViewModel: ObservableObject {
     @Published var favorites = [Supermarket]()
     @Published var userLoggedIn: String? {
         didSet {
-            if let userLoggedIn = userLoggedIn {
-                getFavorites(id: userLoggedIn) { [weak self] supermarkets in
-                    guard let self = self else { return }
-                    DispatchQueue.main.async {
-                        self.favorites = supermarkets
-                    }
-                }
-            }
+            UserDefaults.standard.set(userLoggedIn, forKey: "userLoggedIn")
         }
     }
+
 
     init() {
         userLoggedIn = UserDefaults.standard.string(forKey: "userLoggedIn")
     }
-
-    func getFavorites(id: String, completion: @escaping ([Supermarket]) -> Void) {
+    func getFavorites(id: String) {
         let url = URL(string: Constants.kbaseUrl + Constants.kfavorites)!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -43,7 +36,7 @@ class FavoritesViewModel: ObservableObject {
             do {
                 let supermarkets = try JSONDecoder().decode([Supermarket].self, from: data)
                 DispatchQueue.main.async {
-                    completion(supermarkets)
+                    self.favorites = supermarkets
                 }
             } catch {
                 print("Error decoding JSON: \(error.localizedDescription)")
@@ -51,6 +44,3 @@ class FavoritesViewModel: ObservableObject {
         }.resume()
     }
 }
-
-
-
