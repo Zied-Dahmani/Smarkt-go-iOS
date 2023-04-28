@@ -22,7 +22,7 @@ struct MapView: UIViewRepresentable {
         let region = MKCoordinateRegion(center: coordinate, span: span)
         mapView.setRegion(region, animated: true)
         
-        for supermarket in supermarketsScreenViewModel.supermarkets! {
+        for supermarket in supermarketsScreenViewModel.supermarkets {
             let annotation = MKPointAnnotation()
             annotation.coordinate = CLLocationCoordinate2D(latitude: supermarket.location[0], longitude:supermarket.location[1])
             annotation.title = supermarket.name
@@ -33,18 +33,18 @@ struct MapView: UIViewRepresentable {
     }
     
     func updateUIView(_ view: MKMapView, context: Context) {
-//        if let myLocation = supermarketsScreenViewModel.locationManager.location?.coordinate {
-//            DispatchQueue.main.async {
-//                self.coordinate = CLLocationCoordinate2D(latitude: myLocation.latitude, longitude: myLocation.longitude)
-//            }
-//        }
-//        let span = MKCoordinateSpan(latitudeDelta: 0.04, longitudeDelta: 0.04)
-//        let region = MKCoordinateRegion(center: coordinate, span: span)
-//        view.setRegion(region, animated: true)
-//        let pin = MKPointAnnotation()
-//        pin.coordinate = coordinate
-//        pin.title = "Me"
-//        view.addAnnotation(pin)
+        if let myLocation = supermarketsScreenViewModel.locationManager.location?.coordinate {
+            DispatchQueue.main.async {
+                self.coordinate = CLLocationCoordinate2D(latitude: myLocation.latitude, longitude: myLocation.longitude)
+            }
+        }
+        let span = MKCoordinateSpan(latitudeDelta: 0.04, longitudeDelta: 0.04)
+        let region = MKCoordinateRegion(center: coordinate, span: span)
+        view.setRegion(region, animated: true)
+        let pin = MKPointAnnotation()
+        pin.coordinate = coordinate
+        pin.title = "Me"
+        view.addAnnotation(pin)
     }
     
     class Coordinator: NSObject, MKMapViewDelegate {
@@ -67,7 +67,7 @@ struct MapView: UIViewRepresentable {
     
     
     func setSupermarket(supermarketName: String) {
-        if let supermarket = supermarketsScreenViewModel.supermarkets?.first(where: { $0.name == supermarketName }) {
+        if let supermarket = supermarketsScreenViewModel.supermarkets.first(where: { $0.name == supermarketName }) {
             function(supermarket)
         }
     }

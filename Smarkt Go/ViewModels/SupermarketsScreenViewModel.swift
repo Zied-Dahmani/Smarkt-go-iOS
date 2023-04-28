@@ -11,7 +11,7 @@ import CoreLocation
 
 class SupermarketsScreenViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var nearbySupermarkets : [Supermarket]?
-    @Published var supermarkets : [Supermarket]?
+    @Published var supermarkets : [Supermarket] = []
     @Published var bestSellers : [Item] = []
     @Published var ufavorites : [String]?
     
