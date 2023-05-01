@@ -133,14 +133,14 @@ struct ProfileScreen: View {
         }
         
         .sheet(isPresented: $isShowingImagePicker) {
-//            ImagePicker(sourceType: selectedImage, onImagePicked: isShowingImagePicker)
-//                            .onDisappear {
-//                                if let image = selectedImage {
-//                                    signInScreenViewModel.uploadImage(id: user!.id, image: image)
-//
-//                                }
-//
-//                            }
+            ImageSheet(selectedImage: $selectedImage, isPicker: $isShowingImagePicker)
+                            .onDisappear {
+                                if let image = selectedImage {
+                                    signInScreenViewModel.uploadImage(id: user!.id, image: image)
+
+                                }
+
+                            }
         }
         
         
