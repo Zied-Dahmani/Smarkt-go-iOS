@@ -32,9 +32,10 @@ class SupermarketsScreenViewModel: NSObject, ObservableObject, CLLocationManager
     
     override init() {
         super.init()
-        locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
+//        locationManager.delegate = self
+//        locationManager.requestWhenInUseAuthorization()
+//        locationManager.startUpdatingLocation()
+        //nearbySupermarkets = []
         getAllSupermarkets()
         getBestSellers()
         userLoggedIn = UserDefaults.standard.string(forKey: "userLoggedIn")
@@ -207,6 +208,7 @@ class SupermarketsScreenViewModel: NSObject, ObservableObject, CLLocationManager
                 let decodedUsers = try JSONDecoder().decode([Supermarket].self, from: data)
                 DispatchQueue.main.async {
                     self.supermarkets = decodedUsers
+                    self.nearbySupermarkets = decodedUsers
                 }
             } catch {
                 print(error.localizedDescription)

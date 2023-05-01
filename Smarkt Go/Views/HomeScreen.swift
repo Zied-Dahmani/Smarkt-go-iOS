@@ -49,7 +49,6 @@ struct HomeScreen: View {
                     }
                     .padding(.horizontal,Constants.ksmallSpace)
                 }
-                Spacer()
                 HStack{
                     Text(Strings.knearbySupermarkets)
                         .font(.headline)
@@ -62,6 +61,7 @@ struct HomeScreen: View {
                             isPresented = true
                         }
                 }
+        
                 if let nearbySupermarkets = supermarketsScreenViewModel.nearbySupermarkets {
                     if nearbySupermarkets.isEmpty
                     {
@@ -69,11 +69,12 @@ struct HomeScreen: View {
                             Image("empty_cart")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(width: UIScreen.main.bounds.width - 80, height:UIScreen.main.bounds.height / 6)
+                                .frame(width: UIScreen.main.bounds.width - 40, height:UIScreen.main.bounds.height / 4)
                             
-                            Text(Strings.knoFavorites)
+                            Text(Strings.knoNearbySupermarkets)
                                 .font(.subheadline)
                                 .foregroundColor(Color.gray)
+                                .padding()
                         }
                     }
                     else {
@@ -92,6 +93,7 @@ struct HomeScreen: View {
                     }
                 }
                 
+                Spacer()
             }
             .padding()
             .navigationTitle(Strings.khome)

@@ -34,6 +34,7 @@ struct Strings {
     static let kverificationCode="Enter the code here "
     static let knoFavorites="Your wishlist is empty"
     static let knoOrders="No orders"
+    static let knoNearbySupermarkets="No nearby supermarkets"
     
     static let khome = "Home"
     static let kcart = "Cart"
