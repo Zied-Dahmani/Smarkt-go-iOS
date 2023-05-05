@@ -58,6 +58,9 @@
 		FE29021829D3D61800A4EF2E /* WalletScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE29021729D3D61800A4EF2E /* WalletScreen.swift */; };
 		FE452F0C2A046D6300F46CAD /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE452F0B2A046D6300F46CAD /* ChatCell.swift */; };
 		FE4DC6C829FD520800BA3659 /* ChatMembers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4DC6C729FD520800BA3659 /* ChatMembers.swift */; };
+		FE8ED1DD2A05C1D700A562FE /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE8ED1DC2A05C1D700A562FE /* Review.swift */; };
+		FE8ED1DF2A05C52E00A562FE /* ReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE8ED1DE2A05C52E00A562FE /* ReviewCell.swift */; };
+		FE8ED1E12A05C54C00A562FE /* ReviewSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE8ED1E02A05C54C00A562FE /* ReviewSheet.swift */; };
 		FE9C5C5D29D670A500E231EF /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9C5C5C29D670A500E231EF /* FavoritesViewModel.swift */; };
 		FE9C5C5F29D674B800E231EF /* FavoritesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9C5C5E29D674B800E231EF /* FavoritesScreen.swift */; };
 		FE9C5C6129D6912B00E231EF /* FavoriteItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9C5C6029D6912B00E231EF /* FavoriteItem.swift */; };
@@ -132,6 +135,9 @@
 		FE29021729D3D61800A4EF2E /* WalletScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletScreen.swift; sourceTree = "<group>"; };
 		FE452F0B2A046D6300F46CAD /* ChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
 		FE4DC6C729FD520800BA3659 /* ChatMembers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMembers.swift; sourceTree = "<group>"; };
+		FE8ED1DC2A05C1D700A562FE /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
+		FE8ED1DE2A05C52E00A562FE /* ReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCell.swift; sourceTree = "<group>"; };
+		FE8ED1E02A05C54C00A562FE /* ReviewSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewSheet.swift; sourceTree = "<group>"; };
 		FE9C5C5C29D670A500E231EF /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
 		FE9C5C5E29D674B800E231EF /* FavoritesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesScreen.swift; sourceTree = "<group>"; };
 		FE9C5C6029D6912B00E231EF /* FavoriteItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteItem.swift; sourceTree = "<group>"; };
@@ -262,6 +268,7 @@
 				891A132A29DE23090021D1B9 /* Item.swift */,
 				8966EBB229E1A41300AD63C4 /* Category.swift */,
 				8966EBB629E1AF7F00AD63C4 /* Order.swift */,
+				FE8ED1DC2A05C1D700A562FE /* Review.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -315,6 +322,8 @@
 				FEDED42D29F9971E00E34BC0 /* UserCell.swift */,
 				FE4DC6C729FD520800BA3659 /* ChatMembers.swift */,
 				FE452F0B2A046D6300F46CAD /* ChatCell.swift */,
+				FE8ED1DE2A05C52E00A562FE /* ReviewCell.swift */,
+				FE8ED1E02A05C54C00A562FE /* ReviewSheet.swift */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -488,6 +497,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				89C489B029E07B9300E25235 /* QuantityPicker.swift in Sources */,
+				FE8ED1E12A05C54C00A562FE /* ReviewSheet.swift in Sources */,
 				FE9C5C5F29D674B800E231EF /* FavoritesScreen.swift in Sources */,
 				891BF33E29C24D6D000735CE /* OnboardingScreen.swift in Sources */,
 				89B3A23229D8989100A5E7B3 /* SupermarketsScreenViewModel.swift in Sources */,
@@ -504,6 +514,7 @@
 				8928C7EF2972F75800AE14C3 /* MainScreen.swift in Sources */,
 				891BF33629C1F5D7000735CE /* CustomButton.swift in Sources */,
 				89D378A629E2DAD400001266 /* MapView.swift in Sources */,
+				FE8ED1DD2A05C1D700A562FE /* Review.swift in Sources */,
 				898DD75F29C50023000E5E04 /* Utils.swift in Sources */,
 				FE452F0C2A046D6300F46CAD /* ChatCell.swift in Sources */,
 				891A132929DE1DD00021D1B9 /* ItemsScreen.swift in Sources */,
@@ -517,6 +528,7 @@
 				8928C7C02972F32900AE14C3 /* Smarkt_GoApp.swift in Sources */,
 				89DB91C229C3B438004A75A3 /* AppDelegate.swift in Sources */,
 				892936E629C5ED83007D4419 /* SettingsScreen.swift in Sources */,
+				FE8ED1DF2A05C52E00A562FE /* ReviewCell.swift in Sources */,
 				FE4DC6C829FD520800BA3659 /* ChatMembers.swift in Sources */,
 				897B279329C3080600FE6BD2 /* HomeScreen.swift in Sources */,
 				FE9C5C5D29D670A500E231EF /* FavoritesViewModel.swift in Sources */,

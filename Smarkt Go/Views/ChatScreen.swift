@@ -22,7 +22,6 @@ struct ChatScreen: View {
                     ChatCell( chat: message)
                 }
             }
-            // List of messages here
             Spacer()
             HStack {
                 TextField("Type a message...", text: $messageText)
@@ -32,9 +31,6 @@ struct ChatScreen: View {
                     supermarketsScreenViewModel.getChat(userId: signInScreenViewModel.user!._id){ statusCode in
                         print(statusCode)
                         if statusCode == 1 {
-                            
-                            // success
-                            // access the chat info from signInScreenViewModel.chat
                             print("Chat: \(supermarketsScreenViewModel.chat)")
                         } else if statusCode == 0 {
                             print("User not authorized to access messages")
@@ -46,7 +42,6 @@ struct ChatScreen: View {
                     }
                     messageText = ""
 
-                    // Send message action here
                 }) {
                     Image(systemName: "paperplane.fill")
                         .foregroundColor(Color.blue)
@@ -55,7 +50,6 @@ struct ChatScreen: View {
             }
         }
         .navigationBarItems(trailing: Button(action: {
-            // Users icon action here
         }) {
             Image(systemName: "person.2.fill")
                 .foregroundColor(Color.blue)
@@ -67,8 +61,7 @@ struct ChatScreen: View {
                 status = statusCode
                 print(statusCode)
                 if statusCode == 1 {
-                    // success
-                    // access the chat info from signInScreenViewModel.chat
+                   
                     print("Chat: \(supermarketsScreenViewModel.chat)")
                 } else if statusCode == 0 {
                     print("User not authorized to access messages")

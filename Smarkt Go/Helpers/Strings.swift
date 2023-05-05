@@ -33,7 +33,10 @@ struct Strings {
     static let kverificationCode="Enter the code here "
     static let knoFavorites="Your wishlist is empty"
     static let knoOrders="No orders"
+    static let knoReview=" has no reviews yet"
+    static let knoChatMembers=" You must have an order to add Chat Members"
     
+
     static let khome = "Home"
     static let kcart = "Cart"
     static let kchat = "Chat"

@@ -13,11 +13,20 @@ struct ChatMembers: View {
 
     var body: some View {
         VStack {
-            if showOrderImage {
-                Image("empty_cart")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: UIScreen.main.bounds.width - 40, height:UIScreen.main.bounds.height / 3)
+            if showOrderImage {              
+                VStack(alignment: .center) {
+                    Image("empty_cart")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: UIScreen.main.bounds.width - 40, height:UIScreen.main.bounds.height / 3)
+                    
+                    Text(Strings.knoChatMembers)
+                        .fontWeight(.semibold)
+                        .font(.subheadline)
+                        .foregroundColor(Color.gray)
+                        .padding(.top, Constants.ksmallSpace)
+                }
+                
                 
             } else {
                 ScrollView (showsIndicators: false){

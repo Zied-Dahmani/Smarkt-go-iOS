@@ -20,7 +20,7 @@ class SupermarketsScreenViewModel: NSObject, ObservableObject, CLLocationManager
     }
     @Published var items = [Item]()
     @Published var chat : [ChatInfo] = []
-
+    @Published var reviews = [Review]()
     @Published var locationManager = CLLocationManager()
     @Published var userLoggedIn: String? {
         didSet {
@@ -42,7 +42,85 @@ class SupermarketsScreenViewModel: NSObject, ObservableObject, CLLocationManager
         
     }
     
-    
+    func addReview(supermarketid: String, userid: String, title: String, description: String, rating: Int) {
+            guard let url = URL(string: Constants.kbaseUrl + Constants.kaddReview) else {
+                return
+            }
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            let parameters: [String: Any] = [
+                "supermarketId": supermarketid,
+                "userId": userid,
+                "title": title,
+                "description": description,
+                "rating": rating
+            ]
+            
+            do {
+                request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: [])
+            } catch let error {
+                print(error.localizedDescription)
+                return
+            }
+            
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                guard let data = data, error == nil else {
+                    print(error?.localizedDescription ?? "Unknown error")
+                    return
+                }
+                
+                if let response = try? JSONDecoder().decode(String.self, from: data) {
+                    self.getSupermarketReviews(supermarketId: supermarketid)
+
+                    print(response)
+                } else {
+                    print("Invalid response")
+                }
+            }
+            .resume()
+        }
+
+        func getSupermarketReviews(supermarketId: String) {
+            let url = URL(string: Constants.kbaseUrl + Constants.kReviews)!
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            let data = ["supermarketId": supermarketId]
+            let jsonData = try? JSONSerialization.data(withJSONObject: data)
+            request.httpBody = jsonData
+            
+            let session = URLSession.shared
+            let task = session.dataTask(with: request) { data, response, error in
+                if let error = error {
+                    print("Error: \(error.localizedDescription)")
+                    return
+                }
+                
+                guard let httpResponse = response as? HTTPURLResponse,
+                      (200...299).contains(httpResponse.statusCode)
+                else {
+                    print("Invalid response")
+                    return
+                }
+                
+                if let data = data {
+                    do {
+                        let decoder = JSONDecoder()
+                        let reviews = try decoder.decode([Review].self, from: data)
+                        DispatchQueue.main.async {
+                            self.reviews = reviews
+                        }
+                    } catch {
+                        print("Error decoding JSON: \(error.localizedDescription)")
+                    }
+                }
+            }
+            task.resume()
+        }
+
     
     
     
