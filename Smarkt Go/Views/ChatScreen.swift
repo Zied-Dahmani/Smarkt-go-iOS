@@ -14,17 +14,34 @@ struct ChatScreen: View {
 
     var body: some View {
         VStack {
-            
-            ForEach(signInScreenViewModel.chat, id: \.id) { message in
-                ChatCell( chat: message)
-               }
-            
+            ScrollView{
+                ForEach(signInScreenViewModel.chat, id: \.id) { message in
+                    ChatCell( chat: message)
+                }
+            }
             // List of messages here
             Spacer()
             HStack {
                 TextField("Type a message...", text: $messageText)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                 Button(action: {
+                    signInScreenViewModel.sendMessage(senderId: signInScreenViewModel.user!._id, content: messageText)
+                    signInScreenViewModel.getChat(userId: signInScreenViewModel.user!._id){ statusCode in
+                        print(statusCode)
+                        if statusCode == 1 {
+                            // success
+                            // access the chat info from signInScreenViewModel.chat
+                            print("Chat: \(signInScreenViewModel.chat)")
+                        } else if statusCode == 0 {
+                            print("User not authorized to access messages")
+                        } else if statusCode == 2 {
+                            print("No active order found")
+                        } else {
+                            print("Server error")
+                        }
+                    }
+                    messageText = ""
+
                     // Send message action here
                 }) {
                     Image(systemName: "paperplane.fill")

@@ -32,6 +32,38 @@ class SignInScreenViewModel: ObservableObject {
         isNotFirstTime = UserDefaults.standard.bool(forKey: "isNotFirstTime")
     }
     
+    func sendMessage (senderId: String, content: String)
+    {
+        let url = URL(string: Constants.kbaseUrl + Constants.ksendChat)!
+
+           var request = URLRequest(url: url)
+           request.httpMethod = "POST"
+           request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+           
+           let parameters: [String: Any] = [
+               "senderId": senderId,
+               "content": content
+           ]
+           
+           do {
+               request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: [])
+           } catch let error {
+               print(error.localizedDescription)
+               return
+           }
+           
+           URLSession.shared.dataTask(with: request) { data, response, error in
+               
+               guard let data = data, error == nil else {
+                   print(error?.localizedDescription ?? "Unknown error")
+                   return
+               }
+               
+           }
+           .resume()
+       }
+    
+    
     
     func getChat(userId: String, onCompletion: @escaping (Int) -> Void) {
         let url = URL(string: Constants.kbaseUrl + Constants.kgetChat)!
