@@ -25,6 +25,7 @@ struct ChatMembers: View {
                         ForEach(signInScreenViewModel.aUsers, id: \.id) { user in
                             UserCell(user: user)
                             {
+                                signInScreenViewModel.addUser(userId: user.id)
                                 print("Plus button tapped for user: \(user.fullName)")
                             }
                         }

@@ -42,6 +42,12 @@ class SupermarketsScreenViewModel: NSObject, ObservableObject, CLLocationManager
         
     }
     
+    
+    
+    
+    
+    
+    
     func sendMessage (senderId: String, content: String)
     {
         let url = URL(string: Constants.kbaseUrl + Constants.ksendChat)!
@@ -134,18 +140,7 @@ class SupermarketsScreenViewModel: NSObject, ObservableObject, CLLocationManager
         }
         task.resume()
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     func isFavorite(supermarketId:String) {
         guard let url = URL(string: Constants.kbaseUrl+Constants.kFavoriteList) else {
             return

@@ -35,6 +35,7 @@ struct Constants {
     static let knonMembers = "order/getNonMembers"
     static let kgetChat = "order/chat"
     static let ksendChat = "order/send"
+    static let kaddUser = "order/addUser"
     static let kdeleteMyAccount = "user/deleteMyAccount"
     static let kupdatePic = "user/updatePic"
     static let kredeemCode = "ticket/redeem"

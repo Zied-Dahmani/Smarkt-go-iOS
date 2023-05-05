@@ -122,6 +122,10 @@ struct ProfileScreen: View {
                         NavigationLink(destination: SettingsScreen()) {
                             Text(Strings.ksettings)
                         }
+                        NavigationLink(destination: ChatMembers()) {
+                            Text(Strings.kchatmembers)
+                        }
+                        
                     }
                     
                     

@@ -28,8 +28,8 @@ struct ChatScreen: View {
                 TextField("Type a message...", text: $messageText)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                 Button(action: {
-                    signInScreenViewModel.sendMessage(senderId: signInScreenViewModel.user!._id, content: messageText)
-                    signInScreenViewModel.getChat(userId: signInScreenViewModel.user!._id){ statusCode in
+                    supermarketsScreenViewModel.sendMessage(senderId: signInScreenViewModel.user!._id, content: messageText)
+                    supermarketsScreenViewModel.getChat(userId: signInScreenViewModel.user!._id){ statusCode in
                         print(statusCode)
                         if statusCode == 1 {
                             
@@ -79,7 +79,9 @@ struct ChatScreen: View {
                 }
             }
         }
+        .padding(.top,Constants.khugeSpace)
     }
+        
         
 }
 

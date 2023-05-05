@@ -31,6 +31,37 @@ class SignInScreenViewModel: ObservableObject {
         isNotFirstTime = UserDefaults.standard.bool(forKey: "isNotFirstTime")
     }
     
+    
+    func addUser (userId: String)
+    {
+        let url = URL(string: Constants.kbaseUrl + Constants.kaddUser)!
+
+           var request = URLRequest(url: url)
+           request.httpMethod = "POST"
+           request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+           
+           let parameters: [String: Any] = [
+               "group": userId
+             
+           ]
+           
+           do {
+               request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: [])
+           } catch let error {
+               print(error.localizedDescription)
+               return
+           }
+           
+           URLSession.shared.dataTask(with: request) { data, response, error in
+               
+               guard let data = data, error == nil else {
+                   print(error?.localizedDescription ?? "Unknown error")
+                   return
+               }
+               
+           }
+           .resume()
+       }
    
     
     func getNonMembers(onCompletion: @escaping (Int, [UserInfo]?) -> Void) {
