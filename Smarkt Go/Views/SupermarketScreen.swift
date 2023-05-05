@@ -12,6 +12,7 @@ struct SupermarketScreen: View {
     @Environment(\.presentationMode) var presentationMode
     let supermarket: Supermarket
     @EnvironmentObject var supermarketsScreenViewModel:SupermarketsScreenViewModel
+    @EnvironmentObject var signInScreenViewModel: SignInScreenViewModel
     @State private var isPresented = false
     @State private var itemCategory = ""
     
@@ -31,6 +32,7 @@ struct SupermarketScreen: View {
                 .onAppear {
                     setupAppearance()
                     supermarketsScreenViewModel.isFavorite(supermarketId: supermarket.id)
+                    print("the connected user id is " + signInScreenViewModel.user!._id )
 
                 }
                 
@@ -51,25 +53,24 @@ struct SupermarketScreen: View {
                     ZStack {
                         Rectangle()
                             .fill(Color.accentColor)
-                            .cornerRadius(Constants.kcornerRadius)
-                        if let favorites = supermarketsScreenViewModel.ufavorites, let userLoggedIn = supermarketsScreenViewModel.userLoggedIn {
-                            Image(systemName: favorites.contains(userLoggedIn) ? "heart.fill" : "heart")
-                                .foregroundColor(.white)
-                                .imageScale(.large)
-                                .onTapGesture {
-                                    if favorites.contains(userLoggedIn) {
-                                        print("found")
-                                           supermarketsScreenViewModel.removeFromFavorites(supermarketID: supermarket.id,userId: userLoggedIn)
-                                    } else {
-                                        print("not found")
-                                            supermarketsScreenViewModel.addToFavorites(supermarketID: supermarket.id,userId: userLoggedIn)
-                                    }
-                                }
-                        } else {
-                        
-                        }
-
-                    }
+                                .cornerRadius(Constants.kcornerRadius)
+                            if let id = signInScreenViewModel.user?._id, let favorites = supermarketsScreenViewModel.ufavorites {
+                                Image(systemName: favorites.contains(id) ? "heart.fill" : "heart")
+                                        .foregroundColor(.white)
+                                            .imageScale(.large)
+                                                   .onTapGesture {
+                                                       if favorites.contains(id) {
+                                                           print("found")
+                                                           supermarketsScreenViewModel.removeFromFavorites(supermarketID: supermarket.id, userId: id)
+                                                       } else {
+                                                           print("not found")
+                                                           supermarketsScreenViewModel.addToFavorites(supermarketID: supermarket.id, userId: id)
+                                                       }
+                                                   }
+                                           } else {
+                                           }
+                    
+                                       }
                     .frame(width: Constants.kiconSize * 2.25, height: Constants.kiconSize * 2.25)
                     
                 }

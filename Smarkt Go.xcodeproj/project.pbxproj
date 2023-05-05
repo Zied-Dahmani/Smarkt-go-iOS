@@ -56,9 +56,13 @@
 		89E00FFE29E241BC00E428FA /* PaymentSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E00FFD29E241BC00E428FA /* PaymentSheetView.swift */; };
 		FE08F4F829D285E900AF65EB /* OTPScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE08F4F729D285E900AF65EB /* OTPScreen.swift */; };
 		FE29021829D3D61800A4EF2E /* WalletScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE29021729D3D61800A4EF2E /* WalletScreen.swift */; };
+		FE452F0C2A046D6300F46CAD /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE452F0B2A046D6300F46CAD /* ChatCell.swift */; };
+		FE4DC6C829FD520800BA3659 /* ChatMembers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4DC6C729FD520800BA3659 /* ChatMembers.swift */; };
 		FE9C5C5D29D670A500E231EF /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9C5C5C29D670A500E231EF /* FavoritesViewModel.swift */; };
 		FE9C5C5F29D674B800E231EF /* FavoritesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9C5C5E29D674B800E231EF /* FavoritesScreen.swift */; };
 		FE9C5C6129D6912B00E231EF /* FavoriteItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9C5C6029D6912B00E231EF /* FavoriteItem.swift */; };
+		FEDED42C29F994DF00E34BC0 /* ChatScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDED42B29F994DF00E34BC0 /* ChatScreen.swift */; };
+		FEDED42E29F9971E00E34BC0 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDED42D29F9971E00E34BC0 /* UserCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,9 +130,13 @@
 		89E00FFD29E241BC00E428FA /* PaymentSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSheetView.swift; sourceTree = "<group>"; };
 		FE08F4F729D285E900AF65EB /* OTPScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPScreen.swift; sourceTree = "<group>"; };
 		FE29021729D3D61800A4EF2E /* WalletScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletScreen.swift; sourceTree = "<group>"; };
+		FE452F0B2A046D6300F46CAD /* ChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
+		FE4DC6C729FD520800BA3659 /* ChatMembers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMembers.swift; sourceTree = "<group>"; };
 		FE9C5C5C29D670A500E231EF /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
 		FE9C5C5E29D674B800E231EF /* FavoritesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesScreen.swift; sourceTree = "<group>"; };
 		FE9C5C6029D6912B00E231EF /* FavoriteItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteItem.swift; sourceTree = "<group>"; };
+		FEDED42B29F994DF00E34BC0 /* ChatScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatScreen.swift; sourceTree = "<group>"; };
+		FEDED42D29F9971E00E34BC0 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -275,6 +283,7 @@
 				8966EBB829E1B0F700AD63C4 /* CartScreen.swift */,
 				89D378A329E2DA4600001266 /* SupermarketsMapScreen.swift */,
 				895C46A329EF01CA0004D10B /* MyOrdersScreen.swift */,
+				FEDED42B29F994DF00E34BC0 /* ChatScreen.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -303,6 +312,9 @@
 				89C489AF29E07B9300E25235 /* QuantityPicker.swift */,
 				89E00FFD29E241BC00E428FA /* PaymentSheetView.swift */,
 				89D378A529E2DAD400001266 /* MapView.swift */,
+				FEDED42D29F9971E00E34BC0 /* UserCell.swift */,
+				FE4DC6C729FD520800BA3659 /* ChatMembers.swift */,
+				FE452F0B2A046D6300F46CAD /* ChatCell.swift */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -486,12 +498,14 @@
 				891BF33429C1F2D8000735CE /* Constants.swift in Sources */,
 				8966EBB329E1A41300AD63C4 /* Category.swift in Sources */,
 				89C0DAE029D9B6EC006582B4 /* SupermarketScreen.swift in Sources */,
+				FEDED42C29F994DF00E34BC0 /* ChatScreen.swift in Sources */,
 				89E00FFE29E241BC00E428FA /* PaymentSheetView.swift in Sources */,
 				891A132729DE14D30021D1B9 /* ItemCategoryCard.swift in Sources */,
 				8928C7EF2972F75800AE14C3 /* MainScreen.swift in Sources */,
 				891BF33629C1F5D7000735CE /* CustomButton.swift in Sources */,
 				89D378A629E2DAD400001266 /* MapView.swift in Sources */,
 				898DD75F29C50023000E5E04 /* Utils.swift in Sources */,
+				FE452F0C2A046D6300F46CAD /* ChatCell.swift in Sources */,
 				891A132929DE1DD00021D1B9 /* ItemsScreen.swift in Sources */,
 				FE9C5C6129D6912B00E231EF /* FavoriteItem.swift in Sources */,
 				89B3A23429D899DD00A5E7B3 /* SupermarketCard.swift in Sources */,
@@ -503,9 +517,11 @@
 				8928C7C02972F32900AE14C3 /* Smarkt_GoApp.swift in Sources */,
 				89DB91C229C3B438004A75A3 /* AppDelegate.swift in Sources */,
 				892936E629C5ED83007D4419 /* SettingsScreen.swift in Sources */,
+				FE4DC6C829FD520800BA3659 /* ChatMembers.swift in Sources */,
 				897B279329C3080600FE6BD2 /* HomeScreen.swift in Sources */,
 				FE9C5C5D29D670A500E231EF /* FavoritesViewModel.swift in Sources */,
 				8928C7F12972FED900AE14C3 /* ProfileScreen.swift in Sources */,
+				FEDED42E29F9971E00E34BC0 /* UserCell.swift in Sources */,
 				891BF33829C1F75C000735CE /* Strings.swift in Sources */,
 				891BF34029C255FD000735CE /* OnboardingSlide.swift in Sources */,
 				895C46A429EF01CA0004D10B /* MyOrdersScreen.swift in Sources */,

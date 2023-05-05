@@ -15,6 +15,9 @@ import AuthenticationServices
 
 class SignInScreenViewModel: ObservableObject {
     @Published var user  : User?
+    @Published var aUsers : [UserInfo] = []
+    @Published var chat : [ChatInfo] = []
+
     @Published var nonce  = ""
     @Published var isLoading  = false
     @Published var userLoggedIn : String?
@@ -23,10 +26,112 @@ class SignInScreenViewModel: ObservableObject {
     @Published var alertMessage = ""
     @Published var phone = ""
     
+    
     init(){
         userLoggedIn = UserDefaults.standard.string(forKey: "userLoggedIn") ?? ""
         isNotFirstTime = UserDefaults.standard.bool(forKey: "isNotFirstTime")
     }
+    
+    
+    func getChat(userId: String, onCompletion: @escaping (Int) -> Void) {
+        let url = URL(string: Constants.kbaseUrl + Constants.kgetChat)!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let parameters: [String: Any] = [
+            "userId": userId
+        ]
+       
+        request.httpBody = try! JSONSerialization.data(withJSONObject: parameters, options: [])
+
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+
+                onCompletion(-1) // server error
+                print("in first error")
+
+                return
+            }
+            guard let httpResponse = response as? HTTPURLResponse else {
+                onCompletion(-1) // server error
+                print("in second error")
+                return
+            }
+            switch httpResponse.statusCode {
+            case 200:
+                DispatchQueue.main.async {
+                    if let data = data {
+                        do {
+
+                            let decoder = JSONDecoder()
+                            self.chat = try decoder.decode([ChatInfo].self, from: data)
+                            print("the chat is")
+                            print (self.chat)
+                            let json = try JSONSerialization.jsonObject(with: data, options: [])
+                                       print("JSON: \(json)") // print the JSON data
+                            onCompletion(1) // success
+                            
+                        }  catch let error {
+                            print("Error decoding JSON: \(error)")
+                            onCompletion(-1) // server error
+                        }catch {
+                            onCompletion(-1) // server error
+                        }
+                    }
+                }
+            case 403:
+                onCompletion(0) // user not authorized to access messages
+            case 404:
+                onCompletion(2) // no active order found
+            default:
+                print("in default error")
+
+                onCompletion(-1) // server error
+            }
+        }
+        task.resume()
+    }
+
+    
+    func getNonMembers(onCompletion: @escaping (Int, [UserInfo]?) -> Void) {
+        let url = URL(string: Constants.kbaseUrl + Constants.knonMembers)!
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                onCompletion(-1, nil) // server error
+                return
+            }
+            guard let httpResponse = response as? HTTPURLResponse else {
+                onCompletion(-1, nil) // server error
+                return
+            }
+            switch httpResponse.statusCode {
+            case 200:
+                guard let data = data else {
+                    onCompletion(-1, nil) // server error
+                    return
+                }
+                do {
+                    let users = try JSONDecoder().decode([UserInfo].self, from: data)
+                    DispatchQueue.main.async {
+                        onCompletion(200, users)
+                    }
+                } catch let error {
+                    print("Error decoding JSON: \(error)")
+                    onCompletion(-1, nil) // server error
+                }
+            case 403:
+                onCompletion(403, nil) // no data found
+            default:
+                onCompletion(-1, nil) // server error
+            }
+        }.resume()
+    }
+
     
     
     

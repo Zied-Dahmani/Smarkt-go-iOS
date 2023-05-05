@@ -55,7 +55,7 @@ struct Strings {
     static let kok = "Ok"
     static let kerror = "Error"
     static let kcheckInternetConnection = "Check your internet connection!"
-    
+    static let kchatmembers = "Chat Members"
     
     static let kbestSellers = "Best sellers"
     static let knearbySupermarkets = "Nearby supermarkets"
