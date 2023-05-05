@@ -10,7 +10,7 @@ import SwiftUI
 struct ChatCell: View {
     let chat: ChatInfo
 
-   
+ 
     
     var body: some View {
         HStack {

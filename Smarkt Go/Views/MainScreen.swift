@@ -26,6 +26,7 @@ struct MainScreen: View {
                     Image(systemName: "message.fill")
                     Text(Strings.kchat)
                 }
+                .environmentObject(viewModel)
             
             FavoritesScreen()
                 .tabItem {

@@ -16,7 +16,6 @@ import AuthenticationServices
 class SignInScreenViewModel: ObservableObject {
     @Published var user  : User?
     @Published var aUsers : [UserInfo] = []
-    @Published var chat : [ChatInfo] = []
 
     @Published var nonce  = ""
     @Published var isLoading  = false
@@ -32,99 +31,7 @@ class SignInScreenViewModel: ObservableObject {
         isNotFirstTime = UserDefaults.standard.bool(forKey: "isNotFirstTime")
     }
     
-    func sendMessage (senderId: String, content: String)
-    {
-        let url = URL(string: Constants.kbaseUrl + Constants.ksendChat)!
-
-           var request = URLRequest(url: url)
-           request.httpMethod = "POST"
-           request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-           
-           let parameters: [String: Any] = [
-               "senderId": senderId,
-               "content": content
-           ]
-           
-           do {
-               request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: [])
-           } catch let error {
-               print(error.localizedDescription)
-               return
-           }
-           
-           URLSession.shared.dataTask(with: request) { data, response, error in
-               
-               guard let data = data, error == nil else {
-                   print(error?.localizedDescription ?? "Unknown error")
-                   return
-               }
-               
-           }
-           .resume()
-       }
-    
-    
-    
-    func getChat(userId: String, onCompletion: @escaping (Int) -> Void) {
-        let url = URL(string: Constants.kbaseUrl + Constants.kgetChat)!
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        let parameters: [String: Any] = [
-            "userId": userId
-        ]
-       
-        request.httpBody = try! JSONSerialization.data(withJSONObject: parameters, options: [])
-
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-
-                onCompletion(-1) // server error
-                print("in first error")
-
-                return
-            }
-            guard let httpResponse = response as? HTTPURLResponse else {
-                onCompletion(-1) // server error
-                print("in second error")
-                return
-            }
-            switch httpResponse.statusCode {
-            case 200:
-                DispatchQueue.main.async {
-                    if let data = data {
-                        do {
-
-                            let decoder = JSONDecoder()
-                            self.chat = try decoder.decode([ChatInfo].self, from: data)
-                            print("the chat is")
-                            print (self.chat)
-                            let json = try JSONSerialization.jsonObject(with: data, options: [])
-                                       print("JSON: \(json)") // print the JSON data
-                            onCompletion(1) // success
-                            
-                        }  catch let error {
-                            print("Error decoding JSON: \(error)")
-                            onCompletion(-1) // server error
-                        }catch {
-                            onCompletion(-1) // server error
-                        }
-                    }
-                }
-            case 403:
-                onCompletion(0) // user not authorized to access messages
-            case 404:
-                onCompletion(2) // no active order found
-            default:
-                print("in default error")
-
-                onCompletion(-1) // server error
-            }
-        }
-        task.resume()
-    }
-
+   
     
     func getNonMembers(onCompletion: @escaping (Int, [UserInfo]?) -> Void) {
         let url = URL(string: Constants.kbaseUrl + Constants.knonMembers)!
@@ -573,7 +480,7 @@ class SignInScreenViewModel: ObservableObject {
         }
         
     }
-    
+ 
     func signOut()
     {
         do {

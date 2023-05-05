@@ -9,13 +9,16 @@ import SwiftUI
 
 struct ChatScreen: View {
     @EnvironmentObject var signInScreenViewModel: SignInScreenViewModel
+    @EnvironmentObject var supermarketsScreenViewModel:SupermarketsScreenViewModel
 
     @State var messageText: String = ""
+    @State private var status = 0
 
     var body: some View {
+        
         VStack {
             ScrollView{
-                ForEach(signInScreenViewModel.chat, id: \.id) { message in
+                ForEach(supermarketsScreenViewModel.chat, id: \.id) { message in
                     ChatCell( chat: message)
                 }
             }
@@ -29,9 +32,10 @@ struct ChatScreen: View {
                     signInScreenViewModel.getChat(userId: signInScreenViewModel.user!._id){ statusCode in
                         print(statusCode)
                         if statusCode == 1 {
+                            
                             // success
                             // access the chat info from signInScreenViewModel.chat
-                            print("Chat: \(signInScreenViewModel.chat)")
+                            print("Chat: \(supermarketsScreenViewModel.chat)")
                         } else if statusCode == 0 {
                             print("User not authorized to access messages")
                         } else if statusCode == 2 {
@@ -59,12 +63,13 @@ struct ChatScreen: View {
         })
         .navigationBarTitle(Text("Chat"), displayMode: .inline)
         .onAppear(){
-            signInScreenViewModel.getChat(userId: signInScreenViewModel.user!._id){ statusCode in
+            supermarketsScreenViewModel.getChat(userId: signInScreenViewModel.user!._id){ statusCode in
+                status = statusCode
                 print(statusCode)
                 if statusCode == 1 {
                     // success
                     // access the chat info from signInScreenViewModel.chat
-                    print("Chat: \(signInScreenViewModel.chat)")
+                    print("Chat: \(supermarketsScreenViewModel.chat)")
                 } else if statusCode == 0 {
                     print("User not authorized to access messages")
                 } else if statusCode == 2 {
@@ -79,8 +84,8 @@ struct ChatScreen: View {
 }
 
 
-struct ChatScreen_Previews: PreviewProvider {
+/*struct ChatScreen_Previews: PreviewProvider {
     static var previews: some View {
         ChatScreen()
     }
-}
+}*/
