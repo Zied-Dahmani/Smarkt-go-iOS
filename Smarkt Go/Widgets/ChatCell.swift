@@ -29,7 +29,7 @@ struct ChatCell: View {
                 Text(chat.content)
                     .font(.subheadline)
                 
-                Text(chat.createdAt)
+                Text(chat.formattedCreatedAt)
                     .font(.caption)
                     .foregroundColor(.gray)
             }

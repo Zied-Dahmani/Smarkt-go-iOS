@@ -23,32 +23,47 @@ struct ChatScreen: View {
                 }
             }
             Spacer()
-            HStack {
-                TextField("Type a message...", text: $messageText)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                Button(action: {
-                    supermarketsScreenViewModel.sendMessage(senderId: signInScreenViewModel.user!._id, content: messageText)
-                    supermarketsScreenViewModel.getChat(userId: signInScreenViewModel.user!._id){ statusCode in
-                        print(statusCode)
-                        if statusCode == 1 {
-                            print("Chat: \(supermarketsScreenViewModel.chat)")
-                        } else if statusCode == 0 {
-                            print("User not authorized to access messages")
-                        } else if statusCode == 2 {
-                            print("No active order found")
-                        } else {
-                            print("Server error")
-                        }
-                    }
-                    messageText = ""
-
-                }) {
-                    Image(systemName: "paperplane.fill")
-                        .foregroundColor(Color.blue)
-                        .font(.system(size: 24))
-                }
-            }
-        }
+            if status == 1 {
+                           HStack {
+                               TextField("Type a message...", text: $messageText)
+                                   .textFieldStyle(RoundedBorderTextFieldStyle())
+                               Button(action: {
+                                   supermarketsScreenViewModel.sendMessage(senderId: signInScreenViewModel.user!._id, content: messageText)
+                                   supermarketsScreenViewModel.getChat(userId: signInScreenViewModel.user!._id){ statusCode in
+                                       print(statusCode)
+                                       if statusCode == 1 {
+                                           print("Chat: \(supermarketsScreenViewModel.chat)")
+                                       } else if statusCode == 0 {
+                                           print("User not authorized to access messages")
+                                       } else if statusCode == 2 {
+                                           print("No active order found")
+                                       } else {
+                                           print("Server error")
+                                       }
+                                   }
+                                   messageText = ""
+                               }) {
+                                   Image(systemName: "paperplane.fill")
+                                       .foregroundColor(Color.blue)
+                                       .font(.system(size: 24))
+                               }
+                           }
+                       } else {
+                           VStack(alignment: .center) {
+                               Image("empty_cart")
+                                   .resizable()
+                                   .aspectRatio(contentMode: .fit)
+                                   .frame(width: UIScreen.main.bounds.width - 40, height:UIScreen.main.bounds.height / 3)
+                               
+                               Text(Strings.knoChat)
+                                   .fontWeight(.semibold)
+                                   .font(.subheadline)
+                                   .foregroundColor(Color.gray)
+                                   .padding(.top, Constants.ksmallSpace)
+                           }
+                       }
+            
+                   }
         .navigationBarItems(trailing: Button(action: {
         }) {
             Image(systemName: "person.2.fill")

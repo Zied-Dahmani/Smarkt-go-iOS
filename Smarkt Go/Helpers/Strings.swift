@@ -35,6 +35,7 @@ struct Strings {
     static let knoOrders="No orders"
     static let knoReview=" has no reviews yet"
     static let knoChatMembers=" You must have an order to add Chat Members"
+    static let knoChat=" You are not in an order group chat"
     
 
     static let khome = "Home"

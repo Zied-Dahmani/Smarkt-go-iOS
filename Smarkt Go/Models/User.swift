@@ -51,8 +51,17 @@ struct ChatInfo : Codable,Identifiable {
     var image: String
     var content: String
     var createdAt: String
-    
-    
+    var formattedCreatedAt: String {
+           let dateFormatter = DateFormatter()
+           dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+           if let date = dateFormatter.date(from: createdAt) {
+               dateFormatter.dateFormat = "MMM dd, yyyy HH:mm:ss"
+               return dateFormatter.string(from: date)
+           } else {
+               return createdAt
+           }
+       }
+   
     
     enum CodingKeys: String, CodingKey {
         case id = "_id"

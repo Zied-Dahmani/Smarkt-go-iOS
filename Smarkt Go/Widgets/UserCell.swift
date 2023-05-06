@@ -13,21 +13,26 @@ struct UserCell: View {
     @State private var isSent = false
     var body: some View {
         HStack {
-            Image(user.getImage())
-                .resizable()
-                .scaledToFit()
-                .frame(width: 100, height: 100)
-                .clipShape(Circle())
+            AsyncImage(url: URL(string: user.getImage()),content: { image in
+                image.resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: Constants.kbuttonHeight , height:Constants.kbuttonHeight)
+                    .clipShape(Circle())
+
+            },
+                       placeholder: {
+                ProgressView()
+            })
             Text(user.fullName)
             Spacer()
-            if isSent { // Check the state variable to show the sent text
+            if isSent {
                             Text("Sent")
                                 .font(.system(size: 20))
                                 .foregroundColor(.blue)
                         } else {
                             Button(action: {
                                 self.onTapPlus?()
-                                self.isSent = true // Set the state variable to true
+                                self.isSent = true 
                             }, label: {
                                 Image(systemName: "plus.circle")
                                     .font(.system(size: 20))
