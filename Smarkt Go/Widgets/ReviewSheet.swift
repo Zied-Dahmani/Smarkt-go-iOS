@@ -96,7 +96,7 @@ struct ReviewSheet: View {
                         if title.isEmpty || description.isEmpty {
                             showAlert = true
                         } else {
-                            supermarketsScreenViewModel.addReview(supermarketid: SupermarketScreen.supermarketid, userid: SupermarketScreen.userid, title: title, description: description, rating: starnum)
+                            supermarketsScreenViewModel.addReview(supermarketid: SupermarketScreen.supermarketid, userid: SupermarketScreen.userid, title: title, description: description,rating: starnum, username: SupermarketScreen.username)
                             supermarketsScreenViewModel.getSupermarketReviews(supermarketId: SupermarketScreen.supermarketid)
                             showAdd.toggle()
                         }

@@ -42,7 +42,7 @@ class SupermarketsScreenViewModel: NSObject, ObservableObject, CLLocationManager
         
     }
     
-    func addReview(supermarketid: String, userid: String, title: String, description: String, rating: Int) {
+    func addReview(supermarketid: String, userid: String, title: String, description: String, rating: Int, username: String) {
             guard let url = URL(string: Constants.kbaseUrl + Constants.kaddReview) else {
                 return
             }
@@ -55,7 +55,8 @@ class SupermarketsScreenViewModel: NSObject, ObservableObject, CLLocationManager
                 "userId": userid,
                 "title": title,
                 "description": description,
-                "rating": rating
+                "rating": rating,
+                "username" : username,
             ]
             
             do {
@@ -73,7 +74,7 @@ class SupermarketsScreenViewModel: NSObject, ObservableObject, CLLocationManager
                 
                 if let response = try? JSONDecoder().decode(String.self, from: data) {
                     DispatchQueue.main.async {
-                        let newReview = Review(title: title, description: description, rating: Float(rating))
+                        let newReview = Review(title: title, description: description, username: username,rating: Float(rating))
                                    self.reviews.append(newReview)
                                }
                     print(response)

@@ -12,6 +12,7 @@ struct SupermarketScreen: View {
     static var supermarketid: String = ""
     static var supermarketname: String = ""
     static var userid: String = ""
+    static var username: String = ""
     
     @Environment(\.presentationMode) var presentationMode
     let supermarket: Supermarket
@@ -20,6 +21,7 @@ struct SupermarketScreen: View {
     var numberOfReviews: Int {
         supermarketsScreenViewModel.reviews.count
     }
+  
     @State private var isPresented = false
     @State private var itemCategory = ""
     var body: some View {
@@ -43,6 +45,7 @@ struct SupermarketScreen: View {
                         SupermarketScreen.supermarketid = supermarket.id
                         SupermarketScreen.supermarketname = supermarket.name
                         SupermarketScreen.userid = signInScreenViewModel.user!._id
+                        SupermarketScreen.username = signInScreenViewModel.user!.fullName
                         
                     }
                     

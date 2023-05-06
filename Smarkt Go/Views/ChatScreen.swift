@@ -47,6 +47,27 @@ struct ChatScreen: View {
                                        .foregroundColor(Color.blue)
                                        .font(.system(size: 24))
                                }
+                               Button(action: {
+                                         // Refresh the chat
+                                         supermarketsScreenViewModel.getChat(userId: signInScreenViewModel.user!._id){ statusCode in
+                                             print(statusCode)
+                                             if statusCode == 1 {
+                                                 print("Chat: \(supermarketsScreenViewModel.chat)")
+                                             } else if statusCode == 0 {
+                                                 print("User not authorized to access messages")
+                                             } else if statusCode == 2 {
+                                                 print("No active order found")
+                                             } else {
+                                                 print("Server error")
+                                             }
+                                         }
+                                     }) {
+                                         // Use the refresh icon for the refresh button
+                                         Image(systemName: "arrow.clockwise")
+                                             .foregroundColor(Color.blue)
+                                             .font(.system(size: 24))
+                                     }
+                                 
                            }
                        } else {
                            VStack(alignment: .center) {
@@ -66,6 +87,7 @@ struct ChatScreen: View {
                    }
         .navigationBarItems(trailing: Button(action: {
         }) {
+            
             Image(systemName: "person.2.fill")
                 .foregroundColor(Color.blue)
                 .font(.system(size: 24))
@@ -94,8 +116,3 @@ struct ChatScreen: View {
 }
 
 
-/*struct ChatScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        ChatScreen()
-    }
-}*/

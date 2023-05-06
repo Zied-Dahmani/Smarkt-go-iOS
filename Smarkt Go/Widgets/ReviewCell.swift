@@ -27,7 +27,11 @@ struct ReviewCell: View {
                         }
                     }
                 }
-            
+                
+                Text(review.username)
+                    .font(.subheadline)
+                    .foregroundColor(.black)
+                
                 Text(review.description)
                     .font(.subheadline)
                     .foregroundColor(.gray)

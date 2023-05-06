@@ -11,6 +11,7 @@ struct Review : Codable,Identifiable  {
     let id = UUID()
     var title: String
     var description: String
+    var username: String
     var rating: Float
-   
+  
 }

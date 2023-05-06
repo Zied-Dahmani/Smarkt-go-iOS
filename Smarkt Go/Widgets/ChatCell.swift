@@ -18,6 +18,8 @@ struct ChatCell: View {
                 image.resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: Constants.kbuttonHeight , height:Constants.kbuttonHeight)
+                    .clipShape(Circle())
+
             },
                        placeholder: {
                 ProgressView()
