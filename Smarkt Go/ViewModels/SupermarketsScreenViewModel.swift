@@ -72,8 +72,10 @@ class SupermarketsScreenViewModel: NSObject, ObservableObject, CLLocationManager
                 }
                 
                 if let response = try? JSONDecoder().decode(String.self, from: data) {
-                    self.getSupermarketReviews(supermarketId: supermarketid)
-
+                    DispatchQueue.main.async {
+                        let newReview = Review(title: title, description: description, rating: Float(rating))
+                                   self.reviews.append(newReview)
+                               }
                     print(response)
                 } else {
                     print("Invalid response")
