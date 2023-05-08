@@ -1,5 +1,5 @@
 
-# Smarkt-GO IOS
+# Smarkt-GO iOS
 
 Skip lines, shop smarter with Smarkt Go! Buy groceries like Amazon Go. 
 
