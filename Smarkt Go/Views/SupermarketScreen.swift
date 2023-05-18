@@ -25,7 +25,7 @@ struct SupermarketScreen: View {
     @State private var isPresented = false
     @State private var itemCategory = ""
     var body: some View {
-        NavigationView{
+//        NavigationView{
             VStack(alignment: .leading){
                 ZStack(alignment: .topLeading) {
                     TabView {
@@ -185,7 +185,7 @@ struct SupermarketScreen: View {
                 
             }
             
-        }
+//        }
     }
     func setupAppearance() {
         UIPageControl.appearance().currentPageIndicatorTintColor = UIColor(.accentColor)

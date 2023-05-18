@@ -119,11 +119,11 @@ struct ProfileScreen: View {
                         NavigationLink(destination: MyOrdersScreen()) {
                             Text(Strings.korders)
                         }
-                        NavigationLink(destination: SettingsScreen()) {
-                            Text(Strings.ksettings)
-                        }
                         NavigationLink(destination: ChatMembers()) {
                             Text(Strings.kchatmembers)
+                        }
+                        NavigationLink(destination: SettingsScreen()) {
+                            Text(Strings.ksettings)
                         }
                         
                     }
@@ -137,14 +137,15 @@ struct ProfileScreen: View {
         }
         
         .sheet(isPresented: $isShowingImagePicker) {
-//            ImagePicker(sourceType: selectedImage, onImagePicked: isShowingImagePicker)
-//                            .onDisappear {
-//                                if let image = selectedImage {
-//                                    signInScreenViewModel.uploadImage(id: user!.id, image: image)
-//
-//                                }
-//
-//                            }
+            ImagePicker(selectedImage: $selectedImage, isPicker: $isShowingImagePicker)
+                .onDisappear {
+                    if let image = selectedImage {
+                        signInScreenViewModel.uploadImage(id: user!.id, image: image)
+                        
+                    }
+                    
+                }
+            
         }
         
         

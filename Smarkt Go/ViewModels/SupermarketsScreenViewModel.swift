@@ -38,6 +38,7 @@ class SupermarketsScreenViewModel: NSObject, ObservableObject, CLLocationManager
         locationManager.startUpdatingLocation()
         getAllSupermarkets()
         getBestSellers()
+        supermarkets = []
         userLoggedIn = UserDefaults.standard.string(forKey: "userLoggedIn")
         
     }

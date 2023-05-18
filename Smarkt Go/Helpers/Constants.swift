@@ -24,8 +24,8 @@ struct Constants {
     
     
    // static let kbaseUrl = "https://smarkt-go-584j.onrender.com/"
-    static let kbaseUrl = "https://fc81-102-159-148-119.eu.ngrok.io/"
-//    static let kbaseUrl = "http://localhost:9090/"
+//    static let kbaseUrl = "https://fc81-102-159-148-119.eu.ngrok.io/"
+    static let kbaseUrl = "http://localhost:9090/"
     static let kfavorites = "supermarket/getFavorites"
     static let ksignUp = "user/signUp"
     static let ksignIn = "user/signIn"

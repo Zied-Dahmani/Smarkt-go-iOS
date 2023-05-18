@@ -29,6 +29,7 @@
 		8928C7F12972FED900AE14C3 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C7F02972FED900AE14C3 /* ProfileScreen.swift */; };
 		892936E629C5ED83007D4419 /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892936E529C5ED83007D4419 /* SettingsScreen.swift */; };
 		892B002E29B76B540026E40F /* SignInScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892B002D29B76B540026E40F /* SignInScreen.swift */; };
+		893DC5C52A16D55B00526170 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893DC5C42A16D55B00526170 /* ImagePicker.swift */; };
 		893E2EF329C74ABD0090906B /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893E2EF229C74ABD0090906B /* NetworkMonitor.swift */; };
 		8944CC6229C480EB00A43B8C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8944CC6129C480EB00A43B8C /* User.swift */; };
 		894F615C29DF1A8300535CAE /* ImagePickerModule in Frameworks */ = {isa = PBXBuildFile; productRef = 894F615B29DF1A8300535CAE /* ImagePickerModule */; };
@@ -110,6 +111,7 @@
 		8928C7F02972FED900AE14C3 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
 		892936E529C5ED83007D4419 /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
 		892B002D29B76B540026E40F /* SignInScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInScreen.swift; sourceTree = "<group>"; };
+		893DC5C42A16D55B00526170 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		893E2EF229C74ABD0090906B /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		8944CC6129C480EB00A43B8C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		895C46A329EF01CA0004D10B /* MyOrdersScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyOrdersScreen.swift; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 				891BF33729C1F75C000735CE /* Strings.swift */,
 				89DB91C129C3B438004A75A3 /* AppDelegate.swift */,
 				898DD75E29C50023000E5E04 /* Utils.swift */,
+				893DC5C42A16D55B00526170 /* ImagePicker.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -497,6 +500,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				89C489B029E07B9300E25235 /* QuantityPicker.swift in Sources */,
+				893DC5C52A16D55B00526170 /* ImagePicker.swift in Sources */,
 				FE8ED1E12A05C54C00A562FE /* ReviewSheet.swift in Sources */,
 				FE9C5C5F29D674B800E231EF /* FavoritesScreen.swift in Sources */,
 				891BF33E29C24D6D000735CE /* OnboardingScreen.swift in Sources */,

@@ -33,18 +33,18 @@ struct MapView: UIViewRepresentable {
     }
     
     func updateUIView(_ view: MKMapView, context: Context) {
-//        if let myLocation = supermarketsScreenViewModel.locationManager.location?.coordinate {
-//            DispatchQueue.main.async {
-//                self.coordinate = CLLocationCoordinate2D(latitude: myLocation.latitude, longitude: myLocation.longitude)
-//            }
-//        }
-//        let span = MKCoordinateSpan(latitudeDelta: 0.04, longitudeDelta: 0.04)
-//        let region = MKCoordinateRegion(center: coordinate, span: span)
-//        view.setRegion(region, animated: true)
-//        let pin = MKPointAnnotation()
-//        pin.coordinate = coordinate
-//        pin.title = "Me"
-//        view.addAnnotation(pin)
+        if let myLocation = supermarketsScreenViewModel.locationManager.location?.coordinate {
+            DispatchQueue.main.async {
+                self.coordinate = CLLocationCoordinate2D(latitude: myLocation.latitude, longitude: myLocation.longitude)
+            }
+        }
+        let span = MKCoordinateSpan(latitudeDelta: 0.04, longitudeDelta: 0.04)
+        let region = MKCoordinateRegion(center: coordinate, span: span)
+        view.setRegion(region, animated: true)
+        let pin = MKPointAnnotation()
+        pin.coordinate = coordinate
+        pin.title = "Me"
+        view.addAnnotation(pin)
     }
     
     class Coordinator: NSObject, MKMapViewDelegate {
