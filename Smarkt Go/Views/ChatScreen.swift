@@ -44,7 +44,7 @@ struct ChatScreen: View {
                                    messageText = ""
                                }) {
                                    Image(systemName: "paperplane.fill")
-                                       .foregroundColor(Color.blue)
+                                       .foregroundColor(Color.accentColor)
                                        .font(.system(size: 24))
                                }
                                Button(action: {
@@ -64,7 +64,7 @@ struct ChatScreen: View {
                                      }) {
                                          // Use the refresh icon for the refresh button
                                          Image(systemName: "arrow.clockwise")
-                                             .foregroundColor(Color.blue)
+                                             .foregroundColor(Color.accentColor)
                                              .font(.system(size: 24))
                                      }
                                  
@@ -89,7 +89,7 @@ struct ChatScreen: View {
         }) {
             
             Image(systemName: "person.2.fill")
-                .foregroundColor(Color.blue)
+                .foregroundColor(Color.accentColor)
                 .font(.system(size: 24))
         })
         .navigationBarTitle(Text("Chat"), displayMode: .inline)

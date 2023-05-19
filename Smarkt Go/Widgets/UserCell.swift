@@ -28,7 +28,7 @@ struct UserCell: View {
             if isSent {
                             Text("Sent")
                                 .font(.system(size: 20))
-                                .foregroundColor(.blue)
+                                .foregroundColor(.accentColor)
                         } else {
                             Button(action: {
                                 self.onTapPlus?()
@@ -36,7 +36,7 @@ struct UserCell: View {
                             }, label: {
                                 Image(systemName: "plus.circle")
                                     .font(.system(size: 20))
-                                    .foregroundColor(.blue)
+                                    .foregroundColor(.accentColor)
                             })
                         }
                     }

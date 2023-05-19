@@ -73,7 +73,7 @@ class SupermarketsScreenViewModel: NSObject, ObservableObject, CLLocationManager
                     return
                 }
                 
-                if let response = try? JSONDecoder().decode(String.self, from: data) {
+                if let response = try? JSONDecoder().decode(Review.self, from: data) {
                     DispatchQueue.main.async {
                         let newReview = Review(title: title, description: description, username: username,rating: Float(rating))
                                    self.reviews.append(newReview)
