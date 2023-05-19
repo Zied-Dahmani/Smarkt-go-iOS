@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SocketIO
 
 struct ChatScreen: View {
     @EnvironmentObject var signInScreenViewModel: SignInScreenViewModel
@@ -13,6 +14,7 @@ struct ChatScreen: View {
 
     @State var messageText: String = ""
     @State private var status = 0
+    let socketIOManager = SocketIOManager()
 
     var body: some View {
         
@@ -28,7 +30,9 @@ struct ChatScreen: View {
                                TextField("Type a message...", text: $messageText)
                                    .textFieldStyle(RoundedBorderTextFieldStyle())
                                Button(action: {
-                                   supermarketsScreenViewModel.sendMessage(senderId: signInScreenViewModel.user!._id, content: messageText)
+                                   sendmsg()
+                                /*   supermarketsScreenViewModel.sendMessage(senderId: signInScreenViewModel.user!._id, content: messageText)
+                                   self.socketIOManager.socket.emit("send",signInScreenViewModel.user!._id)
                                    supermarketsScreenViewModel.getChat(userId: signInScreenViewModel.user!._id){ statusCode in
                                        print(statusCode)
                                        if statusCode == 1 {
@@ -41,7 +45,7 @@ struct ChatScreen: View {
                                            print("Server error")
                                        }
                                    }
-                                   messageText = ""
+                                   messageText = ""*/
                                }) {
                                    Image(systemName: "paperplane.fill")
                                        .foregroundColor(Color.blue)
@@ -108,11 +112,57 @@ struct ChatScreen: View {
                     print("Server error")
                 }
             }
+            socketIOManager.start(
+                               onConnect: {
+                                   socketIOManager.config(id: signInScreenViewModel.user!._id)
+                               },
+                               onReady: {
+                                   supermarketsScreenViewModel.refresh(s: socketIOManager.socket, id: signInScreenViewModel.user!._id)
+                                   
+                               }
+                           )
         }
+        .onChange(of: supermarketsScreenViewModel.chat) { newValue in
+            supermarketsScreenViewModel.chat = newValue
+    print("change")
+            supermarketsScreenViewModel.getChat(userId: signInScreenViewModel.user!._id){ statusCode in
+                status = statusCode
+                print(statusCode)
+                if statusCode == 1 {
+                   
+                    print("Chat: \(supermarketsScreenViewModel.chat)")
+                } else if statusCode == 0 {
+                    print("User not authorized to access messages")
+                } else if statusCode == 2 {
+                    print("No active order found")
+                } else {
+                    print("Server error")
+                }
+            }
+    }.onDisappear {
+        self.socketIOManager.socket.disconnect()
+    }
         .padding(.top,Constants.khugeSpace)
     }
         
+    func sendmsg()  {
+        supermarketsScreenViewModel.sendMessage(senderId: signInScreenViewModel.user!._id, content: messageText)
+        supermarketsScreenViewModel.getChat(userId: signInScreenViewModel.user!._id){ statusCode in
+            print(statusCode)
+            if statusCode == 1 {
+                print("Chat: \(supermarketsScreenViewModel.chat)")
+            } else if statusCode == 0 {
+                print("User not authorized to access messages")
+            } else if statusCode == 2 {
+                print("No active order found")
+            } else {
+                print("Server error")
+            }
+        }
+        self.socketIOManager.socket.emit("send",signInScreenViewModel.user!._id)
         
+        messageText = ""
+    }
 }
 
 

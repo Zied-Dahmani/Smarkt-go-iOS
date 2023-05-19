@@ -12,6 +12,7 @@ import Combine
 import GoogleSignIn
 import Firebase
 import AuthenticationServices
+import SocketIO
 
 class SignInScreenViewModel: ObservableObject {
     @Published var user  : User?

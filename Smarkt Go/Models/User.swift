@@ -44,7 +44,7 @@ struct UserInfo : Codable,Identifiable {
         return provider == "google"
     }
 }
-struct ChatInfo : Codable,Identifiable {
+struct ChatInfo : Codable,Identifiable ,Equatable{
     var id: String
     var provider: String?
     var fullName: String

@@ -1,0 +1,6 @@
+framework module Pods_Smarkt_Go {
+  umbrella header "Pods-Smarkt Go-umbrella.h"
+
+  export *
+  module * { export * }
+}

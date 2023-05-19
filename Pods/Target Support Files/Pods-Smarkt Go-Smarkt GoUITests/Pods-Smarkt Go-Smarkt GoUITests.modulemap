@@ -1,0 +1,6 @@
+framework module Pods_Smarkt_Go_Smarkt_GoUITests {
+  umbrella header "Pods-Smarkt Go-Smarkt GoUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

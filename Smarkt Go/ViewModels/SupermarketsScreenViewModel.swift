@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import CoreLocation
+import SocketIO
 
 class SupermarketsScreenViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var nearbySupermarkets : [Supermarket]?
@@ -41,6 +42,36 @@ class SupermarketsScreenViewModel: NSObject, ObservableObject, CLLocationManager
         userLoggedIn = UserDefaults.standard.string(forKey: "userLoggedIn")
         
     }
+    
+    
+    func refresh(s: SocketIOClient,id:String) {
+       var socket: SocketIOClient
+                                                socket = s
+    print("refresh")
+                socket.on("refresh") { data, _ in
+                  print("refresh2")
+                    self.getChat(userId: SupermarketScreen.userid){ statusCode in
+                       // status = statusCode
+                        print(statusCode)
+                        if statusCode == 1 {
+                        //    self.room=u
+                            // Handle successful sign-in
+                            
+                        } else if statusCode == 0 {
+                            print("User not authorized to access messages")
+                        } else if statusCode == 2 {
+                            print("No active order found")
+                        } else {
+                            print("Server error")
+                        }
+                    }
+                            
+                    
+                        }
+                    }
+                
+    
+    
     
     func addReview(supermarketid: String, userid: String, title: String, description: String, rating: Int, username: String) {
             guard let url = URL(string: Constants.kbaseUrl + Constants.kaddReview) else {
@@ -124,11 +155,6 @@ class SupermarketsScreenViewModel: NSObject, ObservableObject, CLLocationManager
             task.resume()
         }
 
-    
-    
-    
-    
-    
     func sendMessage (senderId: String, content: String)
     {
         let url = URL(string: Constants.kbaseUrl + Constants.ksendChat)!
@@ -156,7 +182,18 @@ class SupermarketsScreenViewModel: NSObject, ObservableObject, CLLocationManager
                    return
                }
                
-           }
+               do {
+                           let decoder = JSONDecoder()
+                           let chatInfo = try decoder.decode(ChatInfo.self, from: data)
+                           
+                           DispatchQueue.main.async {
+                               self.chat.append(chatInfo)
+                           }
+                       } catch {
+                           print("Error decoding JSON: \(error)")
+                       }
+                       
+                   }
            .resume()
        }
     

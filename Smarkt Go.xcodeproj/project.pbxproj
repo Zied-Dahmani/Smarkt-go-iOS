@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		323A93E095A918AF7B13809D /* Pods_Smarkt_Go.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CA10FB9B197CDFB47612779 /* Pods_Smarkt_Go.framework */; };
+		7B8FB49405D6241DFE576EA6 /* Pods_Smarkt_GoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70A5629706A4752D3A2D8AF0 /* Pods_Smarkt_GoTests.framework */; };
 		891A132729DE14D30021D1B9 /* ItemCategoryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891A132629DE14D30021D1B9 /* ItemCategoryCard.swift */; };
 		891A132929DE1DD00021D1B9 /* ItemsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891A132829DE1DD00021D1B9 /* ItemsScreen.swift */; };
 		891A132B29DE23090021D1B9 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891A132A29DE23090021D1B9 /* Item.swift */; };
@@ -54,6 +56,7 @@
 		89DB91C029C3B3CC004A75A3 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 89DB91BF29C3B3CC004A75A3 /* FirebaseAuth */; };
 		89DB91C229C3B438004A75A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89DB91C129C3B438004A75A3 /* AppDelegate.swift */; };
 		89E00FFE29E241BC00E428FA /* PaymentSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E00FFD29E241BC00E428FA /* PaymentSheetView.swift */; };
+		D0A5917BA529B383F71231DA /* Pods_Smarkt_Go_Smarkt_GoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07BAB9D25C0AA24C1589FD95 /* Pods_Smarkt_Go_Smarkt_GoUITests.framework */; };
 		FE08F4F829D285E900AF65EB /* OTPScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE08F4F729D285E900AF65EB /* OTPScreen.swift */; };
 		FE29021829D3D61800A4EF2E /* WalletScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE29021729D3D61800A4EF2E /* WalletScreen.swift */; };
 		FE452F0C2A046D6300F46CAD /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE452F0B2A046D6300F46CAD /* ChatCell.swift */; };
@@ -66,6 +69,7 @@
 		FE9C5C6129D6912B00E231EF /* FavoriteItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9C5C6029D6912B00E231EF /* FavoriteItem.swift */; };
 		FEDED42C29F994DF00E34BC0 /* ChatScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDED42B29F994DF00E34BC0 /* ChatScreen.swift */; };
 		FEDED42E29F9971E00E34BC0 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDED42D29F9971E00E34BC0 /* UserCell.swift */; };
+		FEF5E9C72A14F5BA00461D28 /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF5E9C62A14F5BA00461D28 /* SocketIOManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +90,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0009E23BA0DAC20EF055BD5F /* Pods-Smarkt GoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Smarkt GoTests.release.xcconfig"; path = "Target Support Files/Pods-Smarkt GoTests/Pods-Smarkt GoTests.release.xcconfig"; sourceTree = "<group>"; };
+		07BAB9D25C0AA24C1589FD95 /* Pods_Smarkt_Go_Smarkt_GoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Smarkt_Go_Smarkt_GoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AFC97551EB2128F4F7373FD /* Pods-Smarkt Go.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Smarkt Go.debug.xcconfig"; path = "Target Support Files/Pods-Smarkt Go/Pods-Smarkt Go.debug.xcconfig"; sourceTree = "<group>"; };
+		5175AAB299B2C203BFD5A9C6 /* Pods-Smarkt Go-Smarkt GoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Smarkt Go-Smarkt GoUITests.release.xcconfig"; path = "Target Support Files/Pods-Smarkt Go-Smarkt GoUITests/Pods-Smarkt Go-Smarkt GoUITests.release.xcconfig"; sourceTree = "<group>"; };
+		70A5629706A4752D3A2D8AF0 /* Pods_Smarkt_GoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Smarkt_GoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7CA10FB9B197CDFB47612779 /* Pods_Smarkt_Go.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Smarkt_Go.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		891A132629DE14D30021D1B9 /* ItemCategoryCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCategoryCard.swift; sourceTree = "<group>"; };
 		891A132829DE1DD00021D1B9 /* ItemsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsScreen.swift; sourceTree = "<group>"; };
 		891A132A29DE23090021D1B9 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
@@ -131,6 +141,9 @@
 		89D378A529E2DAD400001266 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		89DB91C129C3B438004A75A3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		89E00FFD29E241BC00E428FA /* PaymentSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSheetView.swift; sourceTree = "<group>"; };
+		A60E0093B68FA47589A8AC20 /* Pods-Smarkt Go.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Smarkt Go.release.xcconfig"; path = "Target Support Files/Pods-Smarkt Go/Pods-Smarkt Go.release.xcconfig"; sourceTree = "<group>"; };
+		C4AE346CE0AC6B0E3F0D6C12 /* Pods-Smarkt Go-Smarkt GoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Smarkt Go-Smarkt GoUITests.debug.xcconfig"; path = "Target Support Files/Pods-Smarkt Go-Smarkt GoUITests/Pods-Smarkt Go-Smarkt GoUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		E45C0D2557D22C66162D339E /* Pods-Smarkt GoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Smarkt GoTests.debug.xcconfig"; path = "Target Support Files/Pods-Smarkt GoTests/Pods-Smarkt GoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		FE08F4F729D285E900AF65EB /* OTPScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPScreen.swift; sourceTree = "<group>"; };
 		FE29021729D3D61800A4EF2E /* WalletScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletScreen.swift; sourceTree = "<group>"; };
 		FE452F0B2A046D6300F46CAD /* ChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
@@ -143,6 +156,7 @@
 		FE9C5C6029D6912B00E231EF /* FavoriteItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteItem.swift; sourceTree = "<group>"; };
 		FEDED42B29F994DF00E34BC0 /* ChatScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatScreen.swift; sourceTree = "<group>"; };
 		FEDED42D29F9971E00E34BC0 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
+		FEF5E9C62A14F5BA00461D28 /* SocketIOManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIOManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +171,7 @@
 				89B3A23729D8A27500A5E7B3 /* URLImage in Frameworks */,
 				897B279B29C30FD700FE6BD2 /* GoogleSignInSwift in Frameworks */,
 				894F615C29DF1A8300535CAE /* ImagePickerModule in Frameworks */,
+				323A93E095A918AF7B13809D /* Pods_Smarkt_Go.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,6 +179,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B8FB49405D6241DFE576EA6 /* Pods_Smarkt_GoTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,12 +187,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0A5917BA529B383F71231DA /* Pods_Smarkt_Go_Smarkt_GoUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1EF449B5EC1B224D4CC30427 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7CA10FB9B197CDFB47612779 /* Pods_Smarkt_Go.framework */,
+				07BAB9D25C0AA24C1589FD95 /* Pods_Smarkt_Go_Smarkt_GoUITests.framework */,
+				70A5629706A4752D3A2D8AF0 /* Pods_Smarkt_GoTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8928C7B32972F32900AE14C3 = {
 			isa = PBXGroup;
 			children = (
@@ -184,6 +211,8 @@
 				8928C7CF2972F32B00AE14C3 /* Smarkt GoTests */,
 				8928C7D92972F32B00AE14C3 /* Smarkt GoUITests */,
 				8928C7BD2972F32900AE14C3 /* Products */,
+				8D7C12A3CC526B96C4B272DA /* Pods */,
+				1EF449B5EC1B224D4CC30427 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -248,6 +277,7 @@
 				891BF33729C1F75C000735CE /* Strings.swift */,
 				89DB91C129C3B438004A75A3 /* AppDelegate.swift */,
 				898DD75E29C50023000E5E04 /* Utils.swift */,
+				FEF5E9C62A14F5BA00461D28 /* SocketIOManager.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -328,6 +358,19 @@
 			path = Widgets;
 			sourceTree = "<group>";
 		};
+		8D7C12A3CC526B96C4B272DA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1AFC97551EB2128F4F7373FD /* Pods-Smarkt Go.debug.xcconfig */,
+				A60E0093B68FA47589A8AC20 /* Pods-Smarkt Go.release.xcconfig */,
+				C4AE346CE0AC6B0E3F0D6C12 /* Pods-Smarkt Go-Smarkt GoUITests.debug.xcconfig */,
+				5175AAB299B2C203BFD5A9C6 /* Pods-Smarkt Go-Smarkt GoUITests.release.xcconfig */,
+				E45C0D2557D22C66162D339E /* Pods-Smarkt GoTests.debug.xcconfig */,
+				0009E23BA0DAC20EF055BD5F /* Pods-Smarkt GoTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -335,10 +378,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8928C7E02972F32B00AE14C3 /* Build configuration list for PBXNativeTarget "Smarkt Go" */;
 			buildPhases = (
+				DE78FDACE2533FB92843570A /* [CP] Check Pods Manifest.lock */,
 				8928C7B82972F32900AE14C3 /* Sources */,
 				8928C7B92972F32900AE14C3 /* Frameworks */,
 				8928C7BA2972F32900AE14C3 /* Resources */,
 				89DB91C529C3D09C004A75A3 /* ShellScript */,
+				65313376DD0C50E46835B428 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -362,6 +407,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8928C7E32972F32B00AE14C3 /* Build configuration list for PBXNativeTarget "Smarkt GoTests" */;
 			buildPhases = (
+				668F3894E34495873A0DEDE5 /* [CP] Check Pods Manifest.lock */,
 				8928C7C82972F32B00AE14C3 /* Sources */,
 				8928C7C92972F32B00AE14C3 /* Frameworks */,
 				8928C7CA2972F32B00AE14C3 /* Resources */,
@@ -380,9 +426,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8928C7E62972F32B00AE14C3 /* Build configuration list for PBXNativeTarget "Smarkt GoUITests" */;
 			buildPhases = (
+				508AE922F8FCF2AEE708D104 /* [CP] Check Pods Manifest.lock */,
 				8928C7D22972F32B00AE14C3 /* Sources */,
 				8928C7D32972F32B00AE14C3 /* Frameworks */,
 				8928C7D42972F32B00AE14C3 /* Resources */,
+				1AA87C4932FFB9E15BB71DA1 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -472,6 +520,84 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1AA87C4932FFB9E15BB71DA1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Smarkt Go-Smarkt GoUITests/Pods-Smarkt Go-Smarkt GoUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Smarkt Go-Smarkt GoUITests/Pods-Smarkt Go-Smarkt GoUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Smarkt Go-Smarkt GoUITests/Pods-Smarkt Go-Smarkt GoUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		508AE922F8FCF2AEE708D104 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Smarkt Go-Smarkt GoUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		65313376DD0C50E46835B428 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Smarkt Go/Pods-Smarkt Go-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Smarkt Go/Pods-Smarkt Go-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Smarkt Go/Pods-Smarkt Go-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		668F3894E34495873A0DEDE5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Smarkt GoTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		89DB91C529C3D09C004A75A3 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -488,6 +614,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "TAGS=\"TODO:|FIXME:\"\nERRORTAG=\"ERROR:\"\nfind \"${SRCROOT}\" \\( -name \"*.h\" -or -name \"*.m\" -or -name \"*.swift\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($TAGS).*\\$|($ERRORTAG).*\\$\" | perl -p -e \"s/($TAGS)/ warning: \\$1/\" | perl -p -e \"s/($ERRORTAG)/ error: \\$1/\"\n";
+		};
+		DE78FDACE2533FB92843570A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Smarkt Go-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -514,6 +662,7 @@
 				8928C7EF2972F75800AE14C3 /* MainScreen.swift in Sources */,
 				891BF33629C1F5D7000735CE /* CustomButton.swift in Sources */,
 				89D378A629E2DAD400001266 /* MapView.swift in Sources */,
+				FEF5E9C72A14F5BA00461D28 /* SocketIOManager.swift in Sources */,
 				FE8ED1DD2A05C1D700A562FE /* Review.swift in Sources */,
 				898DD75F29C50023000E5E04 /* Utils.swift in Sources */,
 				FE452F0C2A046D6300F46CAD /* ChatCell.swift in Sources */,
@@ -694,6 +843,7 @@
 		};
 		8928C7E12972F32B00AE14C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1AFC97551EB2128F4F7373FD /* Pods-Smarkt Go.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -732,6 +882,7 @@
 		};
 		8928C7E22972F32B00AE14C3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A60E0093B68FA47589A8AC20 /* Pods-Smarkt Go.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -770,6 +921,7 @@
 		};
 		8928C7E42972F32B00AE14C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E45C0D2557D22C66162D339E /* Pods-Smarkt GoTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -790,6 +942,7 @@
 		};
 		8928C7E52972F32B00AE14C3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0009E23BA0DAC20EF055BD5F /* Pods-Smarkt GoTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -810,6 +963,7 @@
 		};
 		8928C7E72972F32B00AE14C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C4AE346CE0AC6B0E3F0D6C12 /* Pods-Smarkt Go-Smarkt GoUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -828,6 +982,7 @@
 		};
 		8928C7E82972F32B00AE14C3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5175AAB299B2C203BFD5A9C6 /* Pods-Smarkt Go-Smarkt GoUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
